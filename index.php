@@ -45,7 +45,12 @@
 			<div id="content">
 			  <div class="browse_location box">
 			    <h2 class="title">Browse by Location</h2>
-			  </div>
+			    <div class="location_lists">
+                	<ul>
+                    	<li>s</li>
+                    </ul>
+                </div>
+              </div>
 			  <div class="browse_industry box">
 			    <h2 class="title">Browse by Industry</h2>
 			  </div>
