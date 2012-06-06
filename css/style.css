@@ -146,3 +146,13 @@ ul#navigation li a {
 }
 .featured_candidate {
 }
+.location_lists {
+	
+}
+.location_lists ul {
+	list-style-type: square;
+	margin-top: 4px;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	margin-left: 20px;
+}
