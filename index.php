@@ -14,7 +14,13 @@
 <div id="wrapper">
 
 	<header id="header">
-		<strong>Header:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tortor. Praesent dictum, libero ut tempus dictum, neque eros elementum mauris, quis mollis arcu velit ac diam. Etiam neque. Quisque nec turpis. Aliquam arcu nulla, dictum et, lacinia a, mollis in, ante. Sed eu felis in elit tempor venenatis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ultricies porttitor purus. Proin non tellus at ligula fringilla tristique. Fusce vehicula quam. Curabitur vel tortor vitae pede imperdiet ultrices. Sed tortor.
+		<nav>
+        	<ul>
+            	<li><a href="#">Home</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Register</a></li>
+            </ul>
+        </nav>
 	</header><!-- #header-->
 
 	<section id="middle">
