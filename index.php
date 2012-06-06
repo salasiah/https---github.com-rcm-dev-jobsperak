@@ -16,7 +16,14 @@
 	<header id="header">
 
 		<div class="center">
-			<h1>Jobs Perak</h1>
+			<div class="left">
+				<h1>Jobs Perak</h1>
+			</div>
+
+			<div class="right">
+				<a href="#" title="Login">Login</a>
+			</div>
+			<div class="clear"></div>
 		</div><!-- .center -->
 		
 		<nav id="menu">
