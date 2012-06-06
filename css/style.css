@@ -6,8 +6,10 @@ header, nav, section, article, aside, footer {
 	display: block;
 }
 body {
+	background-color: #fefefe;
 	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
 	width: 100%;
+	color: #333;
 }
 a {
 	color: blue;
@@ -26,7 +28,7 @@ img {
 input {
 	vertical-align: middle;
 }
-#wrapper {
+#wrapper, .center {
 	width: 1000px;
 	margin: 0 auto;
 }
@@ -35,8 +37,8 @@ input {
 /* Header
 -----------------------------------------------------------------------------*/
 #header {
-	height: 150px;
-	background: #FFE680;
+	background: #2e2e2e;
+	border-bottom: medium #ffba00 solid;
 }
 
 
@@ -58,31 +60,81 @@ input {
 	width: 100%;
 	float: left;
 	overflow: hidden;
+	border:0px solid red;
 }
 #content {
 	padding-top: 10px;
-	padding-right: 350px;
 	padding-bottom: 10px;
 	padding-left: 10px;
+	width: 640px;
+	border:0px solid red;
+	float:left;
 }
 
 
 /* Sidebar Right
 -----------------------------------------------------------------------------*/
 #sideRight {
-	float: left;
+	float: right;
 	margin-right: -3px;
 	width: 320px;
-	margin-left: -340px;
-	position: relative;
-	background: #FFACAA;
+	/*margin-left: -340px;*/
+	/*background: #FFACAA;*/
 	padding: 10px;
+	border-left:1px solid #f3f3f3;
 }
 
 
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {
-	height: 100px;
-	background: #BFF08E;
+	border-top: thin #f3f3f3 solid;
+	padding-top: 10px;
+	font-size: 11px;
+}
+
+
+
+/* Link
+-----------------------------------------------------------------------------*/
+a:link 		{text-decoration:none;color:#247aac;}
+a:hover,
+a:active 	{text-decoration:underline;}
+
+
+/* Navigation 
+----------------------------------------------------------------------------*/
+#menu {
+    background: #212121;
+}
+
+ul#navigation {
+    border:0px solid red;
+    height: 30px;
+}
+
+ul#navigation li {
+    float:left;
+    list-style:none;
+}
+
+ul#navigation li a {
+    display:block;
+    line-height: 30px;
+    padding:0px 10px;
+}.browse_location {
+
+}
+.box {
+	margin-bottom: 20px;
+}
+
+.browse_industry {
+}
+.freatured_employer {
+}
+.title {
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+.featured_candidate {
 }
