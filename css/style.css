@@ -60,7 +60,10 @@ input {
 	overflow: hidden;
 }
 #content {
-	padding: 0 270px 0 0;
+	padding-top: 10px;
+	padding-right: 350px;
+	padding-bottom: 10px;
+	padding-left: 10px;
 }
 
 
@@ -69,10 +72,11 @@ input {
 #sideRight {
 	float: left;
 	margin-right: -3px;
-	width: 250px;
-	margin-left: -250px;
+	width: 320px;
+	margin-left: -340px;
 	position: relative;
 	background: #FFACAA;
+	padding: 10px;
 }
 
 
