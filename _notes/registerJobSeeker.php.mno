@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsTenLatestJob" value="name:ads_id;datatype:int,name:ads_title;datatype:string" />
+	<infoitem key="UD_rsEmployerDetails" value="name:emp_id;datatype:int,name:emp_name;datatype:string,name:emp_desc;datatype:blob,name:emp_industry_id_fk;datatype:int,name:emp_address;datatype:blob,name:emp_tel;datatype:string,name:emp_email;datatype:string,name:emp_web;datatype:string,name:emp_pic;datatype:string,name:emp_featured;datatype:int,name:users_id_fk;datatype:int,name:indus_name;datatype:string" />
+	<infoitem key="UD_rsEmployerJobLists" value="name:ads_id;datatype:int,name:ads_title;datatype:string,name:emp_id_fk;datatype:int,name:ads_enable_view;datatype:int,name:ads_date_published;datatype:timestamp" />
+</info>
