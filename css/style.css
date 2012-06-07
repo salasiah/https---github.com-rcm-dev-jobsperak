@@ -69,6 +69,7 @@ input {
 	width: 640px;
 	border:0px solid red;
 	float:left;
+	border-right:1px solid #f3f3f3;
 }
 
 
@@ -81,7 +82,6 @@ input {
 	/*margin-left: -340px;*/
 	/*background: #FFACAA;*/
 	padding: 10px;
-	border-left:1px solid #f3f3f3;
 }
 
 
@@ -100,12 +100,22 @@ input {
 a:link 		{text-decoration:none;color:#247aac;}
 a:hover,
 a:active 	{text-decoration:underline;}
+a:visited	{color:#247bbc;}
 
 
 /* Float
 -----------------------------------------------------------------------------*/
 .left 		{float: left;}
 .right 		{float: right;}
+.main_q {
+	width: 570px;
+}
+#header .center .right {
+	font-size: 10px;
+	color: #CCC;
+}
+
+
 .clear 		{clear: both;}
 
 
@@ -117,8 +127,8 @@ a:active 	{text-decoration:underline;}
 }
 
 ul#navigation {
-    border:0px solid red;
-    height: 30px;
+	border:0px solid red;
+	height: 30px;
 }
 
 ul#navigation li {
@@ -130,11 +140,20 @@ ul#navigation li a {
     display:block;
     line-height: 30px;
     padding:0px 10px;
-}.browse_location {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+ul#navigation li a:hover,
+ul#navigation li a:active  {
+	color:#ffba00;
+}
+
+.browse_location {
 
 }
 .box {
 	margin-bottom: 20px;
+	width: 610px;
 }
 
 .browse_industry {
@@ -149,10 +168,30 @@ ul#navigation li a {
 .location_lists {
 	
 }
-.location_lists ul {
+.location_lists ul, .industry_lists ul, .featured_emplyed_lists ul, .featured_candidate_list ul {
 	list-style-type: square;
 	margin-top: 4px;
 	margin-right: 4px;
 	margin-bottom: 4px;
 	margin-left: 20px;
 }
+.industry_lists {
+}
+.sidebarBox {
+	margin-bottom: 20px;
+}
+.sidebarBox ul {
+	list-style:none;
+}
+.featured_emplyed_lists {
+}
+.featured_candidate_list {
+}
+.search_container {
+	border: thin solid #CCC;
+	padding: 8px;
+}
+.sidebar_howto {}
+
+select {width:100%;}
+select, input {padding:4px}
