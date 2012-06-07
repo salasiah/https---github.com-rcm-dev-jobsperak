@@ -88,9 +88,12 @@ input {
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {
-	border-top: thin #f3f3f3 solid;
+	border-top: medium #black solid;
 	padding-top: 10px;
 	font-size: 11px;
+	color: #FFF;
+	background-color: #212121;
+	padding-bottom: 10px;
 }
 
 
@@ -179,8 +182,9 @@ ul#navigation li a:active  {
 }
 .sidebarBox {
 	margin-bottom: 20px;
+	width: 320px;
 }
-.sidebarBox ul {
+.sidebarBox ul, .sidebarFullBox ul {
 	list-style:none;
 }
 .featured_emplyed_lists {
@@ -188,13 +192,35 @@ ul#navigation li a:active  {
 .featured_candidate_list {
 }
 .search_container {
-	border: thin solid #CCC;
+	border: thin solid #909090;
 	padding: 8px;
 }
 .sidebar_howto {}
 
+.sidebarFullBox {
+    border: 1px solid #eee;
+    background: white;
+    margin-bottom: 20px;
+	width: 320px;
+}
+
+.sidebarFullBox .sidebarHeader {
+    background-color: #2e2e2e;
+    padding: 4px;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #ffba00;
+    color: white;
+}
+
+.sidebarFullBoxContainer {
+    padding: 5px 10px;;
+}
+
 select {width:100%;}
-select, input {padding:4px}
+input[type="radio"] {
+	height:18px;
+}
+select, input {padding:2px}
 .csstable {
 	background-color:#FFFFFF;
 	margin-top: 5px;
@@ -210,7 +236,8 @@ select, input {padding:4px}
 }
 
 .csstable th {
-background-color:#999;
+background-color:#2e2e2e;
+color: #fff;
 padding:4px;
 border-bottom:1px solid #333;
 }
@@ -228,7 +255,7 @@ border-bottom:1px solid #333;
   background-color:#EEE;
 }
 .csstable tr:hover {
-  background-color:#ddd;
+  background-color:#fff779;
 }
 
 .paginate {
@@ -252,4 +279,25 @@ border-bottom:1px solid #333;
 	border-top-width: 1px;
 	border-top-style: dotted;
 	border-top-color: #999;
+}
+
+#content, #sideRight {
+    padding-top:30px;
+}.note {
+	font-size: 10px;
+	color: #999;
+}
+.req {
+	font-size: 11px;
+	color: #F00;
+}
+.success {
+	font-size: 14px;
+	color: #69cc46;
+}
+#wrapper #middle #container #content .box .search_container {
+	background-color: #feb900;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius::5px
 }
