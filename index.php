@@ -97,6 +97,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+	<script language="javascript" src="js/jquery-1.7.1.min.js"></script>
 </head>
 
 <body>
@@ -106,13 +107,12 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	<header id="header">
 
 		<div class="center">
-			<div class="left">
-				<h1>Jobs Perak</h1>
+			<div class="left"> <a href="index.php"><img src="img/logo.png" width="179" height="44" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
-				<a href="#" title="Login">Login</a> &nbsp;|&nbsp;
-                <a href="#" title="Register">Register</a>
+				<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+                <a href="registerJobSeeker.php" title="Register JobSeeker">Register JobSeeker</a>
 			</div>
 			<div class="clear"></div>
 		</div><!-- .center -->
@@ -122,8 +122,8 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	        	<ul id="navigation">
 	            	<li><a href="index.php">Home</a></li>
 	                <li><a href="#">Search</a></li>
-	                <li><a href="#">Register</a></li>
-                    <li><a href="#">Employer : Post a Job</a></li>
+	                <li><a href="registerJobSeeker.php" title="Register JobSeeker">Register JobSeeker</a></li>
+                    <li><a href="registerJobSeeker.php">Employer : Post a Job</a></li>
 	            </ul>
             </div><!-- .center -->
         </nav>
@@ -141,7 +141,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
                 	<form action="jobAdsSearchResult.php" method="get" name="front_search">
                     <table width="100%" border="0" cellspacing="6" cellpadding="2">
   <tr>
-  	<td colspan="4"><input name="q" type="text" class="main_q" placeholder="Search Jobstitle / Job Description " dir="ltr" /></td>
+  	<td colspan="4"><input name="q" type="text" class="main_q" id="main_q" placeholder="Search Jobstitle / Job Description " dir="ltr" /></td>
   </tr>
   <tr>
     <td><select name="industries">
@@ -192,8 +192,8 @@ do {
   </tr>
   <tr>
   	<td colspan="2">Over (<?php echo $row_rsTotalJobsOnline['totalOnline']; ?>) jobs available to be hire</td>
-    <td><input name="search_job" type="submit" value="Search"> <input name="search_job" type="reset" value="Reset"></td>
-    <td><a href="#">Advance Search</a></td>
+    <td><input name="search_job" id="search_job" type="submit" value="Search"> <input name="search_job" type="reset" value="Reset"></td>
+    <td><a href="#">Advanced Search</a></td>
   </tr>
 </table>
                   </form>
@@ -247,14 +247,14 @@ do {
 	
 		  <aside id="sideRight">
           	  <div class="sidebarBox">
-              	<strong>How-to</strong>
-            	<div class="sidebar_howto">
-                	<ul>
+                	<strong>How-to</strong>
+				  <div class="sidebar_howto">
+    	    	   	  <ul>
                     	<li><a href="#">Register</a></li>
                         <li><a href="#">Post a Job</a></li>
-                    </ul>
+	            	</ul>
 	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
+            </div><!-- .sidebarFullBox -->
               
 			  <div class="sidebarBox">
               	<strong>Recent Jobs</strong>
@@ -277,7 +277,7 @@ do {
            	  <strong>Get Connected</strong><br />
               	Facebook | Twitter | RSS
               </div><!-- .sidebarBox -->
-            </aside>
+          </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
 
@@ -298,6 +298,19 @@ do {
 
 </body>
 </html>
+<script>
+$(document).ready(function(){
+	$('#search_job').live('click', function(){
+		var q = $('#main_q').val();
+		
+		if(q == ''){
+			alert('Fill Job Title / Job Description');
+			return false;
+		}
+
+	});
+});
+</script>
 <?php
 mysql_free_result($rsLocation);
 
