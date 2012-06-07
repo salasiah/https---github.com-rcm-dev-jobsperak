@@ -195,3 +195,61 @@ ul#navigation li a:active  {
 
 select {width:100%;}
 select, input {padding:4px}
+.csstable {
+	background-color:#FFFFFF;
+	margin-top: 5px;
+	border:1px solid black;
+}
+.topTableCaption {
+	font-size: 11px;
+	padding: 4px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+}
+
+.csstable th {
+background-color:#999;
+padding:4px;
+border-bottom:1px solid #333;
+}
+
+.csstable, tr, td {
+	border-collapse: collapse;
+	padding: 4px;
+	border-top-color: #333;
+	border-right-color: #333;
+	border-bottom-color: #333;
+	border-left-color: #333;
+}
+
+.csstable tr:nth-of-type(odd) {
+  background-color:#EEE;
+}
+.csstable tr:hover {
+  background-color:#ddd;
+}
+
+.paginate {
+	padding: 4px;
+	width: 580px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	font-size: 11px;
+}
+.master_details {
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+}
+.hide {display:none}.jobEmployer {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #999;
+}
