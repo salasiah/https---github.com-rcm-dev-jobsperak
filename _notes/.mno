@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
 	<infoitem key="MM_URL_Count" value="0" />
+	<infoitem key="PageAccessControlMethod" value="useAccessList" />
+	<infoitem key="MM_Session1" value="MM_Username" />
+	<infoitem key="MM_Session_Count" value="1" />
+	<infoitem key="PageAccessControl" value="1,2" />
 </info>
