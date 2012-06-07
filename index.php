@@ -138,7 +138,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
           	  <div class="box">
               	<div class="search_container">
                 	<h3>Search Jobs</h3>
-                	<form action="#" method="get" name="front_search">
+                	<form action="jobAdsSearchResult.php" method="get" name="front_search">
                     <table width="100%" border="0" cellspacing="6" cellpadding="2">
   <tr>
   	<td colspan="4"><input name="q" type="text" class="main_q" placeholder="Search Jobstitle / Job Description " dir="ltr" /></td>
@@ -176,10 +176,10 @@ do {
     </select></td>
     <td><select name="salary">
       <option value="0">All Salaries</option>
-      <option value="1">Below RM1,000</option>
-      <option value="2">Below RM2,000</option>
-      <option value="3">Below RM3,000</option>
-      <option value="4">RM3,000 and Above</option>
+      <option value="1000">Below RM1,000</option>
+      <option value="2000">Below RM2,000</option>
+      <option value="3000">Below RM3,000</option>
+      <option value="10000">RM10,000 and Below</option>
     </select></td>
     <td><select name="year_exp">
       <option value="0">No Experience</option>
@@ -201,14 +201,14 @@ do {
               </div>
               
             <div class="browse_jobopening box">
-            	<a href="#"> Browse all openig jobs in our portal &raquo;</a></div>
+            	<a href="jobsOpeningAll.php"> Browse all openig jobs in our portal &raquo;</a></div>
             
 <div class="browse_location box">
 	      <h2 class="title">Browse by Location</h2>
 			    <div class="location_lists">
                 	<ul>
                     	<?php do { ?>
-                   	    <li><?php echo $row_rsLocation['location_name']; ?></li>
+                   	    <li><a href="jobsByLocation.php?ads_location=<?php echo $row_rsLocation['location_id']; ?>&location=<?php echo $row_rsLocation['location_name']; ?>"><?php echo $row_rsLocation['location_name']; ?></a></li>
                     	  <?php } while ($row_rsLocation = mysql_fetch_assoc($rsLocation)); ?>
                     </ul>
                 </div>
@@ -218,7 +218,7 @@ do {
 			    <div class="industry_lists">
                 	<ul>
                     	<?php do { ?>
-                    	  <li><?php echo $row_rsIndustry['indus_name']; ?></li>
+                    	  <li><a href="jobsByIndustry.php?ads_industry_id_fk=<?php echo $row_rsIndustry['indus_id']; ?>&industry=<?php echo $row_rsIndustry['indus_name']; ?>"><?php echo $row_rsIndustry['indus_name']; ?></a></li>
                     	  <?php } while ($row_rsIndustry = mysql_fetch_assoc($rsIndustry)); ?>
                     </ul>
                 </div>
@@ -228,7 +228,7 @@ do {
 			    <div class="featured_emplyed_lists">
                 	<ul>
                     	<?php do { ?>
-                   	    <li><?php echo $row_rs14FeaturedEmployed['emp_name']; ?></li>
+                   	    <li><a href="employer.php?emp_id=<?php echo $row_rs14FeaturedEmployed['emp_id']; ?>&employer=<?php echo $row_rs14FeaturedEmployed['emp_name']; ?>"><?php echo $row_rs14FeaturedEmployed['emp_name']; ?></a></li>
                     	  <?php } while ($row_rs14FeaturedEmployed = mysql_fetch_assoc($rs14FeaturedEmployed)); ?>
                     </ul>
                 </div>
@@ -261,7 +261,7 @@ do {
             	<div class="sidebar_recentjob">
                 	<ul>
                     	<?php do { ?>
-                   	    <li><?php echo $row_rsTenLatestJob['ads_title']; ?></li>
+                   	    <li><a href="jobsAdsDetails.php?jobAdsId=<?php echo $row_rsTenLatestJob['ads_id']; ?>"><?php echo $row_rsTenLatestJob['ads_title']; ?></a></li>
                     	  <?php } while ($row_rsTenLatestJob = mysql_fetch_assoc($rsTenLatestJob)); ?>
                     </ul>
 	            </div><!-- .sidebar_recentjob -->
