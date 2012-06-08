@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsNationality" value="name:national_id;datatype:int,name:national_name;datatype:string" />
+	<infoitem key="UD_rsUpdateJobSeeker" value="name:jobseeker_id;datatype:int,name:users_id_fk;datatype:int,name:jobseeker_tel;datatype:string,name:jobseeker_mobile;datatype:string,name:jobseeker_address;datatype:blob,name:jobseeker_dob_y;datatype:int,name:jobseeker_dob_m;datatype:int,name:jobseeker_dob_d;datatype:int,name:jobseeker_gender;datatype:int,name:jobseeker_nationality;datatype:int,name:jobseeker_moreinfo;datatype:blob,name:jobseeker_pic;datatype:string,name:jobseeker_last_edited;datatype:timestamp" />
+</info>
