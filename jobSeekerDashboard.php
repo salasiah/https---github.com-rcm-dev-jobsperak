@@ -1,3 +1,4 @@
+<?php require_once('Connections/conJobsPerak.php'); ?>
 <?php
 //initialize the session
 if (!isset($_SESSION)) {
@@ -14,9 +15,11 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   //to fully log out a visitor we need to clear the session varialbles
   $_SESSION['MM_Username'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
+  $_SESSION['MM_UserID'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
   unset($_SESSION['MM_Username']);
   unset($_SESSION['MM_UserGroup']);
+  unset($_SESSION['MM_UserID']);
   unset($_SESSION['PrevUrl']);
 	
   $logoutGoTo = "login.php";
@@ -71,6 +74,48 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   exit;
 }
 ?>
+<?php
+if (!function_exists("GetSQLValueString")) {
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+{
+  if (PHP_VERSION < 6) {
+    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+  }
+
+  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+
+  switch ($theType) {
+    case "text":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;    
+    case "long":
+    case "int":
+      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+      break;
+    case "double":
+      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+      break;
+    case "date":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;
+    case "defined":
+      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+      break;
+  }
+  return $theValue;
+}
+}
+
+$colname_rsUserDashboard = "-1";
+if (isset($_SESSION['MM_UserID'])) {
+  $colname_rsUserDashboard = $_SESSION['MM_UserID'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsUserDashboard = sprintf("SELECT * FROM jp_users WHERE users_id = %s", GetSQLValueString($colname_rsUserDashboard, "int"));
+$rsUserDashboard = mysql_query($query_rsUserDashboard, $conJobsPerak) or die(mysql_error());
+$row_rsUserDashboard = mysql_fetch_assoc($rsUserDashboard);
+$totalRows_rsUserDashboard = mysql_num_rows($rsUserDashboard);
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -120,7 +165,27 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 		  <div id="content">
 <h2>JobSeeker Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  
+  <div class="menu_container">
+  		<ul id="default_inline_menu">
+	        <li><a href="jobSeekerDashboard.php">My Dashboard</a></li>
+        	<li><a href="jobSeekerMyResume.php?email=<?php echo $_SESSION['MM_Username']; ?>">My Resume</a></li>
+            <li><a href="#">My Application</a></li>
+            <li><a href="#">Shortlisted Job</a></li>
+            <li><a href="#">Job Alert</a></li>
+            <li><a href="jobSeekerEditProfile.php?email=<?php echo $_SESSION['MM_Username']; ?>">Edit Profile</a></li>
+        </ul>
+  	</div>
+    
+    <div class="resumebox">
+    	<strong>Register at</strong> <?php echo $row_rsUserDashboard['users_register']; ?><br/><br/>
+		<strong>Last Login at</strong> <?php echo $row_rsUserDashboard['users_last_login']; ?>
+    </div>
+    
+    <div class="resumebox">
+    	<strong>Job Alert</strong>
+    </div>
 </div>
 
           </div><!-- #content-->
@@ -156,7 +221,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
            	  <strong>Get Connected</strong><br />
               	Facebook | Twitter | RSS
               </div><!-- .sidebarBox -->
-            </aside>
+          </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
 
@@ -177,3 +242,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 
 </body>
 </html>
+<?php
+mysql_free_result($rsUserDashboard);
+?>
