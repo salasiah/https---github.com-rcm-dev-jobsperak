@@ -15,9 +15,11 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   //to fully log out a visitor we need to clear the session varialbles
   $_SESSION['MM_Username'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
+  $_SESSION['MM_UserID'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
   unset($_SESSION['MM_Username']);
   unset($_SESSION['MM_UserGroup']);
+  unset($_SESSION['MM_UserID']);
   unset($_SESSION['PrevUrl']);
 	
   $logoutGoTo = "index.php";
@@ -115,7 +117,7 @@ $row_rsUsers = mysql_fetch_assoc($rsUsers);
 $totalRows_rsUsers = mysql_num_rows($rsUsers);
 ?>
 
-<?php if ($row_rsUsers['users_type'] == 1) {header('location:jobSeekerDashboard.php');} else {header('location:employerDashboard.php');} ?>
+<?php if ($row_rsUsers['users_type'] == 1) {header('location:jobSeekerDashboard.php?cuid='.$_SESSION['MM_UserID']);} else {header('location:employerDashboard.php');} ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
