@@ -120,7 +120,15 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 		  <div id="content">
 <h2>Employer Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <div class="menu_container">
+  		<ul id="default_inline_menu">
+        	<li><a href="#">Browse Resume</a></li>
+            <li><a href="#">View Application</a></li>
+            <li><a href="#">View Job Posts</a></li>
+            <li><a href="#">Edit Profile</a></li>
+        </ul>
+  	</div>
 </div>
 
           </div><!-- #content-->
