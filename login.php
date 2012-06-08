@@ -51,7 +51,7 @@ if (isset($_POST['email'])) {
   $MM_redirecttoReferrer = false;
   mysql_select_db($database_conJobsPerak, $conJobsPerak);
   	
-  $LoginRS__query=sprintf("SELECT users_email, users_pass, users_type FROM jp_users WHERE users_email=%s AND users_pass=%s",
+  $LoginRS__query=sprintf("SELECT users_id, users_email, users_pass, users_type FROM jp_users WHERE users_email=%s AND users_pass=%s",
   GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
    
   $LoginRS = mysql_query($LoginRS__query, $conJobsPerak) or die(mysql_error());
@@ -59,11 +59,17 @@ if (isset($_POST['email'])) {
   if ($loginFoundUser) {
     
     $loginStrGroup  = mysql_result($LoginRS,0,'users_type');
-    
+    // get userID
+	$query_user_id 			= "SELECT * FROM jp_users WHERE users_email = '$loginUsername'";
+	$query_user_id_result 	= mysql_query($query_user_id);
+	$c_users 				= mysql_fetch_object($query_user_id_result);
+	$cuid    				= $c_users->users_id;
+	
 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
     //declare two session variables and assign them
     $_SESSION['MM_Username'] = $loginUsername;
-    $_SESSION['MM_UserGroup'] = $loginStrGroup;	      
+    $_SESSION['MM_UserGroup'] = $loginStrGroup;
+	$_SESSION['MM_UserID'] = $cuid;	      
 
     if (isset($_SESSION['PrevUrl']) && false) {
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
