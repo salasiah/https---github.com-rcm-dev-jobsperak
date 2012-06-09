@@ -66,13 +66,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsLocation = "SELECT * FROM jp_location ORDER BY location_name ASC";
+$query_rsLocation = "SELECT * FROM jp_location WHERE location_parent = 0 ORDER BY location_name ASC";
 $rsLocation = mysql_query($query_rsLocation, $conJobsPerak) or die(mysql_error());
 $row_rsLocation = mysql_fetch_assoc($rsLocation);
 $totalRows_rsLocation = mysql_num_rows($rsLocation);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsIndustry = "SELECT * FROM jp_industry";
+$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0";
 $rsIndustry = mysql_query($query_rsIndustry, $conJobsPerak) or die(mysql_error());
 $row_rsIndustry = mysql_fetch_assoc($rsIndustry);
 $totalRows_rsIndustry = mysql_num_rows($rsIndustry);
@@ -173,7 +173,6 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	
 	<section id="middle">
 
-		<div id="container">
 		  <div id="content">
           	  <div class="box">
               	<div class="search_container">
@@ -320,8 +319,6 @@ do {
           </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
-
-		</div><!-- #container-->
 		
 
 	</section><!-- #middle-->
