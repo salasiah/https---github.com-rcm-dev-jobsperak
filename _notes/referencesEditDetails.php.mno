@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsIndustryList" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+	<infoitem key="UD_rsSpecializeList" value="name:specialize_id;datatype:int,name:specialize_name;datatype:string" />
+	<infoitem key="UD_rsLevelList" value="name:level_id;datatype:int,name:level_position;datatype:string" />
+	<infoitem key="UD_rsLanguList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+	<infoitem key="UD_rsLocationList" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsUserRefer" value="name:ref_id;datatype:int,name:ref_name;datatype:string,name:ref_relationship;datatype:int,name:ref_email;datatype:string,name:ref_phone;datatype:string,name:ref_pos_title;datatype:string,name:ref_comp_name;datatype:string,name:user_id_fk;datatype:int" />
+</info>
