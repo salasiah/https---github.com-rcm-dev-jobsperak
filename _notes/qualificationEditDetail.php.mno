@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsEduList" value="name:edu_id;datatype:int,name:edu_name;datatype:string" />
+	<infoitem key="UD_rsFieldList" value="name:field_id;datatype:int,name:field_name;datatype:string" />
+	<infoitem key="UD_rsGradeList" value="name:grade_id;datatype:int,name:grade_name;datatype:string" />
+	<infoitem key="UD_rsLocatedList" value="name:national_id;datatype:int,name:national_name;datatype:string" />
+	<infoitem key="UD_rsEditQualification" value="name:edu_name;datatype:string,name:field_name;datatype:string,name:edu_id;datatype:int,name:edu_qualification;datatype:int,name:edu_fieldStudy;datatype:int,name:edu_major;datatype:string,name:edu_grade;datatype:int,name:edu_cgpa;datatype:real,name:edu_university;datatype:string,name:edu_located;datatype:int,name:edu_date_graduate_month;datatype:int,name:edu_date_graduate_year;datatype:int,name:user_id_fk;datatype:int,name:grade_name;datatype:string,name:national_name;datatype:string" />
+	<infoitem key="UD_rsUserEdu" value="name:edu_id;datatype:int,name:edu_qualification;datatype:int,name:edu_fieldStudy;datatype:int,name:edu_major;datatype:string,name:edu_grade;datatype:int,name:edu_cgpa;datatype:real,name:edu_university;datatype:string,name:edu_located;datatype:int,name:edu_date_graduate_month;datatype:int,name:edu_date_graduate_year;datatype:int,name:user_id_fk;datatype:int" />
+</info>

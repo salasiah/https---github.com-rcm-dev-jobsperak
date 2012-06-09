@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsIndustryList" value="name:indus_id;datatype:int,name:indus_name;datatype:string" />
+	<infoitem key="UD_rsSpecializeList" value="name:specialize_id;datatype:int,name:specialize_name;datatype:string" />
+	<infoitem key="UD_rsLevelList" value="name:level_id;datatype:int,name:level_position;datatype:string" />
+	<infoitem key="UD_rsEduList" value="name:edu_id;datatype:int,name:edu_name;datatype:string" />
+	<infoitem key="UD_rsFieldList" value="name:field_id;datatype:int,name:field_name;datatype:string" />
+	<infoitem key="UD_rsGradeList" value="name:grade_id;datatype:int,name:grade_name;datatype:string" />
+	<infoitem key="UD_rsLocatedList" value="name:national_id;datatype:int,name:national_name;datatype:string" />
+</info>
