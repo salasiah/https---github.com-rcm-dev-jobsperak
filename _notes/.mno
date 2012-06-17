@@ -2,10 +2,13 @@
 <info>
 	<infoitem key="MM_URL_Count" value="0" />
 	<infoitem key="PageAccessControlMethod" value="useAccessList" />
-	<infoitem key="MM_Session1" value="MM_Username" />
 	<infoitem key="MM_Session_Count" value="2" />
 	<infoitem key="PageAccessControl" value="1,2" />
-	<infoitem key="MM_Session2" value="MM_UserID" />
 	<infoitem key="MM_Environment1" value="app_url" />
 	<infoitem key="MM_Environment_Count" value="1" />
+	<infoitem key="MM_Cookie_Count" value="0" />
+	<infoitem key="MM_Form1" value="jobP_1" />
+	<infoitem key="MM_Form_Count" value="1" />
+	<infoitem key="MM_Session1" value="MM_Username" />
+	<infoitem key="MM_Session2" value="MM_UserID" />
 </info>

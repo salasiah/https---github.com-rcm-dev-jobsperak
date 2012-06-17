@@ -15,9 +15,11 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   $_SESSION['MM_Username'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
+  $_SESSION['MM_UserID'] = NULL;
   unset($_SESSION['MM_Username']);
   unset($_SESSION['MM_UserGroup']);
   unset($_SESSION['PrevUrl']);
+  unset($_SESSION['MM_UserID']);
 	
   $logoutGoTo = "login.php";
   if ($logoutGoTo) {
@@ -89,49 +91,35 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 	<header id="header">
 
 		<div class="center">
-			<div class="left">
-				<h1>Jobs Perak</h1>
+			<div class="left"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
-				<a href="#" title="Login">Login</a> &nbsp;|&nbsp;
-                <a href="#" title="Register">Register</a>
-			</div>
+            	<?php if (!isset($_SESSION['MM_Username'])) { ?>
+					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+                	<a href="registerJobSeeker.php" title="Register JobSeeker">
+                    Register JobSeeker</a>
+				<?php } else { ?>
+                	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
+                    &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
+<?php }?>
+    		</div>
 			<div class="clear"></div>
 		</div><!-- .center -->
 		
-		<nav id="menu">
-			<div class="center">
-	        	<ul id="navigation">
-	            	<li><a href="index.php">Home</a></li>
-	                <li><a href="#">Search</a></li>
-	                <li><a href="#">Register</a></li>
-                    <li><a href="#">Employer : Post a Job</a></li>
-	            </ul>
-            </div><!-- .center -->
-        </nav>
+		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
 	<div id="wrapper">
 	
 	<section id="middle">
 
-		<div id="container">
 		  <div id="content">
 <h2>JobSeeker Dashboard</h2>
 <div class="master_details">
   <p>Welcome <?php echo $_SESSION['MM_Username']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
-  <div class="menu_container">
-  		<ul id="default_inline_menu">
-        	<li><a href="jobSeekerDashboard.php">My Dashboard</a></li>
-        	<li><a href="#">My Resume</a></li>
-            <li><a href="#">My Application</a></li>
-            <li><a href="#">Shortlisted Job</a></li>
-            <li><a href="#">Job Alert</a></li>
-            <li><a href="#">Edit Profile</a></li>
-        </ul>
-  	</div>
+  <?php include("jobSeekerMenu.php"); ?>
     
     <div class="box">
     	<h3>Edit Profile</h3>
@@ -143,42 +131,11 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
           </div><!-- #content-->
 	
 		  <aside id="sideRight">
-          	  <div class="sidebarBox">
-              	<strong>How-to</strong>
-            	<div class="sidebar_howto">
-                	<ul>
-                    	<li><a href="#">Register</a></li>
-                        <li><a href="#">Post a Job</a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-			  <div class="sidebarBox hide">
-              	<strong>Recent Jobs</strong>
-            	<div class="sidebar_recentjob">
-                	<ul>
-                      <li><a></a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Jobs Posted under </strong>
-              	<ul>
-                  <li><a></a></li>
-                </ul>
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Get Connected</strong><br />
-              	Facebook | Twitter | RSS
-              </div><!-- .sidebarBox -->
-            </aside>
+          	  <?php include('full_content_sidebar.php'); ?>
+          </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
 
-		</div><!-- #container-->
-		
 
 	</section><!-- #middle-->
 
@@ -186,7 +143,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 
 	<footer id="footer">
 		<div class="center">
-			Copyright Reserved &copy; 2012
+			<?php include("footer.php"); ?>
 		</div><!-- .center -->
 	</footer><!-- #footer -->
 

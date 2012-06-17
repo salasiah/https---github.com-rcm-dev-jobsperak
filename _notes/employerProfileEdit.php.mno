@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsEmployerProfile" value="name:users_id;datatype:int,name:users_email;datatype:blob,name:users_pass;datatype:string,name:users_register;datatype:datetime,name:users_last_login;datatype:timestamp,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_type;datatype:int,name:user_active;datatype:int" />
+	<infoitem key="UD_rsCompanyInfo" value="name:emp_id;datatype:int,name:emp_name;datatype:string,name:emp_desc;datatype:blob,name:emp_industry_id_fk;datatype:int,name:emp_address;datatype:blob,name:emp_tel;datatype:string,name:emp_email;datatype:string,name:emp_web;datatype:string,name:emp_pic;datatype:string,name:emp_featured;datatype:int,name:users_id_fk;datatype:int" />
+	<infoitem key="UD_rsIndustry" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+	<infoitem key="UD_rsCompanyInfoDetail" value="name:emp_id;datatype:int,name:emp_name;datatype:string,name:emp_desc;datatype:blob,name:emp_industry_id_fk;datatype:int,name:emp_address;datatype:blob,name:emp_tel;datatype:string,name:emp_email;datatype:string,name:emp_web;datatype:string,name:emp_pic;datatype:string,name:emp_featured;datatype:int,name:users_id_fk;datatype:int" />
+</info>

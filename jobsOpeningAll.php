@@ -34,7 +34,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 $currentPage = $_SERVER["PHP_SELF"];
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsTenLatestJob = "SELECT ads_id, ads_title FROM jp_ads ORDER BY ads_date_posted DESC";
+$query_rsTenLatestJob = "SELECT ads_id, ads_title FROM jp_ads WHERE ads_enable_view = 1 ORDER BY ads_date_posted DESC";
 $rsTenLatestJob = mysql_query($query_rsTenLatestJob, $conJobsPerak) or die(mysql_error());
 $row_rsTenLatestJob = mysql_fetch_assoc($rsTenLatestJob);
 $totalRows_rsTenLatestJob = mysql_num_rows($rsTenLatestJob);
@@ -94,45 +94,39 @@ $queryString_rsJobsOpening = sprintf("&totalRows_rsJobsOpening=%d%s", $totalRows
 	<header id="header">
 
 		<div class="center">
-			<div class="left">
-				<h1>Jobs Perak</h1>
+			<div class="left"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
-				<a href="#" title="Login">Login</a> &nbsp;|&nbsp;
-                <a href="#" title="Register">Register</a>
-			</div>
+            	<?php if (!isset($_SESSION['MM_Username'])) { ?>
+					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+                	<a href="registerJobSeeker.php" title="Register JobSeeker">
+                    Register JobSeeker</a>
+				<?php } else { ?>
+                	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
+                    &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
+<?php }?>
+    		</div>
 			<div class="clear"></div>
 		</div><!-- .center -->
 		
-		<nav id="menu">
-			<div class="center">
-	        	<ul id="navigation">
-	            	<li><a href="index.php">Home</a></li>
-	                <li><a href="#">Search</a></li>
-	                <li><a href="#">Register</a></li>
-                    <li><a href="#">Employer : Post a Job</a></li>
-	            </ul>
-            </div><!-- .center -->
-        </nav>
+		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
 	<div id="wrapper">
 	
 	<section id="middle">
 
-		<div id="container">
 		  <div id="content">
           	  <strong>Browse Jobs Opening</strong>
-              <div class="topTableCaption">There are <?php echo $totalRows_rsJobsOpening ?> Job(s) opening <?php echo ucfirst($_GET['location']); ?></div>
+              <div class="topTableCaption">There are <?php echo $totalRows_rsJobsOpening ?> Job(s) opening.</div>
               <?php if ($totalRows_rsJobsOpening > 0) { // Show if recordset not empty ?>
-  <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable">
+  <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
     <tr>
       <th>Job Title</th>
       <th>Post By</th>
       <th>Salary</th>
       <th>Exp (Year)</th>
-      <th>Date posted</th>
     </tr>
     <?php do { ?>
       <tr>
@@ -140,7 +134,6 @@ $queryString_rsJobsOpening = sprintf("&totalRows_rsJobsOpening=%d%s", $totalRows
         <td><a href="employer.php?emp_id=<?php echo $row_rsJobsOpening['emp_id_fk']; ?>&employer=<?php echo $row_rsJobsOpening['emp_name']; ?>"><?php echo $row_rsJobsOpening['emp_name']; ?></a></td>
         <td>RM <?php echo $row_rsJobsOpening['ads_salary']; ?></td>
         <td align="center" valign="middle"><?php echo $row_rsJobsOpening['ads_y_exp']; ?></td>
-        <td align="center" valign="middle"><?php echo $row_rsJobsOpening['ads_date_published']; ?></td>
       </tr>
       <?php } while ($row_rsJobsOpening = mysql_fetch_assoc($rsJobsOpening)); ?>
   </table>
@@ -150,42 +143,11 @@ Records <?php echo ($startRow_rsJobsOpening + 1) ?> to <?php echo min($startRow_
           </div><!-- #content-->
 	
 		  <aside id="sideRight">
-          	  <div class="sidebarBox">
-              	<strong>How-to</strong>
-            	<div class="sidebar_howto">
-                	<ul>
-                    	<li><a href="#">Register</a></li>
-                        <li><a href="#">Post a Job</a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-			  <div class="sidebarBox">
-              	<strong>Recent Jobs</strong>
-            	<div class="sidebar_recentjob">
-                	<ul>
-                    	<?php do { ?>
-                   	    <li><a href="jobsAdsDetails.php?jobAdsId=<?php echo $row_rsTenLatestJob['ads_id']; ?>"><?php echo $row_rsTenLatestJob['ads_title']; ?></a></li>
-                    	  <?php } while ($row_rsTenLatestJob = mysql_fetch_assoc($rsTenLatestJob)); ?>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox">
-           	  <strong>Advertisement</strong>
-              	<img src="media/ads/36b7c88239654754a0504fe7c6e01669.gif" width="300" height="100" alt="latest">
-              	<img src="media/ads/34e8a0caf5ff263683d3b3371fda5ecd.jpg" width="300" height="250" alt="advert1">
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox">
-           	  <strong>Get Connected</strong><br />
-              	Facebook | Twitter | RSS
-              </div><!-- .sidebarBox -->
-            </aside>
+          	  <?php include('full_content_sidebar.php'); ?>
+          </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
 
-		</div><!-- #container-->
 		
 
 	</section><!-- #middle-->
@@ -194,7 +156,7 @@ Records <?php echo ($startRow_rsJobsOpening + 1) ?> to <?php echo min($startRow_
 
 	<footer id="footer">
 		<div class="center">
-			Copyright Reserved &copy; 2012
+			<?php include("footer.php"); ?>
 		</div><!-- .center -->
 	</footer><!-- #footer -->
 

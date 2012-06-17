@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsLoc" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsIndustry" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+	<infoitem key="UD_rsEmployerProfile" value="name:users_id;datatype:int,name:users_email;datatype:blob,name:users_pass;datatype:string,name:users_register;datatype:datetime,name:users_last_login;datatype:timestamp,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_type;datatype:int,name:user_active;datatype:int" />
+	<infoitem key="UD_rsCompanyInfoDetail" value="name:emp_id;datatype:int,name:emp_name;datatype:string,name:emp_desc;datatype:blob,name:emp_industry_id_fk;datatype:int,name:emp_address;datatype:blob,name:emp_tel;datatype:string,name:emp_email;datatype:string,name:emp_web;datatype:string,name:emp_pic;datatype:string,name:emp_featured;datatype:int,name:users_id_fk;datatype:int" />
+	<infoitem key="UD_rsEmployerId" value="name:emp_id;datatype:int" />
+	<infoitem key="UD_rsJobSeekerList" value="name:users_id;datatype:int,name:users_email;datatype:blob,name:users_pass;datatype:string,name:users_register;datatype:datetime,name:users_last_login;datatype:timestamp,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_type;datatype:int,name:user_active;datatype:int,name:jobseeker_id;datatype:int,name:users_id_fk;datatype:int,name:jobseeker_tel;datatype:string,name:jobseeker_mobile;datatype:string,name:jobseeker_address;datatype:blob,name:jobseeker_dob_y;datatype:int,name:jobseeker_dob_m;datatype:int,name:jobseeker_dob_d;datatype:int,name:jobseeker_gender;datatype:int,name:jobseeker_nationality;datatype:int,name:jobseeker_moreinfo;datatype:blob,name:jobseeker_pic;datatype:blob,name:jobseeker_last_edited;datatype:timestamp,name:users_type1;datatype:int" />
+	<infoitem key="UD_rsLocation" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsNationality" value="name:national_id;datatype:int,name:national_name;datatype:string" />
+	<infoitem key="UD_spmSubjectList" value="name:subject_id;datatype:int,name:subject_name;datatype:string" />
+	<infoitem key="UD_rsQualification" value="name:edu_id;datatype:int,name:edu_name;datatype:string" />
+	<infoitem key="UD_rsFieldList" value="name:field_id;datatype:int,name:field_name;datatype:string" />
+	<infoitem key="UD_rsMajorList" value="name:specialize_id;datatype:int,name:specialize_name;datatype:string" />
+	<infoitem key="UD_rsLangList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+</info>

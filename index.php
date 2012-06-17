@@ -16,9 +16,11 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   $_SESSION['MM_Username'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
+  $_SESSION['MM_UserID'] = NULL;
   unset($_SESSION['MM_Username']);
   unset($_SESSION['MM_UserGroup']);
   unset($_SESSION['PrevUrl']);
+  unset($_SESSION['MM_UserID']);
 	
   $logoutGoTo = "index.php";
   if ($logoutGoTo) {
@@ -72,13 +74,13 @@ $row_rsLocation = mysql_fetch_assoc($rsLocation);
 $totalRows_rsLocation = mysql_num_rows($rsLocation);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0";
+$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0 LIMIT 0,60";
 $rsIndustry = mysql_query($query_rsIndustry, $conJobsPerak) or die(mysql_error());
 $row_rsIndustry = mysql_fetch_assoc($rsIndustry);
 $totalRows_rsIndustry = mysql_num_rows($rsIndustry);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsTenLatestJob = "SELECT ads_id, ads_title FROM jp_ads ORDER BY ads_date_posted DESC";
+$query_rsTenLatestJob = "SELECT ads_id, ads_title FROM jp_ads WHERE ads_enable_view = 1 ORDER BY ads_date_posted DESC";
 $rsTenLatestJob = mysql_query($query_rsTenLatestJob, $conJobsPerak) or die(mysql_error());
 $row_rsTenLatestJob = mysql_fetch_assoc($rsTenLatestJob);
 $totalRows_rsTenLatestJob = mysql_num_rows($rsTenLatestJob);
@@ -111,7 +113,7 @@ $row_rs10FeaturedCandidate = mysql_fetch_assoc($rs10FeaturedCandidate);
 $totalRows_rs10FeaturedCandidate = mysql_num_rows($rs10FeaturedCandidate);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsAllindustries = "SELECT * FROM jp_industry ORDER BY indus_name ASC";
+$query_rsAllindustries = "SELECT * FROM jp_industry LIMIT 0 , 60";
 $rsAllindustries = mysql_query($query_rsAllindustries, $conJobsPerak) or die(mysql_error());
 $row_rsAllindustries = mysql_fetch_assoc($rsAllindustries);
 $totalRows_rsAllindustries = mysql_num_rows($rsAllindustries);
@@ -141,7 +143,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	<header id="header">
 
 		<div class="center">
-			<div class="left"> <a href="index.php"><img src="img/logo.png" width="179" height="44" alt="JobsPerak Logo" longdesc="index.php"></a>
+			<div class="left logo"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
@@ -157,16 +159,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 			<div class="clear"></div>
 		</div><!-- .center -->
 		
-		<nav id="menu">
-			<div class="center">
-	        	<ul id="navigation">
-	            	<li><a href="index.php">Home</a></li>
-	                <li><a href="#">Search</a></li>
-	                <li><a href="registerJobSeeker.php" title="Register JobSeeker">Register JobSeeker</a></li>
-                    <li><a href="registerJobSeeker.php">Employer : Post a Job</a></li>
-	            </ul>
-            </div><!-- .center -->
-        </nav>
+		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
 	<div id="wrapper">
@@ -231,8 +224,8 @@ do {
   </tr>
   <tr>
   	<td colspan="2">Over (<?php echo $row_rsTotalJobsOnline['totalOnline']; ?>) jobs available to be hire</td>
-    <td><input name="search_job" id="search_job" type="submit" value="Search"> <input name="search_job" type="reset" value="Reset"></td>
-    <td><a href="#">Advanced Search</a></td>
+    <td><input name="search_job" type="submit" class="button green" id="search_job" value="Search Job"></td>
+    <td><a href="#" class="hide">Advanced Search</a></td>
   </tr>
 </table>
                   </form>
@@ -242,16 +235,7 @@ do {
             <div class="browse_jobopening box">
             	<a href="jobsOpeningAll.php"> Browse all openig jobs in our portal &raquo;</a></div>
             
-<div class="browse_location box">
-	      <h2 class="title">Browse by Location</h2>
-			    <div class="location_lists">
-                	<ul>
-                    	<?php do { ?>
-                   	    <li><a href="jobsByLocation.php?ads_location=<?php echo $row_rsLocation['location_id']; ?>&location=<?php echo $row_rsLocation['location_name']; ?>"><?php echo $row_rsLocation['location_name']; ?></a></li>
-                    	  <?php } while ($row_rsLocation = mysql_fetch_assoc($rsLocation)); ?>
-                    </ul>
-                </div>
-              </div>
+				
 			  <div class="browse_industry box">
 			    <h2 class="title">Browse by Industry</h2>
 			    <div class="industry_lists">
@@ -259,10 +243,47 @@ do {
                     	<?php do { ?>
                     	  <li><a href="jobsByIndustry.php?ads_industry_id_fk=<?php echo $row_rsIndustry['indus_id']; ?>&industry=<?php echo $row_rsIndustry['indus_name']; ?>"><?php echo $row_rsIndustry['indus_name']; ?></a></li>
                     	  <?php } while ($row_rsIndustry = mysql_fetch_assoc($rsIndustry)); ?>
+                          <div class="clear"></div>
                     </ul>
                 </div>
               </div>
-			  <div class="freatured_employer box">
+              
+              <div class="browse_location box">
+	      		<h2 class="title">Browse by Location</h2>
+			    <div class="location_lists">
+                	<ul>
+                    	<?php do { ?>
+                   	    <li><a href="jobsByLocation.php?ads_location=<?php echo $row_rsLocation['location_id']; ?>&location=<?php echo $row_rsLocation['location_name']; ?>"><?php echo $row_rsLocation['location_name']; ?></a>
+                        	<?php
+						  
+							  /*$parent = $row_rsLocation['location_id'];
+							  $sql_child = "SELECT * FROM jp_location WHERE location_parent = $parent";
+							  $sql_child_result = mysql_query($sql_child);
+							  $sql_child_result_row = mysql_num_rows($sql_child_result);
+							  
+							  
+							  if($sql_child_result_row > 0) {
+									
+								echo "<ul>";
+									
+									while($child_object_row = mysql_fetch_object($sql_child_result)){
+										echo "<li>" . $child_object_row->location_name . "</li>";
+									}
+									
+								echo "</ul>";
+									
+							  }*/
+							  
+							  
+							?>
+                        	</li>
+                    	  <?php } while ($row_rsLocation = mysql_fetch_assoc($rsLocation)); ?>
+                          <div class="clear"></div>
+                    </ul>
+                </div>
+              </div>
+              
+			  <div class="freatured_employer box hide">
 			    <h2 class="title">Featured Employer</h2>
 			    <div class="featured_emplyed_lists">
                 	<ul>
@@ -272,7 +293,7 @@ do {
                     </ul>
                 </div>
               </div>
-		    <div class="featured_candidate box">
+		    <div class="featured_candidate box hide">
 		      <h2 class="title">Featured Candidate</h2>
 		      <div class="featured_candidate_list">
                	  <ul>
@@ -285,37 +306,7 @@ do {
             </div><!-- #content-->
 	
 		  <aside id="sideRight">
-          	  <div class="sidebarBox">
-                	<strong>How-to</strong>
-				  <div class="sidebar_howto">
-    	    	   	  <ul>
-                    	<li><a href="#">Register</a></li>
-                        <li><a href="#">Post a Job</a></li>
-	            	</ul>
-	            </div><!-- .sidebar_recentjob -->
-            </div><!-- .sidebarFullBox -->
-              
-			  <div class="sidebarBox">
-              	<strong>Recent Jobs</strong>
-            	<div class="sidebar_recentjob">
-                	<ul>
-                    	<?php do { ?>
-                   	    <li><a href="jobsAdsDetails.php?jobAdsId=<?php echo $row_rsTenLatestJob['ads_id']; ?>"><?php echo $row_rsTenLatestJob['ads_title']; ?></a></li>
-                    	  <?php } while ($row_rsTenLatestJob = mysql_fetch_assoc($rsTenLatestJob)); ?>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox">
-           	  <strong>Advertisement</strong>
-              	<img src="media/ads/36b7c88239654754a0504fe7c6e01669.gif" width="300" height="100" alt="latest">
-              	<img src="media/ads/34e8a0caf5ff263683d3b3371fda5ecd.jpg" width="300" height="250" alt="advert1">
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox">
-           	  <strong>Get Connected</strong><br />
-              	Facebook | Twitter | RSS
-              </div><!-- .sidebarBox -->
+          	  <?php include('full_content_sidebar.php'); ?>
           </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
@@ -327,7 +318,7 @@ do {
 
 	<footer id="footer">
 		<div class="center">
-			Copyright Reserved &copy; 2012
+        	<?php include("footer.php"); ?>
 		</div><!-- .center -->
 	</footer><!-- #footer -->
 

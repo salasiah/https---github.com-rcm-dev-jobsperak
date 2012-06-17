@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
 	<infoitem key="UD_rsUserDashboard" value="name:users_id;datatype:int,name:users_email;datatype:blob,name:users_pass;datatype:string,name:users_register;datatype:datetime,name:users_last_login;datatype:timestamp,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_type;datatype:int,name:user_active;datatype:int" />
+	<infoitem key="UD_rsUserJobAlert" value="name:jobP_id;datatype:int,name:jobP_1;datatype:int,name:jobP_2;datatype:int,name:jobP_3;datatype:int,name:jobP_salary;datatype:int,name:user_id_fk;datatype:int" />
+	<infoitem key="UD_rsJobAlertAdsLoc" value="name:ads_id;datatype:int,name:ads_title;datatype:string,name:ads_details;datatype:blob,name:emp_id_fk;datatype:int,name:ads_location;datatype:int,name:ads_salary;datatype:string,name:ads_y_exp;datatype:int,name:ads_enable_view;datatype:int,name:ads_featured;datatype:int,name:ads_date_posted;datatype:timestamp,name:ads_date_published;datatype:timestamp,name:ads_date_last_edited;datatype:timestamp,name:ads_date_expired;datatype:datetime,name:ads_industry_id_fk;datatype:int" />
+	<infoitem key="UD_rsJobAlertAds" value="name:ads_id;datatype:int,name:ads_title;datatype:string,name:ads_details;datatype:blob,name:emp_id_fk;datatype:int,name:ads_location;datatype:int,name:ads_salary;datatype:string,name:ads_y_exp;datatype:int,name:ads_enable_view;datatype:int,name:ads_featured;datatype:int,name:ads_date_posted;datatype:timestamp,name:ads_date_published;datatype:timestamp,name:ads_date_last_edited;datatype:timestamp,name:ads_date_expired;datatype:datetime,name:ads_industry_id_fk;datatype:int" />
+	<infoitem key="UD_rsIsActive" value="name:user_active;datatype:int" />
 </info>

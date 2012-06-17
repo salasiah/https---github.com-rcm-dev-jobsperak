@@ -16,9 +16,11 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   $_SESSION['MM_Username'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
+  $_SESSION['MM_UserID'] = NULL;
   unset($_SESSION['MM_Username']);
   unset($_SESSION['MM_UserGroup']);
   unset($_SESSION['PrevUrl']);
+  unset($_SESSION['MM_UserID']);
 	
   $logoutGoTo = "login.php";
   if ($logoutGoTo) {
@@ -193,6 +195,16 @@ $query_rsUserRefer = sprintf("SELECT * FROM jp_references WHERE user_id_fk = %s"
 $rsUserRefer = mysql_query($query_rsUserRefer, $conJobsPerak) or die(mysql_error());
 $row_rsUserRefer = mysql_fetch_assoc($rsUserRefer);
 $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
+
+$colname_rsJsSPM = "-1";
+if (isset($_SESSION['MM_UserID'])) {
+  $colname_rsJsSPM = $_SESSION['MM_UserID'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsJsSPM = sprintf("SELECT jp_spm_subject.subject_name,   jp_spm.* FROM jp_spm Inner Join   jp_spm_subject On jp_spm.spm_subject_id_fk = jp_spm_subject.subject_id WHERE jp_spm.user_id_fk = %s", GetSQLValueString($colname_rsJsSPM, "int"));
+$rsJsSPM = mysql_query($query_rsJsSPM, $conJobsPerak) or die(mysql_error());
+$row_rsJsSPM = mysql_fetch_assoc($rsJsSPM);
+$totalRows_rsJsSPM = mysql_num_rows($rsJsSPM);
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -212,27 +224,23 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
 	<header id="header">
 
 		<div class="center">
-			<div class="left">
-				<h1>Jobs Perak</h1>
+			<div class="left"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
-				<a href="#" title="Login">Login</a> &nbsp;|&nbsp;
-                <a href="#" title="Register">Register</a>
-			</div>
+            	<?php if (!isset($_SESSION['MM_Username'])) { ?>
+					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+                	<a href="registerJobSeeker.php" title="Register JobSeeker">
+                    Register JobSeeker</a>
+				<?php } else { ?>
+                	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
+                    &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
+<?php }?>
+    		</div>
 			<div class="clear"></div>
 		</div><!-- .center -->
 		
-		<nav id="menu">
-			<div class="center">
-	        	<ul id="navigation">
-	            	<li><a href="index.php">Home</a></li>
-	                <li><a href="#">Search</a></li>
-	                <li><a href="#">Register</a></li>
-                    <li><a href="#">Employer : Post a Job</a></li>
-	            </ul>
-            </div><!-- .center -->
-        </nav>
+		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
 	<div id="wrapper">
@@ -244,28 +252,45 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
 <div class="master_details">
   <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
-  <div class="menu_container">
-  		<ul id="default_inline_menu">
-        	<li><a href="jobSeekerDashboard.php">My Dashboard</a></li>
-        	<li><a href="#">My Resume</a></li>
-            <li><a href="#">My Application</a></li>
-            <li><a href="#">Shortlisted Job</a></li>
-            <li><a href="#">Job Alert</a></li>
-            <li><a href="#">Edit Profile</a></li>
-        </ul>
-  	</div>
+  <?php include("jobSeekerMenu.php"); ?>
     
     <div class="box">
     	<h3>My Resume</h3>
     	</div>
         
     <div class="box resumebox">
+    <table width="500" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="121"><img src="<?php echo $row_rsJobSeekerInfo['jobseeker_pic']; ?>" /></td>
+    <td width="279" align="left" valign="middle"><h3><?php echo $row_rsCurrentUsers['users_fname']; ?><?php echo $row_rsCurrentUsers['users_lname']; ?></h3></td>
+    </tr>
+  <tr>
+    <td>
+    <?php if ($row_rsJobSeekerInfo['users_id_fk']== $_SESSION['MM_UserID']){ ?>
+    
+	<?php if ($row_rsJobSeekerInfo['jobseeker_pic']== "media/jobseeker/default_jobseeker.png"){ ?>
+    <a href="jobSeekerUploadPicture.php">Upload Picture</a>
+    <?php } else { ?>
+    <a href="jobSeekerUploadPicture.php">Change Picture</a>
+    <?php } ?>
+    
+    <?php } else { // else display update your resume 1st  ?>
+    	Update your resume 1st to upload your picture
+    <?php } ?>
+    </td>
+    <td>&nbsp;</td>
+    </tr>
+</table>
+
+    </div>
+        
+    <div class="box resumebox">
     	<strong>Uploaded Resume</strong> &middot;
         <?php if ($totalRows_rsUserResume == 0) { // Show if recordset empty ?>
-          <a href="#">Upload</a>
+          <a href="resumeUpload.php">Upload</a>
           <?php } // Show if recordset empty ?>
         <?php if ($totalRows_rsUserResume > 0) { // Show if recordset not empty ?>
-          <a href="#">Edit</a>
+          <a href="resumeUpload.php">Upload new resume</a>
           <?php } // Show if recordset not empty ?>
 <?php if ($totalRows_rsUserResume > 0) { // Show if recordset not empty ?>
   <table width="500" border="0" cellspacing="0" cellpadding="2">
@@ -273,13 +298,13 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
       <td width="32">&nbsp;</td>  
       <td class="def_width_box_3">File name</td>
       <td width="22">:</td>
-      <td><a href="<?php echo $row_rsUserResume['resume_path']; ?>"><?php echo $row_rsUserResume['resume_title']; ?></a></td>
+      <td><a href="media/resume/<?php echo $row_rsUserResume['resume_path']; ?>"><?php echo $row_rsUserResume['resume_title']; ?></a></td>
       </tr>
     <tr>
       <td>&nbsp;</td>
       <td>Uploaded On</td>
       <td width="22">:</td>
-      <td><?php echo $row_rsUserResume['resume_upload_on']; ?></td>
+      <td><?php echo date('l, d/m/Y',strtotime($row_rsUserResume['resume_upload_on'])); ?></td>
       </tr>
   </table>
   <?php } // Show if recordset not empty ?>
@@ -357,7 +382,7 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
     
     <?php do { ?>
       <tr>
-        <td width="10"><?php echo $i; ?></td>
+        <td width="10"><?php //echo $i; ?></td>
         <td class="def_width_box_2">Company Name</td>
         <td width="22">:</td>
         <td><?php echo $row_rsUserEmpHistory['exp_co_name']; ?></td>
@@ -467,6 +492,29 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
       <td colspan="4">&nbsp;</td>
         <?php } while ($row_rsUserQualification = mysql_fetch_assoc($rsUserQualification)); ?>
     </tr>
+  </table>
+  <?php } // Show if recordset not empty ?>
+    </div>
+    
+    
+    <div class="box resumebox">
+    	<strong>SPM</strong> &middot;
+          <a href="spmAdd.php">Add Subject</a> &middot; 
+        <?php if ($totalRows_rsJsSPM > 0) { // Show if recordset not empty ?>
+          <a href="spmEdit.php">Edit</a>
+          <?php } // Show if recordset not empty ?>
+        <?php if ($totalRows_rsJsSPM > 0) { // Show if recordset not empty ?>
+  <table width="600" border="0" cellspacing="0" cellpadding="2">
+    <tr>
+      <th>Subject</th>
+      <th class="def_width_box_2">Grade</th>
+    </tr>
+    <?php do { ?>
+      <tr>
+        <td><?php echo $row_rsJsSPM['subject_name']; ?></td>
+        <td align="center" valign="middle"><?php echo $row_rsJsSPM['spm_grade']; ?></td>
+      </tr>
+      <?php } while ($row_rsJsSPM = mysql_fetch_assoc($rsJsSPM)); ?>
   </table>
   <?php } // Show if recordset not empty ?>
     </div>
@@ -608,37 +656,8 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
           </div><!-- #content-->
 	
 		  <aside id="sideRight">
-          	  <div class="sidebarBox">
-              	<strong>How-to</strong>
-            	<div class="sidebar_howto">
-                	<ul>
-                    	<li><a href="#">Register</a></li>
-                        <li><a href="#">Post a Job</a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-			  <div class="sidebarBox hide">
-              	<strong>Recent Jobs</strong>
-            	<div class="sidebar_recentjob">
-                	<ul>
-                      <li><a></a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Jobs Posted under </strong>
-              	<ul>
-                  <li><a></a></li>
-                </ul>
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Get Connected</strong><br />
-              	Facebook | Twitter | RSS
-              </div><!-- .sidebarBox -->
-            </aside>
+          	  <?php include('full_content_sidebar.php'); ?>
+          </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
 		
@@ -649,7 +668,7 @@ $totalRows_rsUserRefer = mysql_num_rows($rsUserRefer);
 
 	<footer id="footer">
 		<div class="center">
-			Copyright Reserved &copy; 2012
+			<?php include("footer.php"); ?>
 		</div><!-- .center -->
 	</footer><!-- #footer -->
 
@@ -675,4 +694,6 @@ mysql_free_result($rsUserLanguage);
 mysql_free_result($rsUserJobPrefer);
 
 mysql_free_result($rsUserRefer);
+
+mysql_free_result($rsJsSPM);
 ?>

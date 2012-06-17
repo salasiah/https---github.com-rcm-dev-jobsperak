@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsLocation" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsIndustry" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+	<infoitem key="UD_rsTenLatestJob" value="name:ads_id;datatype:int,name:ads_title;datatype:string" />
+	<infoitem key="UD_rs14FeaturedEmployed" value="name:emp_id;datatype:int,name:emp_name;datatype:string,name:emp_featured;datatype:int" />
+	<infoitem key="UD_rs10FeaturedCandidate" value="name:users_id_fk;datatype:int,name:resume_featured;datatype:int,name:users_fname;datatype:string,name:users_lname;datatype:string" />
+	<infoitem key="UD_rsAllindustries" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+	<infoitem key="UD_rsTotalJobsOnline" value="name:totalOnline;datatype:int" />
+</info>

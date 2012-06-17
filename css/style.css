@@ -6,7 +6,8 @@ header, nav, section, article, aside, footer {
 	display: block;
 }
 body {
-	background-color: #fefefe;
+	/*background-color: #fefefe;*/
+	background:#F2F2F2;
 	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
 	width: 100%;
 	color: #333;
@@ -20,7 +21,7 @@ a:hover {
 	text-decoration: none;
 }
 p {
-	margin: 0 0 18px
+	margin: 0 0 18px;
 }
 img {
 	border: none;
@@ -38,9 +39,16 @@ input {
 -----------------------------------------------------------------------------*/
 #header {
 	background: #2e2e2e;
-	border-bottom: medium #ffba00 solid;
+	border-bottom: medium #b11791 solid;
 }
 
+#header .logo {
+	margin: 10px 0px;
+}
+
+#header .right{
+	margin-top:40px;
+}
 
 /* Middle
 -----------------------------------------------------------------------------*/
@@ -82,6 +90,13 @@ input {
 	/*margin-left: -340px;*/
 	/*background: #FFACAA;*/
 	padding: 10px;
+	background:#fefefe;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 }
 
 
@@ -92,7 +107,7 @@ input {
 	padding-top: 10px;
 	font-size: 11px;
 	color: #FFF;
-	background-color: #212121;
+	background-color: #111;
 	padding-bottom: 10px;
 	margin-top:30px;
 }
@@ -133,6 +148,7 @@ a:visited	{color:#247bbc;}
 ul#navigation {
 	border:0px solid red;
 	height: 30px;
+	width:780px;
 }
 
 ul#navigation li {
@@ -152,20 +168,19 @@ ul#navigation li a:active  {
 	color:#ffba00;
 }
 
-.browse_location {
-
-}
 .box {
 	margin-bottom: 20px;
 	width: 610px;
 }
 
-.browse_industry {
+.browse_industry, .browse_location {
+	font-size:11px;
 }
 .freatured_employer {
 }
 .title {
-	font-family: Georgia, "Times New Roman", Times, serif;
+	/*font-family: Georgia, "Times New Roman", Times, serif;*/
+	margin-bottom:20px;
 }
 .featured_candidate {
 }
@@ -193,8 +208,15 @@ ul#navigation li a:active  {
 .featured_candidate_list {
 }
 .search_container {
-	border: thin solid #909090;
+	/*border: thin solid #909090;*/
 	padding: 8px;
+	background:#fefefe;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 }
 .sidebar_howto {}
 
@@ -259,6 +281,47 @@ border-bottom:1px solid #333;
   background-color:#fff779;
 }
 
+
+/*Table css2*/
+.csstable2 {
+	background-color:#FFFFFF;
+	margin-top: 5px;
+	/*border:1px solid black;*/
+}
+
+
+.topTableCaption {
+	font-size: 11px;
+	padding: 4px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+}
+
+.csstable2 th {
+background-color:#CCC;
+color: #333;
+padding:4px;
+border-bottom:1px solid #e1e1e1;
+}
+
+.csstable2, tr, td {
+	border-collapse: collapse;
+	padding: 4px;
+	border-top-color: #e1e1e1;
+	border-right-color: #e1e1e1;
+	border-bottom-color: #e1e1e1;
+	border-left-color: #e1e1e1;
+}
+
+.csstable2 tr:nth-of-type(odd) {
+  background-color:#EEE;
+}
+.csstable2 tr:hover {
+  background-color:#fff779;
+}
+/*******/
 .paginate {
 	padding: 4px;
 	width: 580px;
@@ -266,15 +329,23 @@ border-bottom:1px solid #333;
 	margin-right: 0px;
 	margin-bottom: 5px;
 	margin-left: 0px;
-	font-size: 11px;
+	font-size: 12px;
 }
 .master_details {
 	margin-top: 5px;
 	margin-right: 0px;
 	margin-bottom: 5px;
 	margin-left: 0px;
+	width:600px;
 }
-.hide {display:none}.jobEmployer {
+
+.master_details_full {
+	width:100%;
+}
+
+.hide {display:none}
+.jobEmployer {
+	width: 600px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border-top-width: 1px;
@@ -322,14 +393,27 @@ ul#default_inline_menu li {
 	padding:0px 10px;
 }
 .resumebox {
-	border: 1px solid #CCC;
+	/*border: 1px solid #CCC;*/
 	padding: 6px;
 	width:580px;
 	margin-bottom:20px;
+	
+	background:#fefefe;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 }
 div.box.resumebox {
-	border-top:2px solid #ccc;
+	/* border-top:2px solid #ccc; */
 }
+
+div.box.resumebox table tr:hover, div.resumebox table tr:hover {
+	background:#f5f5f5;
+}
+
 .def_width_box {width:190px;}
 .def_width_box_2 {width:170px;}
 .def_width_box_3 {width:150px;}
@@ -356,4 +440,84 @@ textarea {padding:5px;
 .boxcenter {
 	width: 800px;
 	margin:0 auto;
+}
+div.apply_container {
+	color:#0b903d;
+	background-color: #CCC;
+	text-align: center;
+	padding: 4px;
+	width:590px;
+}
+
+div.browse_industry ul {
+    border: 0px solid red
+;
+}
+
+div.browse_industry ul li {
+    border: 0px solid blue;
+    float: left;
+    width: 280px;
+}
+
+div.browse_industry ul li:nth-child(2n) {
+    margin-left: 20px;
+}
+
+.button {
+	display: block; 
+	font-size: 12px; 
+	text-decoration: none!important; 
+	font-family: Helvetica, Arial, sans serif;
+	padding: 8px 12px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	box-shadow: inset 0px 0px 2px #fff;
+	-o-box-shadow: inset 0px 0px 2px #fff;
+	-webkit-box-shadow: inset 0px 0px 2px #fff;
+	-moz-box-shadow: inset 0px 0px 2px #fff;
+}
+.button:active {
+	box-shadow: inset 0px 0px 3px #999;
+	-o-box-shadow: inset 0px 0px 3px #999;
+	-webkit-box-shadow: inset 0px 0px 3px #999;
+	-moz-box-shadow: inset 0px 0px 3px #999;
+}
+
+.green {
+	color: #5a742d;
+	border: 1px solid #95b959;
+	background-image: -moz-linear-gradient(#cae387, #a5cb5e);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a5cb5e), to(#cae387));
+	background-image: -webkit-linear-gradient(#cae387, #a5cb5e);
+	background-image: -o-linear-gradient(#cae387, #a5cb5e);
+	text-shadow: 1px 1px 1px #dff4bc;
+	background-color: #a5cb5e;
+}
+.green:hover {
+	border: 1px solid #687e30;
+	background-image: -moz-linear-gradient(#a5cb5e, #cae387);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#cae387), to(#a5cb5e));
+	background-image: -webkit-linear-gradient(#a5cb5e, #cae387);
+	background-image: -o-linear-gradient(#a5cb5e, #cae387);
+	background-color: #cae387;
+	cursor:pointer;
+}
+.green:active {border: 1px solid #506320;}
+.dateSidebar {font-size:11px; color:#d1d1d1}
+
+
+.location_lists ul {
+    border:0px solid blue
+}
+
+.location_lists ul li {
+    float:left;
+    width:280px;
+    border:0px solid red;
+}
+
+.location_lists ul li:nth-child(2n) {
+    margin-left:16px;
+    /*background:red;*/
 }

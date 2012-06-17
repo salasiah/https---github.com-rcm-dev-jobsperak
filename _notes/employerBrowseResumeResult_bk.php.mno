@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsNationality" value="name:national_id;datatype:int,name:national_name;datatype:string" />
+	<infoitem key="UD_spmSubjectList" value="name:subject_id;datatype:int,name:subject_name;datatype:string" />
+	<infoitem key="UD_rsQualification" value="name:edu_id;datatype:int,name:edu_name;datatype:string" />
+	<infoitem key="UD_rsFieldList" value="name:field_id;datatype:int,name:field_name;datatype:string" />
+	<infoitem key="UD_rsLangList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+	<infoitem key="UD_rsLocation" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsIndustry" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+</info>

@@ -16,9 +16,11 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   $_SESSION['MM_Username'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
+  $_SESSION['MM_UserID'] = NULL;
   unset($_SESSION['MM_Username']);
   unset($_SESSION['MM_UserGroup']);
   unset($_SESSION['PrevUrl']);
+  unset($_SESSION['MM_UserID']);
 	
   $logoutGoTo = "login.php";
   if ($logoutGoTo) {
@@ -173,27 +175,23 @@ $totalRows_rsLevelList = mysql_num_rows($rsLevelList);
 	<header id="header">
 
 		<div class="center">
-			<div class="left">
-				<h1>Jobs Perak</h1>
+			<div class="left"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
-				<a href="#" title="Login">Login</a> &nbsp;|&nbsp;
-                <a href="#" title="Register">Register</a>
-			</div>
+            	<?php if (!isset($_SESSION['MM_Username'])) { ?>
+					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+                	<a href="registerJobSeeker.php" title="Register JobSeeker">
+                    Register JobSeeker</a>
+				<?php } else { ?>
+                	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
+                    &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
+<?php }?>
+    		</div>
 			<div class="clear"></div>
 		</div><!-- .center -->
 		
-		<nav id="menu">
-			<div class="center">
-	        	<ul id="navigation">
-	            	<li><a href="index.php">Home</a></li>
-	                <li><a href="#">Search</a></li>
-	                <li><a href="#">Register</a></li>
-                    <li><a href="#">Employer : Post a Job</a></li>
-	            </ul>
-            </div><!-- .center -->
-        </nav>
+		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
 	<div id="wrapper">
@@ -357,7 +355,7 @@ do {
 
 	<footer id="footer">
 		<div class="center">
-			Copyright Reserved &copy; 2012
+			<?php include("footer.php"); ?>
 		</div><!-- .center -->
 	</footer><!-- #footer -->
 

@@ -74,6 +74,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   exit;
 }
 ?>
+<?php //$getJobAlertLoc = $row_rsUserJobAlert['jobP_1']; ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
@@ -115,6 +116,48 @@ $query_rsUserDashboard = sprintf("SELECT * FROM jp_users WHERE users_id = %s", G
 $rsUserDashboard = mysql_query($query_rsUserDashboard, $conJobsPerak) or die(mysql_error());
 $row_rsUserDashboard = mysql_fetch_assoc($rsUserDashboard);
 $totalRows_rsUserDashboard = mysql_num_rows($rsUserDashboard);
+
+$colname_rsUserJobAlert = "-1";
+if (isset($_SESSION['MM_UserID'])) {
+  $colname_rsUserJobAlert = $_SESSION['MM_UserID'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsUserJobAlert = sprintf("SELECT * FROM jp_jobpreferences WHERE user_id_fk = %s", GetSQLValueString($colname_rsUserJobAlert, "int"));
+$rsUserJobAlert = mysql_query($query_rsUserJobAlert, $conJobsPerak) or die(mysql_error());
+$row_rsUserJobAlert = mysql_fetch_assoc($rsUserJobAlert);
+$totalRows_rsUserJobAlert = mysql_num_rows($rsUserJobAlert);
+
+$colname_rsJobAlertAds = $row_rsUserJobAlert['jobP_1'];
+if (isset($row_rsUserJobAlert['jobP_1'])) {
+  $colname_rsJobAlertAds = $row_rsUserJobAlert['jobP_1'];
+}
+$colLoc_rsJobAlertAds = $row_rsUserJobAlert['jobP_1'];
+if (isset($colLoc_rsJobAlertAds)) {
+  $colLoc_rsJobAlertAds = $row_rsUserJobAlert['jobP_1'];
+}
+$colSal_rsJobAlertAds = $row_rsUserJobAlert['jobP_salary'];
+if (isset($colSal_rsJobAlertAds)) {
+  $colSal_rsJobAlertAds = $row_rsUserJobAlert['jobP_salary'];
+}
+$colInd_rsJobAlertAds = $row_rsUserJobAlert['jobP_2'];
+if (isset($colInd_rsJobAlertAds)) {
+  $colInd_rsJobAlertAds = $row_rsUserJobAlert['jobP_2'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsJobAlertAds = sprintf("Select   jp_ads.* From   jp_ads Where   (jp_ads.ads_location = %s Or   jp_ads.ads_salary <= %s Or   jp_ads.ads_industry_id_fk = %s) And jp_ads.ads_enable_view = 1", GetSQLValueString($colLoc_rsJobAlertAds, "int"),GetSQLValueString($colSal_rsJobAlertAds, "int"),GetSQLValueString($colInd_rsJobAlertAds, "int"));
+$rsJobAlertAds = mysql_query($query_rsJobAlertAds, $conJobsPerak) or die(mysql_error());
+$row_rsJobAlertAds = mysql_fetch_assoc($rsJobAlertAds);
+$totalRows_rsJobAlertAds = mysql_num_rows($rsJobAlertAds);
+
+$colname_rsIsActive = "-1";
+if (isset($_SESSION['MM_UserID'])) {
+  $colname_rsIsActive = $_SESSION['MM_UserID'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsIsActive = sprintf("SELECT user_active FROM jp_users WHERE users_id = %s", GetSQLValueString($colname_rsIsActive, "int"));
+$rsIsActive = mysql_query($query_rsIsActive, $conJobsPerak) or die(mysql_error());
+$row_rsIsActive = mysql_fetch_assoc($rsIsActive);
+$totalRows_rsIsActive = mysql_num_rows($rsIsActive);
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -134,49 +177,42 @@ $totalRows_rsUserDashboard = mysql_num_rows($rsUserDashboard);
 	<header id="header">
 
 		<div class="center">
-			<div class="left">
-				<h1>Jobs Perak</h1>
+			<div class="left"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">
-				<a href="#" title="Login">Login</a> &nbsp;|&nbsp;
-                <a href="#" title="Register">Register</a>
-			</div>
+            	<?php if (!isset($_SESSION['MM_Username'])) { ?>
+					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+                	<a href="registerJobSeeker.php" title="Register JobSeeker">
+                    Register JobSeeker</a>
+				<?php } else { ?>
+                	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
+                    &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
+<?php }?>
+    		</div>
 			<div class="clear"></div>
 		</div><!-- .center -->
 		
-		<nav id="menu">
-			<div class="center">
-	        	<ul id="navigation">
-	            	<li><a href="index.php">Home</a></li>
-	                <li><a href="#">Search</a></li>
-	                <li><a href="#">Register</a></li>
-                    <li><a href="#">Employer : Post a Job</a></li>
-	            </ul>
-            </div><!-- .center -->
-        </nav>
+		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
 	<div id="wrapper">
 	
 	<section id="middle">
-
-		<div id="container">
+    
 		  <div id="content">
 <h2>JobSeeker Dashboard</h2>
 <div class="master_details">
   <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
-  <div class="menu_container">
-  		<ul id="default_inline_menu">
-	        <li><a href="jobSeekerDashboard.php">My Dashboard</a></li>
-        	<li><a href="jobSeekerMyResume.php?email=<?php echo $_SESSION['MM_Username']; ?>">My Resume</a></li>
-            <li><a href="#">My Application</a></li>
-            <li><a href="#">Shortlisted Job</a></li>
-            <li><a href="#">Job Alert</a></li>
-            <li><a href="jobSeekerEditProfile.php?email=<?php echo $_SESSION['MM_Username']; ?>">Edit Profile</a></li>
-        </ul>
-  	</div>
+  <?php if ($row_rsIsActive['user_active'] != 0){ ?>
+  <?php include("jobSeekerMenu.php"); ?>
+  <?php } else { ?>
+  	<span style="color:#FF0000">Please Activate your account. Check your mail or <a href="resent-activation.php?mail=<?php echo $_SESSION['MM_Username']; ?>">resend activation link</a>.</span>
+  <?php } ?>
+  
+  <?php if ($row_rsIsActive['user_active'] != 0){ ?>
+  <h3>Summary</h3><br/>
     
     <div class="resumebox">
     	<strong>Register at</strong> <?php echo $row_rsUserDashboard['users_register']; ?><br/><br/>
@@ -184,49 +220,38 @@ $totalRows_rsUserDashboard = mysql_num_rows($rsUserDashboard);
     </div>
     
     <div class="resumebox">
-    	<strong>Job Alert</strong>
+    	<p><strong>Job Alert</strong> based on Job Preferences Setting
+  	  </p>
+        <?php if ($totalRows_rsJobAlertAds == 0) { // Show if recordset empty ?>
+  <p>No Job Alert from your setting.</p>
+  <?php } // Show if recordset empty ?>
+<?php if ($totalRows_rsJobAlertAds > 0) { // Show if recordset not empty ?>
+  <table width="500" border="0" cellspacing="2" cellpadding="2">
+    <tr>
+      <th width="250">Job Title</th>
+      <th>Salary</th>
+    </tr>
+    <?php do { ?>
+      <tr>
+        <td align="left" valign="middle"><a href="jobsAdsDetails.php?jobAdsId=<?php echo $row_rsJobAlertAds['ads_id']; ?>"><?php echo $row_rsJobAlertAds['ads_title']; ?></a></td>
+        <td align="right" valign="middle">MYR&nbsp;<?php echo $row_rsJobAlertAds['ads_salary']; ?></td>
+      </tr>
+      <?php } while ($row_rsJobAlertAds = mysql_fetch_assoc($rsJobAlertAds)); ?>
+  </table>
+  <?php } // Show if recordset not empty ?>
+ 
     </div>
+    
+     <?php } // if not active?>
 </div>
 
           </div><!-- #content-->
 	
 		  <aside id="sideRight">
-          	  <div class="sidebarBox">
-              	<strong>How-to</strong>
-            	<div class="sidebar_howto">
-                	<ul>
-                    	<li><a href="#">Register</a></li>
-                        <li><a href="#">Post a Job</a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-			  <div class="sidebarBox hide">
-              	<strong>Recent Jobs</strong>
-            	<div class="sidebar_recentjob">
-                	<ul>
-                      <li><a></a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Jobs Posted under </strong>
-              	<ul>
-                  <li><a></a></li>
-                </ul>
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Get Connected</strong><br />
-              	Facebook | Twitter | RSS
-              </div><!-- .sidebarBox -->
+          	  <?php include('full_content_sidebar.php'); ?>
           </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
-
-		</div><!-- #container-->
-		
 
 	</section><!-- #middle-->
 
@@ -234,7 +259,7 @@ $totalRows_rsUserDashboard = mysql_num_rows($rsUserDashboard);
 
 	<footer id="footer">
 		<div class="center">
-			Copyright Reserved &copy; 2012
+			<?php include("footer.php"); ?>
 		</div><!-- .center -->
 	</footer><!-- #footer -->
 
@@ -244,4 +269,10 @@ $totalRows_rsUserDashboard = mysql_num_rows($rsUserDashboard);
 </html>
 <?php
 mysql_free_result($rsUserDashboard);
+
+mysql_free_result($rsUserJobAlert);
+
+mysql_free_result($rsJobAlertAds);
+
+mysql_free_result($rsIsActive);
 ?>
