@@ -205,7 +205,7 @@ $totalRows_rsSubject = mysql_num_rows($rsSubject);
 		  <div id="content_full">
 <h2>Employer Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <div class="master_details boxcenter">
 	<h3>Upload Company Logo</h3><br/>

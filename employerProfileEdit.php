@@ -222,7 +222,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 		  <div id="content">
 <h2>Employer Profile</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   <?php include("employer_menu.php"); ?><br/>
   
   <strong>Basic Profile</strong><br/>
@@ -245,7 +245,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
         <td><?php if ($row_rsEmployerProfile['users_type']==2){echo "Employer";}else{echo "JobSeeker";} ?></td>
       </tr>
       <tr valign="baseline">
-        <td width="140" align="right" nowrap>is Active:</td>
+        <td width="140" align="right" nowrap>Status:</td>
         <td><?php if (htmlentities($row_rsEmployerProfile['user_active'], ENT_COMPAT, 'utf-8')==1){echo"Active";}else{echo"Not Active";} ?></td>
       </tr>
       <tr valign="baseline">
@@ -286,7 +286,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
         <td><input type="text" name="emp_name" value="<?php echo htmlentities($row_rsCompanyInfoDetail['emp_name'], ENT_COMPAT, 'utf-8'); ?>" size="32"></td>
         </tr>
       <tr valign="baseline">
-        <td nowrap align="right">Co. Description</td>
+        <td nowrap align="right">Description</td>
         <td><textarea name="emp_desc" cols="50" rows="5"><?php echo htmlentities($row_rsCompanyInfoDetail['emp_desc'], ENT_COMPAT, 'utf-8'); ?></textarea></td>
         </tr>
       <tr valign="baseline">

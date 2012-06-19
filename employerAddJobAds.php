@@ -277,7 +277,7 @@ font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
 		  <div id="content">
 <h2>Employer Profile</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   <?php include("employer_menu.php"); ?><br/> 
 <strong>Add New Job Ads</strong><br/><br/>
 <form method="post" name="form1" action="<?php echo $editFormAction; ?>">

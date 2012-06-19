@@ -203,7 +203,7 @@ $totalRows_rsIsActive = mysql_num_rows($rsIsActive);
 		  <div id="content">
 <h2>JobSeeker Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <?php if ($row_rsIsActive['user_active'] != 0){ ?>
   <?php include("jobSeekerMenu.php"); ?>
@@ -215,8 +215,8 @@ $totalRows_rsIsActive = mysql_num_rows($rsIsActive);
   <h3>Summary</h3><br/>
     
     <div class="resumebox">
-    	<strong>Register at</strong> <?php echo $row_rsUserDashboard['users_register']; ?><br/><br/>
-		<strong>Last Login at</strong> <?php echo $row_rsUserDashboard['users_last_login']; ?>
+    	<strong>Registered :</strong> <?php echo $row_rsUserDashboard['users_register']; ?><br/><br/>
+		<strong>Last Login :</strong> <?php echo $row_rsUserDashboard['users_last_login']; ?>
     </div>
     
     <div class="resumebox">
@@ -229,7 +229,7 @@ $totalRows_rsIsActive = mysql_num_rows($rsIsActive);
   <table width="500" border="0" cellspacing="2" cellpadding="2">
     <tr>
       <th width="250">Job Title</th>
-      <th>Salary</th>
+      <th>Salary (MYR-Malaysia Ringgit)</th>
     </tr>
     <?php do { ?>
       <tr>

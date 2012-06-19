@@ -207,11 +207,11 @@ $totalRows_rsProfile = mysql_num_rows($rsProfile);
           <table align="center">
             <tr valign="baseline">
               <td nowrap align="right">New Password</td>
-              <td><input type="password" name="users_pass" id="users_pass" value="" size="32"></td>
+              <td><input type="password" placeholder="Create New Password" name="users_pass" id="users_pass" value="" size="32"></td>
             </tr>
             <tr valign="baseline">
               <td nowrap align="right">&nbsp;</td>
-              <td><input type="submit" id="submitNewPass" value="Update record"></td>
+              <td><input type="submit" id="submitNewPass" value="Update Password"></td>
             </tr>
           </table>
           <input type="hidden" name="users_id" value="<?php echo $_SESSION['MM_UserID']; ?>">

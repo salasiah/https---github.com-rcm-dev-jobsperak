@@ -86,7 +86,7 @@ $totalPages_rsHiringThisWeek = ceil($totalRows_rsHiringThisWeek/$maxRows_rsHirin
             
 
 <div class="sidebarBox">
-<strong>Recent Jobs</strong>
+<strong>New Job Openings</strong>
 <div class="sidebar_recentjob">
     <ul>
         <?php do { ?>

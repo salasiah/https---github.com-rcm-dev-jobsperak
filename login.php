@@ -106,7 +106,7 @@ if (isset($_POST['email'])) {
             	<?php if (!isset($_SESSION['MM_Username'])) { ?>
 					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
                 	<a href="registerJobSeeker.php" title="Register JobSeeker">
-                    Register JobSeeker</a>
+                    JobSeeker / Employer Registration</a>
 				<?php } else { ?>
                 	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
                     &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
@@ -125,7 +125,7 @@ if (isset($_POST['email'])) {
 		  <div id="content">
 <h2>Portal Login</h2>
 <div class="master_details">
-	<p>Fill up your email and Password</p>
+	<p>Please fill up your Email and Password.</p>
 	<form action="<?php echo $loginFormAction; ?>" method="POST" enctype="application/x-www-form-urlencoded" name="portalLogin">
     <table width="500" border="0" cellspacing="0" cellpadding="2">
   <tr>

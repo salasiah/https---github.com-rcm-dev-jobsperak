@@ -150,7 +150,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
             	<?php if (!isset($_SESSION['MM_Username'])) { ?>
 					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
                 	<a href="registerJobSeeker.php" title="Register JobSeeker">
-                    Register JobSeeker</a>
+                    JobSeeker / Employer Registration</a>
 				<?php } else { ?>
                 	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
                     &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
@@ -173,7 +173,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
                 	<form action="jobAdsSearchResult.php" method="get" name="front_search">
                     <table width="100%" border="0" cellspacing="6" cellpadding="2">
   <tr>
-  	<td colspan="4"><input name="q" type="text" class="main_q" id="main_q" placeholder="Search Jobstitle / Job Description " dir="ltr" /></td>
+  	<td colspan="4"><input name="q" type="text" class="main_q" id="main_q" placeholder="Search by Job Title / Job Description " dir="ltr" /></td>
   </tr>
   <tr>
     <td><select name="industries">
@@ -215,15 +215,15 @@ do {
     </select></td>
     <td><select name="year_exp">
       <option value="0">No Experience</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5 and above</option>
+      <option value="1">1 Year</option>
+      <option value="2">2 Years</option>
+      <option value="3">3 Years</option>
+      <option value="4">4 Years</option>
+      <option value="5">5 Years and above</option>
     </select></td>
   </tr>
   <tr>
-  	<td colspan="2">Over (<?php echo $row_rsTotalJobsOnline['totalOnline']; ?>) jobs available to be hire</td>
+  	<td colspan="2">There are currently (<?php echo $row_rsTotalJobsOnline['totalOnline']; ?>) jobs available for you to choose.</td>
     <td><input name="search_job" type="submit" class="button green" id="search_job" value="Search Job"></td>
     <td><a href="#" class="hide">Advanced Search</a></td>
   </tr>
@@ -233,7 +233,7 @@ do {
               </div>
               
             <div class="browse_jobopening box">
-            	<a href="jobsOpeningAll.php"> Browse all openig jobs in our portal &raquo;</a></div>
+            	<a href="jobsOpeningAll.php"> Browse all jobs opening in our portal &raquo;</a></div>
             
 				
 			  <div class="browse_industry box">

@@ -203,7 +203,7 @@ $totalRows_rsLocationList = mysql_num_rows($rsLocationList);
 		  <div id="content_full">
 <h2>Update</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <div class="master_details boxcenter">
 	<h3>Add Job Preferences</h3><br/>

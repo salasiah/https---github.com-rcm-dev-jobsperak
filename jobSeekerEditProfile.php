@@ -215,7 +215,7 @@ $totalRows_rsProfile = mysql_num_rows($rsProfile);
               <td><input type="text" name="users_lname" value="<?php echo htmlentities($row_rsProfile['users_lname'], ENT_COMPAT, 'utf-8'); ?>" size="32"></td>
             </tr>
             <tr valign="baseline">
-              <td nowrap align="right">Account:</td>
+              <td nowrap align="right">Account Status:</td>
               <td><?php $account = htmlentities($row_rsProfile['user_active'], ENT_COMPAT, 'utf-8'); ?><?php if ($account == 1) {echo "Active";} else {echo "Not Active";} ?></td>
             </tr>
             <tr valign="baseline">

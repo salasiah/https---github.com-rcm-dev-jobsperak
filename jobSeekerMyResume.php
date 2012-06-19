@@ -250,7 +250,7 @@ $totalRows_rsJsSPM = mysql_num_rows($rsJsSPM);
 		  <div id="content">
 <h2>JobSeeker Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <?php include("jobSeekerMenu.php"); ?>
     
@@ -285,7 +285,7 @@ $totalRows_rsJsSPM = mysql_num_rows($rsJsSPM);
     </div>
         
     <div class="box resumebox">
-    	<strong>Uploaded Resume</strong> &middot;
+    	<strong>My Resume</strong> &middot;
         <?php if ($totalRows_rsUserResume == 0) { // Show if recordset empty ?>
           <a href="resumeUpload.php">Upload</a>
           <?php } // Show if recordset empty ?>

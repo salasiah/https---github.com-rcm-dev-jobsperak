@@ -9,7 +9,7 @@
     'Reply-To: webmaster@jobsperak.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
-	//mail($to, $subject, $message, $headers);
+	mail($to, $subject, $message, $headers);
 	//echo $to;
   // ==============================================================
 

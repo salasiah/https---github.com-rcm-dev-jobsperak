@@ -209,7 +209,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 		  <div id="content">
 <h2>Employer Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <?php if ($row_rsIsActive['user_active'] != 0){ ?>
   
@@ -220,19 +220,19 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   
   <?php if ($row_rsIsActive['user_active'] != 0){ ?>
   <br/>
-    <p><strong><?php echo $totalRows_rsJobAds ?> List(s) Job Ads by <?php echo $row_rsEmployed['emp_name']; ?></strong>
+    <p><strong><?php echo $totalRows_rsJobAds ?> Job Ad(s) by <?php echo $row_rsEmployed['emp_name']; ?></strong>
     &middot;
     <?php if ($totalRows_rsComDetail == 0) { // Show if recordset empty ?>
   <a href="employerAddDetails.php">Add Company Details</a>
   <?php } else { // Show if recordset empty ?>
-    <a href="employerAddJobAds.php?emp_id=<?php echo $row_rsEmployed['emp_id']; ?>">New Job Ads</a></p>
+    <a href="employerAddJobAds.php?emp_id=<?php echo $row_rsEmployed['emp_id']; ?>">Submit New Job Ads</a></p>
     <?php } ?><br/>
 <?php if ($totalRows_rsJobAds > 0) { // Show if recordset not empty ?>
   <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
     <tr>
       <th>Title</th>
-      <th>Date Submited</th>
-      <th>Candidate</th>
+      <th>Date Submitted</th>
+      <th>Candidate(s)</th>
       <th>Status</th>
       <th>Delete</th>
     </tr>

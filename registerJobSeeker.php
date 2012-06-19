@@ -80,7 +80,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
             	<?php if (!isset($_SESSION['MM_Username'])) { ?>
 					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
                 	<a href="registerJobSeeker.php" title="Register JobSeeker">
-                    Register JobSeeker</a>
+                    JobSeeker / Employer Registration</a>
 				<?php } else { ?>
                 	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
                     &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
@@ -96,9 +96,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 	
 	<section id="middle">
 		  <div id="content">
-<h2>Register as JobSeeker</h2>
+<h2>Register as a JobSeeker / Employer</h2>
 <div class="master_details">
-<p>Please fill up the form to using this portal.</p>
+<p>Please fill up the form in order to use this portal.</p>
   <form method="post" name="form1" action="<?php echo $editFormAction; ?>">
     <table width="500" align="center">
       <tr valign="baseline">
@@ -107,15 +107,15 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
       </tr>
       <tr valign="baseline">
         <td nowrap align="right">Password <span class="req">*</span></td>
-        <td><input type="password" name="users_pass" value="" size="32"></td>
+        <td><input type="password" placeholder="Create Your Password" name="users_pass" value="" size="32"></td>
       </tr>
       <tr valign="baseline">
         <td nowrap align="right">First Name <span class="req">*</span></td>
-        <td><input type="text" placeholder="Mohd" name="users_fname" value="" size="32"></td>
+        <td><input type="text" placeholder="First Name" name="users_fname" value="" size="32"></td>
       </tr>
       <tr valign="baseline">
         <td nowrap align="right">Last Name <span class="req">*</span></td>
-        <td><input type="text" placeholder="Ali" name="users_lname" value="" size="32"></td>
+        <td><input type="text" placeholder="Last Name" name="users_lname" value="" size="32"></td>
       </tr>
       <tr valign="baseline">
         <td nowrap align="right">Register as: <span class="req">*</span></td>
@@ -127,8 +127,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
               Employer</td>
           </tr>
           <tr>
-            <td class="note">* You can apply job ads in this portal</td>
-            <td class="note">* You can post jobs ads up to 5 ads</td>
+            <td class="note">* Apply jobs from this portal</td>
+            <td class="note">* You can post up to 5 job ads</td>
           </tr>
         </table></td>
       </tr>

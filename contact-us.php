@@ -74,8 +74,8 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 		  <div id="content_full">
 <h2>Contact Us</h2><br/>
 <div class="master_details_full">
-  <p>If you have any enquiries, do not hesitate to contact with us and <br>
-    please fill up the form and we will happy to receive any mail from you.
+  <p>If you have any enquiries, do not hesitate to contact us by filling<br/>
+up the form and we will reply your email as soon as possible.
   </p><br>
   <form action="email-sent.php" method="post" name="form1" style="width:600px; margin:0 auto;">
   	<table width="600" border="0" align="center" cellpadding="2" cellspacing="2">

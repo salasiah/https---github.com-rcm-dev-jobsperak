@@ -230,7 +230,7 @@ $queryString_rsMyApplication = sprintf("&totalRows_rsMyApplication=%d%s", $total
 		  <div id="content">
 <h2>JobSeeker Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <?php include("jobSeekerMenu.php"); ?>
   
@@ -238,7 +238,7 @@ $queryString_rsMyApplication = sprintf("&totalRows_rsMyApplication=%d%s", $total
 <?php if ($totalRows_rsMyApplication > 0) { // Show if recordset not empty ?>
   <div>
     
-    <h3>My Application</h3><br/>
+    <h3>My Job Application(s)</h3><br/>
     
     List of Job Applied<br/><br/>
     <?php if ($totalRows_rsMyApplication > 0) { // Show if recordset not empty ?>

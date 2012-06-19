@@ -210,7 +210,7 @@ $totalRows_rsSubject = mysql_num_rows($rsSubject);
 		  <div id="content_full">
 <h2>Upload Resume</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   
   <div class="master_details boxcenter">
 	<h3>Upload Resume</h3><br/>
@@ -219,7 +219,7 @@ $totalRows_rsSubject = mysql_num_rows($rsSubject);
       <table align="center">
         <tr valign="baseline">
           <td nowrap align="right">Title</td>
-          <td><input type="text" name="resume_title" value="" size="32"></td>
+          <td><input type="text" name="resume_title" placeholder="Resume Title" value="" size="32"></td>
         </tr>
         <tr valign="baseline">
           <td nowrap align="right">Resume File</td>

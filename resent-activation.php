@@ -33,7 +33,7 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 $to      = $_GET['mail'];
 $subject = 'Activation for JobsPerak Recruitment Portal';
 $message = 'Hi, '.$to;
-$message .= 'Please activate your account by clicking http://www.jobsperak.com/account-activation.php?mail='.$to;
+$message .= 'Please activate your account by clicking http://www.jobsperak.com/v1/account-activation.php?mail='.$to;
 $headers = 'From: no-replay@jobsperak.com' . "\r\n" .
     'Reply-To: webmaster@jobsperak.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();

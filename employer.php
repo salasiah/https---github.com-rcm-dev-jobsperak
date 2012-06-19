@@ -133,7 +133,7 @@ $totalPages_rsEmployerJobLists = ceil($totalRows_rsEmployerJobLists/$maxRows_rsE
             	<?php if (!isset($_SESSION['MM_Username'])) { ?>
 					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
                 	<a href="registerJobSeeker.php" title="Register JobSeeker">
-                    Register JobSeeker</a>
+                    JobSeeker / Employer Registration</a>
 				<?php } else { ?>
                 	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
                     &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
