@@ -112,7 +112,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO jp_jobseeker (users_id_fk, jobseeker_tel, jobseeker_mobile, jobseeker_address, jobseeker_dob_y, jobseeker_dob_m, jobseeker_dob_d, jobseeker_gender, jobseeker_nationality, jobseeker_moreinfo, jobseeker_last_edited) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO jp_jobseeker (users_id_fk, jobseeker_tel, jobseeker_mobile, jobseeker_address, jobseeker_dob_y, jobseeker_dob_m, jobseeker_dob_d, jobseeker_gender, jobseeker_nationality, jobseeker_moreinfo, jobseeker_pic, jobseeker_last_edited) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['users_id_fk'], "int"),
                        GetSQLValueString($_POST['jobseeker_tel'], "text"),
                        GetSQLValueString($_POST['jobseeker_mobile'], "text"),
@@ -123,6 +123,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['jobseeker_gender'], "int"),
                        GetSQLValueString($_POST['jobseeker_nationality'], "int"),
                        GetSQLValueString($_POST['jobseeker_moreinfo'], "text"),
+					   GetSQLValueString("media/jobseeker/default_jobseeker.png", "text"),
                        GetSQLValueString($_POST['jobseeker_last_edited'], "date"));
 
   mysql_select_db($database_conJobsPerak, $conJobsPerak);

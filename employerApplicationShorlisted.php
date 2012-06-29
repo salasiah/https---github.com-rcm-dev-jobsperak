@@ -61,6 +61,38 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+  $insertSQL = sprintf("INSERT INTO jp_shortlisted (shortlisted_id, ads_id_fk, joseeker_id_fk, employer_id_fk, `time`) VALUES (%s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['shortlisted_id'], "int"),
+                       GetSQLValueString($_POST['ads_id_fk'], "int"),
+                       GetSQLValueString($_POST['joseeker_id_fk'], "int"),
+                       GetSQLValueString($_POST['employer_id_fk'], "int"),
+                       GetSQLValueString($_POST['time'], "date"));
+
+  mysql_select_db($database_conJobsPerak, $conJobsPerak);
+  $Result1 = mysql_query($insertSQL, $conJobsPerak) or die(mysql_error());
+  
+  
+  // update shortlisted
+  $ads_id_fk = $_POST['ads_id_fk'];
+  $js_id_fk = $_POST['joseeker_id_fk'];
+  $sqlUpdate = "UPDATE jp_application SET is_shortlisted = '1' WHERE ads_id_fk = '$ads_id_fk' AND js_id_fk = '$js_id_fk'";
+  $sqlUpdateResult = mysql_query($sqlUpdate);
+  // ==================================
+
+  $insertGoTo = "employerDashboard.php";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+    $insertGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $insertGoTo));
+}
+
 
 
 $colname_rsEmployed = "-1";
@@ -97,8 +129,12 @@ if (isset($row_rsEmployed['emp_id'])) {
 
 $colname_rsJobAds = $row_rsEmployed['emp_id'];
 
+$colname_rsJobAds = "-1";
+if (isset($_GET['adsId'])) {
+  $colname_rsJobAds = $_GET['adsId'];
+}
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsJobAds = sprintf("SELECT * FROM jp_ads WHERE emp_id_fk = %s", GetSQLValueString($colname_rsJobAds, "int"));
+$query_rsJobAds = sprintf("SELECT * FROM jp_ads WHERE ads_id = %s", GetSQLValueString($colname_rsJobAds, "int"));
 $rsJobAds = mysql_query($query_rsJobAds, $conJobsPerak) or die(mysql_error());
 $row_rsJobAds = mysql_fetch_assoc($rsJobAds);
 $totalRows_rsJobAds = mysql_num_rows($rsJobAds);
@@ -119,6 +155,16 @@ $query_rsIsActive = sprintf("SELECT user_active FROM jp_users WHERE users_id = %
 $rsIsActive = mysql_query($query_rsIsActive, $conJobsPerak) or die(mysql_error());
 $row_rsIsActive = mysql_fetch_assoc($rsIsActive);
 $totalRows_rsIsActive = mysql_num_rows($rsIsActive);
+
+$colname_rsCandidate = "-1";
+if (isset($_GET['candidateID'])) {
+  $colname_rsCandidate = $_GET['candidateID'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsCandidate = sprintf("Select   jp_users.users_fname,   jp_users.users_lname,   jp_jobseeker.jobseeker_id From   jp_jobseeker Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id Where   jp_jobseeker.jobseeker_id = %s", GetSQLValueString($colname_rsCandidate, "int"));
+$rsCandidate = mysql_query($query_rsCandidate, $conJobsPerak) or die(mysql_error());
+$row_rsCandidate = mysql_fetch_assoc($rsCandidate);
+$totalRows_rsCandidate = mysql_num_rows($rsCandidate);
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -188,7 +234,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 
 			<div class="right">
             	<?php if (!isset($_SESSION['MM_Username'])) { ?>
-					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
+<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
                 	<a href="registerJobSeeker.php" title="Register JobSeeker">
                     Register JobSeeker</a>
 				<?php } else { ?>
@@ -214,57 +260,31 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   <?php if ($row_rsIsActive['user_active'] != 0){ ?>
   
   <?php include("employer_menu.php"); ?>
-  <?php } else { ?>
-  <span style="color:#FF0000">Please Activate your account. Check your mail or <a href="resent-activation.php?mail=<?php echo $_SESSION['MM_Username']; ?>">resend activation link</a>.</span>
-  <?php } ?>
-  
-  <?php if ($row_rsIsActive['user_active'] != 0){ ?>
-  <br/>
-    <p><strong><?php echo $totalRows_rsJobAds ?> Job Ad(s) by <?php echo $row_rsEmployed['emp_name']; ?></strong>
-    &middot;
-    <?php if ($totalRows_rsComDetail == 0) { // Show if recordset empty ?>
-  <a href="employerAddDetails.php">Add Company Details</a>
-  <?php } else { // Show if recordset empty ?>
-    <a href="employerAddJobAds.php?emp_id=<?php echo $row_rsEmployed['emp_id']; ?>">Submit New Job Ads</a></p>
-    <?php } ?><br/>
-<?php if ($totalRows_rsJobAds > 0) { // Show if recordset not empty ?>
-  <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
-    <tr>
-      <th>Title</th>
-      <th>Date Submitted</th>
-      <th>Candidate(s)</th>
-      <th>Status</th>
+  <p>Set Shortlisted for Candidate</p>
+<form method="post" name="form1" action="<?php echo $editFormAction; ?>">
+  <table align="center">
+    <tr valign="baseline">
+      <td nowrap align="right">Candidate Name:</td>
+      <td><?php echo $row_rsCandidate['users_fname']; ?> <?php echo $row_rsCandidate['users_lname']; ?><input name="employer_id_fk" type="hidden" id="employer_id_fk" value="<?php echo $row_rsJobAds['emp_id_fk']; ?>"></td>
     </tr>
-    <?php do { ?>
-      <tr>
-        <td><?php echo $row_rsJobAds['ads_title']; ?></td>
-        <td align="center" valign="middle"><?php echo date('l, F d, Y',strtotime($row_rsJobAds['ads_date_posted'])); ?></td>
-        <td align="center" valign="middle">
-        <?php 
-		
-		$c_JobAdsId = $row_rsJobAds['ads_id'];
-		$query_total = "Select
-  Count(jp_application.ads_id_fk) As Candidate
-From
-  jp_application
-Where ads_id_fk = $c_JobAdsId And is_shortlisted = 0";
-  		$result_qt = mysql_query($query_total);
-		$row_qt = mysql_fetch_object($result_qt);
-		
-		if ($row_qt->Candidate > 0) {
-			echo "<a href=\"employerApplicationDashboard.php?appid=".$row_rsJobAds['ads_id']."\" title=\"View Candidate(s)\">".$row_qt->Candidate."</a>";
-		} else {
-			echo $row_qt->Candidate;
-		}
-		?>
-        </td>
-        <td align="center" valign="middle"><?php if ($row_rsJobAds['ads_enable_view']==0){echo "Pending";}else{echo "<a href=jobsAdsDetails.php?jobAdsId=".$row_rsJobAds['ads_id'].">"."Live"."</a>";} ?></td>
-      </tr>
-      <?php } while ($row_rsJobAds = mysql_fetch_assoc($rsJobAds)); ?>
+    <tr valign="baseline">
+      <td nowrap align="right">Jobs Title</td>
+      <td><?php echo $row_rsJobAds['ads_title']; ?></td>
+    </tr>
+    <tr valign="baseline">
+      <td nowrap align="right">&nbsp;</td>
+      <td><input type="submit" value="Set Shortlisted"></td>
+    </tr>
   </table>
-  <?php } // Show if recordset not empty ?>
-  
-   <?php } // if not active?>
+  <input type="hidden" name="shortlisted_id" value="">
+  <input type="hidden" name="ads_id_fk" value="<?php echo $_GET['adsId']; ?>">
+  <input type="hidden" name="joseeker_id_fk" value="<?php echo $_GET['candidateID']; ?>">
+  <input type="hidden" name="time" value="">
+  <input type="hidden" name="MM_insert" value="form1">
+</form>
+<p>&nbsp;</p>
+<br/>
+<?php } // Show if recordset not empty ?>
 </div>
 
           </div><!-- #content-->
@@ -296,6 +316,8 @@ mysql_free_result($rsJobAds);
 mysql_free_result($rsCandidateApplied);
 
 mysql_free_result($rsIsActive);
+
+mysql_free_result($rsCandidate);
 
 mysql_free_result($rsEmployed);
 

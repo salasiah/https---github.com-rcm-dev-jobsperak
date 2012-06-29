@@ -95,7 +95,7 @@ if (isset($_GET['appid'])) {
   $colname_rsAppsList = $_GET['appid'];
 }
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsAppsList = sprintf("SELECT jp_users.users_email,   jp_jobseeker.jobseeker_pic,   jp_application.ads_app_date,   jp_users.users_fname,   jp_users.users_lname,   jp_application.js_id_fk,   jp_users.users_id FROM jp_application Inner Join   jp_jobseeker On jp_application.js_id_fk = jp_jobseeker.jobseeker_id Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_application.ads_id_fk = %s", GetSQLValueString($colname_rsAppsList, "int"));
+$query_rsAppsList = sprintf("SELECT jp_users.users_email,   jp_jobseeker.jobseeker_pic,   jp_application.ads_app_date,   jp_users.users_fname,   jp_users.users_lname,   jp_application.js_id_fk,   jp_users.users_id FROM jp_application Inner Join   jp_jobseeker On jp_application.js_id_fk = jp_jobseeker.jobseeker_id Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_application.ads_id_fk = %s AND jp_application.is_shortlisted = 0", GetSQLValueString($colname_rsAppsList, "int"));
 $query_limit_rsAppsList = sprintf("%s LIMIT %d, %d", $query_rsAppsList, $startRow_rsAppsList, $maxRows_rsAppsList);
 $rsAppsList = mysql_query($query_limit_rsAppsList, $conJobsPerak) or die(mysql_error());
 $row_rsAppsList = mysql_fetch_assoc($rsAppsList);
@@ -178,26 +178,33 @@ $currentJobAdsId = 7;
 		  <div id="content">
 <h2>Employer Dashboard</h2>
 <div class="master_details">
-  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+  <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   <?php include("employer_menu.php"); ?>
   <br/>
   <p>List(s) of candidate under job ads <strong><?php echo ucfirst($row_rsJobAdsTitle['ads_title']); ?>.</strong></p>
+  <?php if ($totalRows_rsAppsList > 0) { // Show if recordset not empty ?>
   <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Date Applied</th>
       <th>Picture</th>
-      </tr>
+      <th>Actions</th>
+    </tr>
     <?php do { ?>
       <tr>
         <td><a href="jobSeekerResume.php?js_id=<?php echo $row_rsAppsList['users_id']; ?>"><?php echo $row_rsAppsList['users_fname']; ?> <?php echo $row_rsAppsList['users_lname']; ?></a></td>
-        <td align="center" valign="middle"><?php echo $row_rsAppsList['users_email']; ?></td>
         <td align="center" valign="middle"><?php echo date('l, d/m/Y',strtotime($row_rsAppsList['ads_app_date'])); ?></td>
-        <td align="center" valign="middle"><img name="" src="<?php echo $row_rsAppsList['jobseeker_pic']; ?>" alt=""></td>
+        <td align="center" valign="middle"><img src="<?php echo $row_rsAppsList['jobseeker_pic']; ?>" alt="" width="48"></td>
+        <td align="center" valign="middle"><a href="employerApplicationReject.php?candidateID=<?php echo $row_rsAppsList['js_id_fk']; ?>&adsId=<?php echo $_GET['appid']; ?>&action=reject"><img src="img/Delete-icon.png" alt="reject" width="16" height="16" border="0" title="Reject this Candidate"></a> &middot; <a href="employerApplicationShorlisted.php?candidateID=<?php echo $row_rsAppsList['js_id_fk']; ?>&adsId=<?php echo $_GET['appid']; ?>&action=reject"><img src="img/Document-Write-icon.png" alt="shortlisted" width="16" height="16" border="0" title="Shorlist this Candidate"></a>
+        </td>
       </tr>
       <?php } while ($row_rsAppsList = mysql_fetch_assoc($rsAppsList)); ?>
   </table>
+  <?php } // Show if recordset not empty ?>
+  
+  <?php if ($totalRows_rsAppsList == 0) { // Show if recordset not empty ?>
+  No Candidate applied under this Job Ads
+  <?php } // Show if recordset not empty ?>
 </div>
 
           </div><!-- #content-->

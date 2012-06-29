@@ -1332,6 +1332,76 @@ $rsLangList = mysql_query($query_rsLangList, $conJobsPerak) or die(mysql_error()
 $row_rsLangList = mysql_fetch_assoc($rsLangList);
 $totalRows_rsLangList = mysql_num_rows($rsLangList);
 
+$colname_rsFilterNationality = "-1";
+if (isset($_GET['nationality'])) {
+  $colname_rsFilterNationality = $_GET['nationality'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterNationality = sprintf("SELECT * FROM jp_nationality WHERE national_id = %s", GetSQLValueString($colname_rsFilterNationality, "int"));
+$rsFilterNationality = mysql_query($query_rsFilterNationality, $conJobsPerak) or die(mysql_error());
+$row_rsFilterNationality = mysql_fetch_assoc($rsFilterNationality);
+$totalRows_rsFilterNationality = mysql_num_rows($rsFilterNationality);
+
+$colname_rsFilterSubject = "-1";
+if (isset($_GET['spm_subject'])) {
+  $colname_rsFilterSubject = $_GET['spm_subject'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterSubject = sprintf("SELECT * FROM jp_spm_subject WHERE subject_id = %s", GetSQLValueString($colname_rsFilterSubject, "int"));
+$rsFilterSubject = mysql_query($query_rsFilterSubject, $conJobsPerak) or die(mysql_error());
+$row_rsFilterSubject = mysql_fetch_assoc($rsFilterSubject);
+$totalRows_rsFilterSubject = mysql_num_rows($rsFilterSubject);
+
+$colname_rsFilterQuali = "-1";
+if (isset($_GET['qualification'])) {
+  $colname_rsFilterQuali = $_GET['qualification'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterQuali = sprintf("SELECT * FROM jp_edu_lists WHERE edu_id = %s", GetSQLValueString($colname_rsFilterQuali, "int"));
+$rsFilterQuali = mysql_query($query_rsFilterQuali, $conJobsPerak) or die(mysql_error());
+$row_rsFilterQuali = mysql_fetch_assoc($rsFilterQuali);
+$totalRows_rsFilterQuali = mysql_num_rows($rsFilterQuali);
+
+$colname_rsFilterField = "-1";
+if (isset($_GET['field_of_study'])) {
+  $colname_rsFilterField = $_GET['field_of_study'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterField = sprintf("SELECT * FROM jp_field_list WHERE field_id = %s", GetSQLValueString($colname_rsFilterField, "int"));
+$rsFilterField = mysql_query($query_rsFilterField, $conJobsPerak) or die(mysql_error());
+$row_rsFilterField = mysql_fetch_assoc($rsFilterField);
+$totalRows_rsFilterField = mysql_num_rows($rsFilterField);
+
+$colname_rsFilterLanguage = "-1";
+if (isset($_GET['language'])) {
+  $colname_rsFilterLanguage = $_GET['language'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterLanguage = sprintf("SELECT * FROM jp_language_list WHERE languList_id = %s", GetSQLValueString($colname_rsFilterLanguage, "int"));
+$rsFilterLanguage = mysql_query($query_rsFilterLanguage, $conJobsPerak) or die(mysql_error());
+$row_rsFilterLanguage = mysql_fetch_assoc($rsFilterLanguage);
+$totalRows_rsFilterLanguage = mysql_num_rows($rsFilterLanguage);
+
+$colname_rsFilterIndustry = "-1";
+if (isset($_GET['industry'])) {
+  $colname_rsFilterIndustry = $_GET['industry'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterIndustry = sprintf("SELECT * FROM jp_industry WHERE indus_id = %s", GetSQLValueString($colname_rsFilterIndustry, "int"));
+$rsFilterIndustry = mysql_query($query_rsFilterIndustry, $conJobsPerak) or die(mysql_error());
+$row_rsFilterIndustry = mysql_fetch_assoc($rsFilterIndustry);
+$totalRows_rsFilterIndustry = mysql_num_rows($rsFilterIndustry);
+
+$colname_rsFilterLocation = "-1";
+if (isset($_GET['prefer_location'])) {
+  $colname_rsFilterLocation = $_GET['prefer_location'];
+}
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsFilterLocation = sprintf("SELECT * FROM jp_location WHERE location_id = %s", GetSQLValueString($colname_rsFilterLocation, "int"));
+$rsFilterLocation = mysql_query($query_rsFilterLocation, $conJobsPerak) or die(mysql_error());
+$row_rsFilterLocation = mysql_fetch_assoc($rsFilterLocation);
+$totalRows_rsFilterLocation = mysql_num_rows($rsFilterLocation);
+
 $queryString_rsJobSeekerList = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -1475,7 +1545,154 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 <div class="master_details">
   <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
   <?php include("employer_menu.php"); ?><br/> 
-<strong>Filtering result</strong><br/>
+<strong>Filtering result on </strong>
+
+
+<?php
+
+// General
+if(@$_GET['submitGeneral'] == "Search")
+{
+	if($_GET['nationality'] != 0)
+	{
+		echo "Nationality:";
+		echo "<b>[".$row_rsFilterNationality['national_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['dob_month'] != 0)
+	{
+		echo " DOB Month:";
+		echo "<b>[" . $_GET['dob_month'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['dob_year'] != 0)
+	{
+		echo " DOB Year:";
+		echo "<b>[" . $_GET['dob_year'];
+		echo "]</b> ";
+	}
+}
+
+// SPM Language
+if(@$_GET['submitSPM'] == "Search")
+{
+	if($_GET['spm_subject'] != 0)
+	{
+		echo "Subject:";
+		echo "<b>[".$row_rsFilterSubject['subject_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['spm_subject_grade'] != "")
+	{
+		echo " Grade:";
+		echo "<b>[" . $_GET['spm_subject_grade'];
+		echo "]</b> ";
+	}
+}
+
+// Education
+if(@$_GET['submitEdu'] == "Search")
+{
+	if($_GET['graduate_year'] != 0)
+	{
+		echo "Year Graduted:";
+		echo "<b>[".$_GET['graduate_year'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['qualification'] != 0)
+	{
+		echo " Qualification:";
+		echo "<b>[" . $row_rsFilterQuali['edu_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['field_of_study'] != 0)
+	{
+		echo " Field of Study:";
+		echo "<b>[" . $row_rsFilterField['field_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['cgpa'] != 0)
+	{
+		if($_GET['cgpa'] == '3.5')
+		{
+			echo " CGPA:";
+			echo "<b>[3.5 and Above";
+			echo "]</b> ";
+		}
+		
+		if($_GET['cgpa'] == '3.49')
+		{
+			echo " CGPA:";
+			echo "<b>[3.49 and below";
+			echo "]</b> ";
+		}
+	}
+}
+
+
+// Language
+if(@$_GET['submitLang'] == "Search")
+{
+	if($_GET['language'] != 0)
+	{
+		echo "Language:";
+		echo "<b>[". $row_rsFilterLanguage['languList_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['lang_spoken'] != 0)
+	{
+		echo " Spoken:";
+		echo "<b>[" . $_GET['lang_spoken'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['lang_written'] != 0)
+	{
+		echo " Written:";
+		echo "<b>[" . $_GET['lang_written'];
+		echo "]</b> ";
+	}
+	
+}
+
+
+// Prefer
+if(@$_GET['submitPrefer'] == "Search")
+{
+	if($_GET['prefer_location'] != 0)
+	{
+		echo "Preference Location:";
+		echo "<b>[". $row_rsFilterLocation['location_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['industry'] != 0)
+	{
+		echo " Industry:";
+		echo "<b>[" . $row_rsFilterIndustry['indus_name'];
+		echo "]</b> ";
+	}
+	
+	if($_GET['salary'] != 0)
+	{
+		echo " Salary:";
+		echo "<b>[RM " . $_GET['salary'];
+		echo "]</b> ";
+	}
+	
+}
+
+?>
+
+
+<br/>
 <br/>
 <?php if ($totalRows_rsJobSeekerList > 0) { // Show if recordset not empty ?>
 <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
@@ -1488,7 +1705,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
     <tr>
       <td align="left" valign="middle"><?php echo $row_rsJobSeekerList['users_fname']; ?> <?php echo $row_rsJobSeekerList['users_lname']; ?></td>
       <td align="center" valign="middle"><a href="jobSeekerResume.php?js_id=<?php echo $row_rsJobSeekerList['users_id']; ?>"><?php echo $row_rsJobSeekerList['users_email']; ?></a></td>
-      <td align="center" valign="middle"><img src="<?php echo $row_rsJobSeekerList['jobseeker_pic']; ?>"></td>
+      <td align="center" valign="middle"><img src="<?php echo $row_rsJobSeekerList['jobseeker_pic']; ?>" width="48"></td>
     </tr>
     <?php } while ($row_rsJobSeekerList = mysql_fetch_assoc($rsJobSeekerList)); ?>
 </table>
@@ -1643,4 +1860,18 @@ mysql_free_result($rsFieldList);
 mysql_free_result($rsMajorList);
 
 mysql_free_result($rsLangList);
+
+mysql_free_result($rsFilterNationality);
+
+mysql_free_result($rsFilterSubject);
+
+mysql_free_result($rsFilterQuali);
+
+mysql_free_result($rsFilterField);
+
+mysql_free_result($rsFilterLanguage);
+
+mysql_free_result($rsFilterIndustry);
+
+mysql_free_result($rsFilterLocation);
 ?>

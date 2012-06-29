@@ -302,7 +302,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <div class="jobEmployer"><br/>
   <p>Posted By</p>
   <div class="left" style="width:120px; height:120px; margin-right:5px;">
-  	<img src="media/employer/img/<?php echo $row_rsJobsAdsDetails['emp_pic']; ?>" width="80" height="80" border="0" />
+  	<img src="media/employer/img/<?php echo $row_rsJobsAdsDetails['emp_pic']; ?>" width="100px" border="0" />
   </div>
   <div class="left">
   <a href="employer.php?emp_id=<?php echo $row_rsJobsAdsDetails['emp_id_fk']; ?>&employer=<?php echo $row_rsJobsAdsDetails['emp_name']; ?>"><?php echo $row_rsJobsAdsDetails['emp_name']; ?></a><br/>

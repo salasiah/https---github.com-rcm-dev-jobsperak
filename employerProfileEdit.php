@@ -268,7 +268,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
     <table align="center">
       <tr valign="baseline">
         <td align="right" valign="middle" nowrap>Company Logo</td>
-        <td><img src="media/employer/img/<?php echo $row_rsCompanyInfoDetail['emp_pic']; ?>" />
+        <td><img src="media/employer/img/<?php echo $row_rsCompanyInfoDetail['emp_pic']; ?>" width="100px" />
         </td>
       </tr>
       <tr valign="baseline">

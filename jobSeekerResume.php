@@ -258,10 +258,10 @@ $totalRows_rsJsSPM = mysql_num_rows($rsJsSPM);
 	  <div id="content">
 	    <h2>JobSeeker Resume</h2>
 	    <div class="master_details">
-	      <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
+	      <p>Welcome <?php echo $_SESSION['MM_Username']; ?> <?php //echo $_SESSION['MM_UserID']; ?> | <a href="<?php echo $logoutAction ?>">Log Out</a></p>
 	      <?php include("employer_menu.php"); ?>
 	      <br/>
-	      <strong>Browse Resume</strong><br/>
+	      <strong>Candidate Resume</strong><br/>
 	      <br/>
           <?php if ($totalRows_rsJobSeekerCheck == 0) { // Show if recordset empty ?>
   <p>Ops..There no resume details here. <a href="employerBrowseResume.php">Back</a></p>
@@ -271,6 +271,23 @@ $totalRows_rsJsSPM = mysql_num_rows($rsJsSPM);
 	        <div class="box">
 	          <h3>Resume</h3>
           </div>
+          
+          <div class="box resumebox">
+    <table width="500" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="121"><img src="<?php echo $row_rsJobSeekerInfo['jobseeker_pic']; ?>" width="80" /></td>
+    <td width="279" align="left" valign="middle"><h3><?php echo $row_rsCurrentUsers['users_fname']; ?><?php echo $row_rsCurrentUsers['users_lname']; ?></h3></td>
+    </tr>
+  <tr>
+    <td>&nbsp;
+    
+    </td>
+    <td>&nbsp;</td>
+    </tr>
+</table>
+
+    </div>
+          
 	        <div class="box resumebox"> <strong>Uploaded Resume</strong>
 	          <?php if ($totalRows_rsUserResume > 0) { // Show if recordset not empty ?>
 	            <table width="500" border="0" cellspacing="0" cellpadding="2">
