@@ -1,0 +1,7 @@
+Child Location
+
+Resume Upload
+Picture upload
+Email respond after register
+forgot password
+Update Password

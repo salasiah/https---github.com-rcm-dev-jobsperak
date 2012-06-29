@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAdsInd" value="name:ads_id;datatype:int,name:ind_id;datatype:int,name:indus_id;datatype:int,name:ind_name;datatype:string,name:ind_count;datatype:int" />
+	<infoitem key="UD_rsUserLoc" value="name:ads_id;datatype:int,name:ads_location;datatype:int,name:location_id;datatype:int,name:location_name;datatype:string" />
+	<infoitem key="UD_rsAdsLoc" value="name:loc_id;datatype:int,name:loc_name;datatype:string" />
+	<infoitem key="UD_rsAdsLocVal" value="name:id;datatype:int,name:ads_location;datatype:int,name:location;datatype:int" />
+	<infoitem key="UD_ttlUser" value="name:totalUser;datatype:int" />
+	<infoitem key="UD_ttlUserActive" value="name:totalUser;datatype:int" />
+	<infoitem key="UD_ttlJs" value="name:ttlJs;datatype:int" />
+	<infoitem key="UD_ttlEmp" value="name:ttlEmp;datatype:int" />
+	<infoitem key="UD_ttlAds" value="name:ttlAds;datatype:int" />
+	<infoitem key="UD_ttlJbApp" value="name:ttljsapp;datatype:int" />
+	<infoitem key="UD_ttlShortlisted" value="name:ttlShortlisted;datatype:int" />
+	<infoitem key="UD_ttlReject" value="name:ttlRejected;datatype:int" />
+	<infoitem key="UD_ttlApproved" value="name:ttlApproved;datatype:int" />
+	<infoitem key="UD_ttlPending" value="name:ttlPending;datatype:int" />
+</info>
