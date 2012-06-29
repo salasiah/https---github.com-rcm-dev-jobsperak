@@ -6,6 +6,5 @@
 	<infoitem key="UD_rsCandidateApplied" value="name:Count(jp_application.ads_id_fk);datatype:int" />
 	<infoitem key="UD_rsIsActive" value="name:user_active;datatype:int" />
 	<infoitem key="UD_rsCandidate" value="name:users_fname;datatype:string,name:users_lname;datatype:string,name:jobseeker_id;datatype:int" />
-	<infoitem key="UD_rsShortlistedCandidate" value="name:ads_title;datatype:string,name:users_id_fk;datatype:int,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_email;datatype:blob,name:employer_id_fk;datatype:int,name:joseeker_id_fk;datatype:int,name:ads_id_fk;datatype:int,name:shortlisted_id;datatype:int,name:is_approve;datatype:int" />
-	<infoitem key="UD_rsDirectShorlisted" value="name:users_email;datatype:blob,name:users_fname;datatype:string,name:users_lname;datatype:string,name:jp_id_fk;datatype:int,name:jp_emp_id_fk;datatype:int,name:sbemp_id;datatype:int" />
+	<infoitem key="UD_rsShortlistedCandidate" value="name:ads_title;datatype:string,name:users_id_fk;datatype:int,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_email;datatype:blob,name:employer_id_fk;datatype:int,name:joseeker_id_fk;datatype:int,name:ads_id_fk;datatype:int" />
 </info>
