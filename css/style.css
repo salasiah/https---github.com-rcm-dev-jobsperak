@@ -200,6 +200,57 @@ ul#navigation li a:active  {
 	margin-bottom: 20px;
 	width: 320px;
 }
+
+.sidebarBox strong {
+	font-size: 16px;
+	line-height:16px;
+}
+
+/*---------- icon ----------------------*/
+.icon_bookmark {
+	background-image:url(../img/icon_black/ic_bookmark.png);
+	background-position:left center;
+	padding-left:20px;
+	background-repeat:no-repeat;
+}
+
+.icon_favorite {
+	background-image:url(../img/icon_black/ic_favorite.png);
+	background-position:left center;
+	padding-left:20px;
+	background-repeat:no-repeat;
+}
+
+.icon_archive {
+	background-image:url(../img/icon_black/ic_archive.png);
+	background-position:left center;
+	padding-left:20px;
+	background-repeat:no-repeat;
+}
+
+.icon_zoom {
+	background-image:url(../img/icon_black/ic_zoom.png);
+	background-position:left center;
+	padding-left:20px;
+	background-repeat:no-repeat;
+	font-size:16px;
+}
+
+.icon_pin {
+	background-image:url(../img/icon_black/ic_pin.png);
+	background-position:left center;
+	padding-left:20px;
+	background-repeat:no-repeat;
+}
+
+.ic_folder {
+	background-image:url(../img/icon_black/ic_folder.png);
+	background-position:left center;
+	padding-left:20px;
+	background-repeat:no-repeat;
+}
+/*--------------------*/
+
 .sidebarBox ul, .sidebarFullBox ul {
 	list-style:none;
 }
