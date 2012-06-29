@@ -9,6 +9,9 @@ Changelog 1.5 / 2012-06-30
 + Added 
 + Added folder icon_black / icon_grey
 + Employer Direct Shortlisted / Deleted
++ Added table jp_article
++ Added table jp_article_cat
++ Added table jp_shortlisted_by_emp
 
 
 
