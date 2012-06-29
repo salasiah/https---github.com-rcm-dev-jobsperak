@@ -47,7 +47,7 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 	<header id="header">
 
 		<div class="center">
-			<div class="left"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
+			<div class="left logo"> <a href="index.php"><img src="img/logo.png" width="260" height="80" alt="JobsPerak Logo" longdesc="index.php"></a>
 			</div>
 
 			<div class="right">

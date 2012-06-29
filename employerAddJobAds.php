@@ -37,7 +37,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO jp_ads (ads_id, ads_title, ads_details, emp_id_fk, ads_location, ads_salary, ads_y_exp, ads_enable_view, ads_featured, ads_industry_id_fk) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO jp_ads (ads_id, ads_title, ads_details, emp_id_fk, ads_location, ads_salary, ads_y_exp, ads_enable_view, ads_featured, ads_industry_id_fk, ads_minimum) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['ads_id'], "int"),
                        GetSQLValueString($_POST['ads_title'], "text"),
                        GetSQLValueString($_POST['ads_details'], "text"),
@@ -47,7 +47,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['ads_y_exp'], "int"),
                        GetSQLValueString($_POST['ads_enable_view'], "int"),
                        GetSQLValueString($_POST['ads_featured'], "int"),
-                       GetSQLValueString($_POST['ads_industry_id_fk'], "int"));
+                       GetSQLValueString($_POST['ads_industry_id_fk'], "int"),
+					   GetSQLValueString($_POST['ads_minimum'], "int"));
 
   mysql_select_db($database_conJobsPerak, $conJobsPerak);
   $Result1 = mysql_query($insertSQL, $conJobsPerak) or die(mysql_error());
@@ -284,7 +285,7 @@ font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
   <table align="center">
     <tr valign="baseline">
       <td nowrap align="right">Job Title:</td>
-      <td><input type="text" name="ads_title" value="" size="32"></td>
+      <td><input type="text" name="ads_title" value="" placeholder="Job ad title" size="32"></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right" valign="top">Job Details:</td>
@@ -303,8 +304,8 @@ do {
       </select></td>
     <tr>
     <tr valign="baseline">
-      <td nowrap align="right">Salary</td>
-      <td><input type="text" name="ads_salary" value="" size="32"></td>
+      <td nowrap align="right">Salary (MYR)</td>
+      <td><input type="text" name="ads_salary" value="" placeholder="number only eg: 1000" size="32"></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Year Experience</td>
@@ -330,6 +331,19 @@ do {
 ?>
       </select></td>
     <tr>
+    <tr valign="baseline">
+      <td nowrap align="right">Minimum</td>
+      <td><label for="ads_minimum"></label>
+        <select name="ads_minimum" class="date" id="ads_minimum">
+          <option value="1">PMR</option>
+          <option value="2">SPM</option>
+          <option value="3">STPM</option>
+          <option value="4">Diploma</option>
+          <option value="5">Degree</option>
+          <option value="6">Master</option>
+          <option value="7">PHD</option>
+        </select></td>
+    </tr>
     <tr valign="baseline">
       <td nowrap align="right">&nbsp;</td>
       <td><input type="submit" value="Submit Job Ads"></td>

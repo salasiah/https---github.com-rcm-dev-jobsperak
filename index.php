@@ -169,7 +169,7 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 		  <div id="content">
           	  <div class="box">
               	<div class="search_container">
-                	<h3>Search Jobs</h3>
+                	<h3 class="icon_zoom">Search Jobs</h3>
                 	<form action="jobAdsSearchResult.php" method="get" name="front_search">
                     <table width="100%" border="0" cellspacing="6" cellpadding="2">
   <tr>
@@ -237,7 +237,7 @@ do {
             
 				
 			  <div class="browse_industry box">
-			    <h2 class="title">Browse by Industry</h2>
+			    <h2 class="title icon_archive">Browse by Industry</h2>
 			    <div class="industry_lists">
                 	<ul>
                     	<?php do { ?>
@@ -249,7 +249,7 @@ do {
               </div>
               
               <div class="browse_location box">
-	      		<h2 class="title">Browse by Location</h2>
+	      		<h2 class="title icon_pin">Browse by Location</h2>
 			    <div class="location_lists">
                 	<ul>
                     	<?php do { ?>

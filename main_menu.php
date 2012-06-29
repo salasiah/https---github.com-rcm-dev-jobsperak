@@ -5,6 +5,7 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="http://niagaperak.jobsperak.com" target="_blank">Niaga Perak</a></li>
             <li style="color:#00CC99" class="hide"><?php echo $_SESSION['MM_UserID']; ?> - <?php echo $_SESSION['MM_Username']; ?></li>
+            <li><a href="resource.php">Resource</a></li>
             <li><a href="contact-us.php">Contact Us</a></li>
         </ul>
         </div>

@@ -73,6 +73,12 @@ if (isset($_GET['totalRows_rsHiringThisWeek'])) {
   $totalRows_rsHiringThisWeek = mysql_num_rows($all_rsHiringThisWeek);
 }
 $totalPages_rsHiringThisWeek = ceil($totalRows_rsHiringThisWeek/$maxRows_rsHiringThisWeek)-1;
+
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsArticleCat = "Select   jp_article.*,   jp_article.art_id As art_id1 From   jp_article Where   arc_published = 1  Order By   RAND() LIMIT 0,5";
+$rsArticleCat = mysql_query($query_rsArticleCat, $conJobsPerak) or die(mysql_error());
+$row_rsArticleCat = mysql_fetch_assoc($rsArticleCat);
+$totalRows_rsArticleCat = mysql_num_rows($rsArticleCat);
 ?>
 <div class="sidebarBox hide">
 <strong>How-to</strong>
@@ -86,7 +92,7 @@ $totalPages_rsHiringThisWeek = ceil($totalRows_rsHiringThisWeek/$maxRows_rsHirin
             
 
 <div class="sidebarBox">
-<strong>New Job Openings</strong>
+<strong class="icon_bookmark">New Job Openings</strong>
 <div class="sidebar_recentjob">
     <ul>
         <?php do { ?>
@@ -98,7 +104,7 @@ $totalPages_rsHiringThisWeek = ceil($totalRows_rsHiringThisWeek/$maxRows_rsHirin
 
 
 <div class="sidebarBox">
-<strong>Companies Hiring This Week</strong>
+<strong class="icon_favorite">Companies Hiring This Week</strong>
 <div class="sidebar_recentjob">
     <ul>
           <?php do { ?>
@@ -108,9 +114,18 @@ $totalPages_rsHiringThisWeek = ceil($totalRows_rsHiringThisWeek/$maxRows_rsHirin
 </div><!-- .sidebar_recentjob -->
 </div>
 
-
 <div class="sidebarBox">
-<strong>Find us on Facebook</strong>
+<strong class="ic_folder">Articles / Resource Categories</strong>
+<div class="sidebar_recentjob">
+    <ul>
+    	<?php do { ?>
+    	  <li><a href="content-details.php?cid=<?php echo $row_rsArticleCat['art_id']; ?>"><?php echo $row_rsArticleCat['art_title']; ?></a></li>
+    	  <?php } while ($row_rsArticleCat = mysql_fetch_assoc($rsArticleCat)); ?>
+    </ul>
+</div><!-- .sidebar_recentjob -->
+</div>
+<br/><br/>
+<div class="sidebarBox">
 <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FJobsPerak%2F198616306873628&amp;width=292&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=true&amp;appId=185462048213496" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:290px;" allowTransparency="true"></iframe>
 </div><!-- .sidebarBox -->
 
@@ -135,4 +150,6 @@ Facebook | Twitter | RSS
 mysql_free_result($rsRecentJobs);
 
 mysql_free_result($rsHiringThisWeek);
+
+mysql_free_result($rsArticleCat);
 ?>

@@ -67,6 +67,31 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+  $insertSQL = sprintf("INSERT INTO jp_message (msg_id, msg_subject, msg_body, ads_id_fk, jobseeker_id_fk, employer_id_fk) VALUES (%s, %s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['msg_id'], "int"),
+                       GetSQLValueString($_POST['msg_subject'], "text"),
+                       GetSQLValueString($_POST['msg_body'], "text"),
+                       GetSQLValueString($_POST['ads_id_fk'], "int"),
+                       GetSQLValueString($_POST['jobseeker_id_fk'], "int"),
+                       GetSQLValueString($_POST['employer_id_fk'], "int"));
+
+  mysql_select_db($database_conJobsPerak, $conJobsPerak);
+  $Result1 = mysql_query($insertSQL, $conJobsPerak) or die(mysql_error());
+  
+  // Set accepted candidate
+  $shortlisted_id = $_POST['shortId'];
+  $sqlAcceptedCandidate = "UPDATE jp_shortlisted SET is_approve = 2 WHERE shortlisted_id = $shortlisted_id";
+  $sqlAcceptedCandidateResult = mysql_query($sqlAcceptedCandidate);
+
+  $insertGoTo = "employerApplicationShorlistedList.php";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+    $insertGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $insertGoTo));
+}
+
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO jp_shortlisted (shortlisted_id, ads_id_fk, joseeker_id_fk, employer_id_fk, `time`) VALUES (%s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['shortlisted_id'], "int"),
                        GetSQLValueString($_POST['ads_id_fk'], "int"),
@@ -168,20 +193,10 @@ $totalRows_rsCandidate = mysql_num_rows($rsCandidate);
 
 $currentEmployedId = $row_rsEmployed['emp_id'];
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsShortlistedCandidate = "SELECT jp_ads.ads_title,   jp_jobseeker.users_id_fk,   jp_users.users_fname,   jp_users.users_lname,   jp_users.users_email,   jp_shortlisted.employer_id_fk, jp_shortlisted.joseeker_id_fk, jp_shortlisted.ads_id_fk, jp_shortlisted.shortlisted_id, jp_shortlisted.is_approve FROM jp_shortlisted Inner Join   jp_ads On jp_shortlisted.ads_id_fk = jp_ads.ads_id Inner Join   jp_jobseeker On jp_shortlisted.joseeker_id_fk = jp_jobseeker.jobseeker_id   Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_shortlisted.employer_id_fk = $currentEmployedId And   jp_shortlisted.is_reject = 0 ORDER BY jp_ads.ads_title";
+$query_rsShortlistedCandidate = "SELECT jp_ads.ads_title,   jp_jobseeker.users_id_fk,   jp_users.users_fname,   jp_users.users_lname,   jp_users.users_email,   jp_shortlisted.employer_id_fk, jp_shortlisted.joseeker_id_fk, jp_shortlisted.ads_id_fk FROM jp_shortlisted Inner Join   jp_ads On jp_shortlisted.ads_id_fk = jp_ads.ads_id Inner Join   jp_jobseeker On jp_shortlisted.joseeker_id_fk = jp_jobseeker.jobseeker_id   Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_shortlisted.employer_id_fk = $currentEmployedId And   jp_shortlisted.is_reject = 0 And   jp_shortlisted.is_approve = 0  ORDER BY jp_ads.ads_title";
 $rsShortlistedCandidate = mysql_query($query_rsShortlistedCandidate, $conJobsPerak) or die(mysql_error());
 $row_rsShortlistedCandidate = mysql_fetch_assoc($rsShortlistedCandidate);
 $totalRows_rsShortlistedCandidate = mysql_num_rows($rsShortlistedCandidate);
-
-$colname_rsDirectShorlisted = "-1";
-if (isset($_SESSION['MM_UserID'])) {
-  $colname_rsDirectShorlisted = $_SESSION['MM_UserID'];
-}
-mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsDirectShorlisted = sprintf("SELECT jp_users.users_email,   jp_users.users_fname,   jp_users.users_lname,   jp_shortlisted_by_emp.jp_id_fk,   jp_shortlisted_by_emp.jp_emp_id_fk, jp_shortlisted_by_emp.sbemp_id FROM jp_shortlisted_by_emp Inner Join   jp_jobseeker On jp_shortlisted_by_emp.jp_id_fk = jp_jobseeker.jobseeker_id   Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_shortlisted_by_emp.jp_emp_id_fk = %s", GetSQLValueString($colname_rsDirectShorlisted, "int"));
-$rsDirectShorlisted = mysql_query($query_rsDirectShorlisted, $conJobsPerak) or die(mysql_error());
-$row_rsDirectShorlisted = mysql_fetch_assoc($rsDirectShorlisted);
-$totalRows_rsDirectShorlisted = mysql_num_rows($rsDirectShorlisted);
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -278,62 +293,12 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   <?php if ($row_rsIsActive['user_active'] != 0){ ?>
   
   <?php include("employer_menu.php"); ?>
-<?php if ($totalRows_rsDirectShorlisted > 0) { // Show if recordset not empty ?>
-  <br/>
-  Direct Shorlisted Lists
-  
-  <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
-    <tr>
-      <th>Candidate Name</th>
-      <th>Email</th>
-      <th>Action</th>
-      </tr>
-    <tr>
-      <td><?php echo $row_rsDirectShorlisted['users_fname']; ?> <?php echo $row_rsDirectShorlisted['users_lname']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_rsDirectShorlisted['users_email']; ?></td>
-      <td align="center" valign="middle"><a href="deleteDirectShorlisted.php?sbemp_id=<?php echo $row_rsDirectShorlisted['sbemp_id']; ?>" id="deleteDirect">Delete</a></td>
-      </tr>
-  </table>
-  <br/><br/><br/>
-  <?php } // Show if recordset not empty ?>
-  
-<?php if ($totalRows_rsShortlistedCandidate > 0) { // Show if recordset not empty ?><br/>
-<p>Your Shortlisted Candidate based on job ad</p>
-  
-  <table width="600" border="0" cellpadding="2" cellspacing="2" class="csstable2">
-    <tr>
-      <th>Candidate Name</th>
-      <th>Jobs</th>
-      <th>Email</th>
-      <th>Action</th>
-    </tr>
-    <?php do { ?>
-      <tr>
-        <td><?php echo $row_rsShortlistedCandidate['users_fname']; ?> <?php echo $row_rsShortlistedCandidate['users_lname']; ?></td>
-        <td align="center" valign="middle"><?php echo $row_rsShortlistedCandidate['ads_title']; ?></td>
-        <td align="center" valign="middle"><?php echo $row_rsShortlistedCandidate['users_email']; ?></td>
-        <td align="center" valign="middle"> 
-        <?php if($row_rsShortlistedCandidate['is_approve'] == 2){ ?>
-         pending for approval
-        <?php } elseif($row_rsShortlistedCandidate['is_approve'] == 0) { ?>
-        <a href="employerApplicationReject.php?candidateID=<?php echo $row_rsShortlistedCandidate['joseeker_id_fk']; ?>&adsId=<?php echo $row_rsShortlistedCandidate['ads_id_fk']; ?>&action=reject"><img src="img/Delete-icon.png" alt="reject" width="16" height="16" border="0" title="Reject this Candidate"></a> &middot; <a href="jobSeekerResume.php?js_id=<?php echo $row_rsShortlistedCandidate['users_id_fk']; ?>" title="View Details"><img src="img/Document-Write-icon.png" width="16" height="16"></a> &middot;
-        
-        <a href="employerApplicationShorlistedAccepted.php?adsIdFk=<?php echo $row_rsShortlistedCandidate['ads_id_fk']; ?>&jbSkerIdFk=<?php echo $row_rsShortlistedCandidate['joseeker_id_fk']; ?>&empIdFk=<?php echo $row_rsShortlistedCandidate['employer_id_fk']; ?>&shortId=<?php echo $row_rsShortlistedCandidate['shortlisted_id']; ?>"><img src="img/Ok-icon.png" width="16" height="16" alt="accepted"></a>
-        <?php } elseif($row_rsShortlistedCandidate['is_approve'] == 1) { ?>
-        Approve as a staff
-        <?php } ?>
-        </td>
-      </tr>
-      <?php } while ($row_rsShortlistedCandidate = mysql_fetch_assoc($rsShortlistedCandidate)); ?>
-  </table>
-  <?php } // Show if recordset not empty ?>
-  
-  
-  <?php if ($totalRows_rsShortlistedCandidate == 0) { // Show if recordset empty ?>
-  	<p>There's no shortlisted candidate yet.</p>
-  <?php } // Show if recordset empty ?>
-  
-<?php } // Show if recordset not empty ?>
+	
+    <p>&nbsp;</p>
+    <p>This applicant has been shortlisted.</p>
+    <p>
+      <?php } // Show if recordset not empty ?>
+    </p>
 </div>
 
           </div><!-- #content-->
@@ -360,18 +325,16 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 </body>
 <script>
 $(document).ready(function(){
-	
-	$('a#deleteDirect').live('click', function(){
-			var answer = confirm('Are you sure you want to delete this?');
-			
-			if(answer){
-				return true;
-			} else {
-				return false;
-			}
-			
-			
-		});
+	$('#submitApproval').live('click', function(){
+		var msg_subject = $('#msg_subject').val();
+		var msg_body = $('#msg_body').val();
+		
+		if(msg_subject == '' && msg_body == ''){
+			alert('Fill up subject and message');
+			return false;
+		}
+
+	});
 });
 </script>
 </html>
@@ -385,8 +348,6 @@ mysql_free_result($rsIsActive);
 mysql_free_result($rsCandidate);
 
 mysql_free_result($rsShortlistedCandidate);
-
-mysql_free_result($rsDirectShorlisted);
 
 mysql_free_result($rsEmployed);
 
