@@ -32,45 +32,44 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 $currentPage = $_SERVER["PHP_SELF"];
-
-$maxRows_rsUser = 20;
-$pageNum_rsUser = 0;
-if (isset($_GET['pageNum_rsUser'])) {
-  $pageNum_rsUser = $_GET['pageNum_rsUser'];
+?>
+<?php
+$maxRows_rsAllUser = 50;
+$pageNum_rsAllUser = 0;
+if (isset($_GET['pageNum_rsAllUser'])) {
+  $pageNum_rsAllUser = $_GET['pageNum_rsAllUser'];
 }
-$startRow_rsUser = $pageNum_rsUser * $maxRows_rsUser;
+$startRow_rsAllUser = $pageNum_rsAllUser * $maxRows_rsAllUser;
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsUser = "SELECT * FROM jp_users";
-$query_limit_rsUser = sprintf("%s LIMIT %d, %d", $query_rsUser, $startRow_rsUser, $maxRows_rsUser);
-$rsUser = mysql_query($query_limit_rsUser, $conJobsPerak) or die(mysql_error());
-$row_rsUser = mysql_fetch_assoc($rsUser);
+$query_rsAllUser = "SELECT * FROM jp_users ORDER BY users_id DESC";
+$query_limit_rsAllUser = sprintf("%s LIMIT %d, %d", $query_rsAllUser, $startRow_rsAllUser, $maxRows_rsAllUser);
+$rsAllUser = mysql_query($query_limit_rsAllUser, $conJobsPerak) or die(mysql_error());
+$row_rsAllUser = mysql_fetch_assoc($rsAllUser);
 
-if (isset($_GET['totalRows_rsUser'])) {
-  $totalRows_rsUser = $_GET['totalRows_rsUser'];
+if (isset($_GET['totalRows_rsAllUser'])) {
+  $totalRows_rsAllUser = $_GET['totalRows_rsAllUser'];
 } else {
-  $all_rsUser = mysql_query($query_rsUser);
-  $totalRows_rsUser = mysql_num_rows($all_rsUser);
+  $all_rsAllUser = mysql_query($query_rsAllUser);
+  $totalRows_rsAllUser = mysql_num_rows($all_rsAllUser);
 }
-$totalPages_rsUser = ceil($totalRows_rsUser/$maxRows_rsUser)-1;
+$totalPages_rsAllUser = ceil($totalRows_rsAllUser/$maxRows_rsAllUser)-1;
 
-$queryString_rsUser = "";
+$queryString_rsAllUser = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
   $newParams = array();
   foreach ($params as $param) {
-    if (stristr($param, "pageNum_rsUser") == false && 
-        stristr($param, "totalRows_rsUser") == false) {
+    if (stristr($param, "pageNum_rsAllUser") == false && 
+        stristr($param, "totalRows_rsAllUser") == false) {
       array_push($newParams, $param);
     }
   }
   if (count($newParams) != 0) {
-    $queryString_rsUser = "&" . htmlentities(implode("&", $newParams));
+    $queryString_rsAllUser = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_rsUser = sprintf("&totalRows_rsUser=%d%s", $totalRows_rsUser, $queryString_rsUser);
-$row_rsUser = mysql_fetch_assoc($rsUser);
-$totalRows_rsUser = mysql_num_rows($rsUser);
+$queryString_rsAllUser = sprintf("&totalRows_rsAllUser=%d%s", $totalRows_rsAllUser, $queryString_rsAllUser);
 ?>
 <?php
 //initialize the session
@@ -233,55 +232,56 @@ ddaccordion.init({
 <table id="rounded-corner">
     <thead>
     	<tr>
-        	<th scope="col" class="rounded-company"></th>
-            <th scope="col" class="rounded">Name</th>
-            <th scope="col" class="rounded">Email</th>
+        	<th scope="col" class="rounded">Name</th>
+        	<th scope="col" class="rounded">Email</th>
+        	<th scope="col" class="rounded">Status</th>
+            <th scope="col" class="rounded">Registered</th>
             <th scope="col" class="rounded">Edit</th>
-            <th scope="col" class="rounded-q4">Delete</th>
+            <th scope="col" class="rounded">Delete</th>
         </tr>
     </thead>
        
     <tbody>
-    	<tr>
-        	<?php do { ?>
-        	<tr>
-        	  <td><input type="checkbox" name="" /></td>
-              <?php $userid = $row_rsUser['users_id']; ?>
-              <td><?php echo $row_rsUser['users_fname']; ?> <?php echo $row_rsUser['users_lname']; ?></td>
-              <td><?php echo $row_rsUser['users_email']; ?></td>
-			  <td><a href="user_edit.php?uid=<?php echo $userid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-              <td><a href="delete_user.php?uid=<?php echo $userid ?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
-            
-            </tr>
-            <?php } while ($row_rsUser = mysql_fetch_assoc($rsUser)); ?>
-            
+      <?php do { ?>
+        <tr>
+          <td><?php echo $row_rsAllUser['users_fname']; ?>, <?php echo $row_rsAllUser['users_lname']; ?></td>
+          <td><?php echo $row_rsAllUser['users_email']; ?></td>
+          <td align="center" valign="middle">
+          <?php if($row_rsAllUser['user_active'] == 1) { ?>
+          <span style="color:green; font-weight:bold">Active</span>
+          <?php } else { ?>
+          <span style="color:red; font-weight:bold">Not Active</span>
+          <?php } ?>
+          </td>
+          <td><?php echo date('D, d/m/Y',strtotime($row_rsAllUser['users_register'])); ?></td>
+          <td><img src="images/user_edit.png" width="16" height="16" /></td>
+          <td><img src="images/trash.png" alt="" title="" border="0" /></td>
         </tr>
-        
-    	
+        <?php } while ($row_rsAllUser = mysql_fetch_assoc($rsAllUser)); ?>
     </tbody>
 </table>
-
-     <a href="#" class="bt_red"><span class="bt_red_lft"></span><strong>Delete items</strong><span class="bt_red_r"></span></a> 
+ 
      
      
-     	<div class="pagination"> Records <?php echo ($startRow_rsUser + 1) ?> to <?php echo min($startRow_rsUser + $maxRows_rsUser, $totalRows_rsUser) ?> of <?php echo $totalRows_rsUser ?>
+     	<div class="pagination">
           <table border="0">
             <tr>
-              <td><?php if ($pageNum_rsUser > 0) { // Show if not first page ?>
-                  <a href="<?php printf("%s?pageNum_rsUser=%d%s", $currentPage, 0, $queryString_rsUser); ?>">First</a>
-                  <?php } // Show if not first page ?></td>
-              <td><?php if ($pageNum_rsUser > 0) { // Show if not first page ?>
-                  <a href="<?php printf("%s?pageNum_rsUser=%d%s", $currentPage, max(0, $pageNum_rsUser - 1), $queryString_rsUser); ?>">Previous</a>
-                  <?php } // Show if not first page ?></td>
-              <td><?php if ($pageNum_rsUser < $totalPages_rsUser) { // Show if not last page ?>
-                  <a href="<?php printf("%s?pageNum_rsUser=%d%s", $currentPage, min($totalPages_rsUser, $pageNum_rsUser + 1), $queryString_rsUser); ?>">Next</a>
-                  <?php } // Show if not last page ?></td>
-              <td><?php if ($pageNum_rsUser < $totalPages_rsUser) { // Show if not last page ?>
-                  <a href="<?php printf("%s?pageNum_rsUser=%d%s", $currentPage, $totalPages_rsUser, $queryString_rsUser); ?>">Last</a>
-                  <?php } // Show if not last page ?></td>
+              <td><?php if ($pageNum_rsAllUser > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsAllUser=%d%s", $currentPage, 0, $queryString_rsAllUser); ?>">First</a>
+              <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsAllUser > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsAllUser=%d%s", $currentPage, max(0, $pageNum_rsAllUser - 1), $queryString_rsAllUser); ?>">Previous</a>
+              <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsAllUser < $totalPages_rsAllUser) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsAllUser=%d%s", $currentPage, min($totalPages_rsAllUser, $pageNum_rsAllUser + 1), $queryString_rsAllUser); ?>">Next</a>
+              <?php } // Show if not last page ?></td>
+              <td><?php if ($pageNum_rsAllUser < $totalPages_rsAllUser) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsAllUser=%d%s", $currentPage, $totalPages_rsAllUser, $queryString_rsAllUser); ?>">Last</a>
+              <?php } // Show if not last page ?></td>
+              <td>Records <?php echo ($startRow_rsAllUser + 1) ?> to <?php echo min($startRow_rsAllUser + $maxRows_rsAllUser, $totalRows_rsAllUser) ?> of <?php echo $totalRows_rsAllUser ?></td>
             </tr>
           </table>
-     	</div>
+          </div>
         
         <div class="pagination" style="display:none">
         <span class="disabled"><< prev</span><span class="current">1</span><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a>…<a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">100</a><a href="">101</a><a href="">next >></a>
@@ -305,6 +305,5 @@ ddaccordion.init({
 </body>
 </html>
 <?php
-mysql_free_result($rsUser);
-
+mysql_free_result($rsAllUser);
 ?>

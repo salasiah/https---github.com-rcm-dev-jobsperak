@@ -104,7 +104,9 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 ?>
 <?php
-$maxRows_rsAds = 20;
+$currentPage = $_SERVER["PHP_SELF"];
+
+$maxRows_rsAds = 50;
 $pageNum_rsAds = 0;
 if (isset($_GET['pageNum_rsAds'])) {
   $pageNum_rsAds = $_GET['pageNum_rsAds'];
@@ -124,6 +126,22 @@ if (isset($_GET['totalRows_rsAds'])) {
   $totalRows_rsAds = mysql_num_rows($all_rsAds);
 }
 $totalPages_rsAds = ceil($totalRows_rsAds/$maxRows_rsAds)-1;
+
+$queryString_rsAds = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_rsAds") == false && 
+        stristr($param, "totalRows_rsAds") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_rsAds = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_rsAds = sprintf("&totalRows_rsAds=%d%s", $totalRows_rsAds, $queryString_rsAds);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -223,20 +241,19 @@ ddaccordion.init({
     </thead>
        
     <tbody>
-    	<tr>
         	<?php do { ?>
         	<tr>
         	  <td><input type="checkbox" name="" /></td>
               <?php $adsid = $row_rsAds['ads_id']; ?>
               <td><?php echo $row_rsAds['ads_title']; ?></td>
               <td><?php echo $row_rsAds['emp_name']; ?></td>
-              <td>
+              <td align="center" valign="middle">
 			        <?php
               $featured = "Featured";
               $not_featured = "Not Featured"; 
               if ($row_rsAds['ads_enable_view'] == 1) { ?>
-                Live
-                <?php } else { ?>
+                  <a href="../jobsAdsDetails.php?jobAdsId=<?php echo $adsid ?>" target="_blank">Live</a>
+<?php } else { ?>
                 <a href="ads_edit.php?uid=<?php echo $adsid ?>">Pending</a><?php } ?>
                 </td>
               <td><a href="ads_edit.php?uid=<?php echo $adsid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
@@ -244,17 +261,29 @@ ddaccordion.init({
             
             </tr>
             <?php } while ($row_rsAds = mysql_fetch_assoc($rsAds)); ?>
-            
-        </tr>
-        
-    	
     </tbody>
 </table>
-
-     <a href="#" class="bt_red"><span class="bt_red_lft"></span><strong>Delete items</strong><span class="bt_red_r"></span></a> 
-     
-     
-     	<div class="pagination"> Records <?php echo ($startRow_rsAds + 1) ?> to <?php echo min($startRow_rsAds + $maxRows_rsAds, $totalRows_rsAds) ?> of <?php echo $totalRows_rsAds ?> </div>
+<div class="pagination">
+          <table border="0">
+            <tr>
+              <td><?php if ($pageNum_rsAds > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsAds=%d%s", $currentPage, 0, $queryString_rsAds); ?>">First</a>
+                  <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsAds > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsAds=%d%s", $currentPage, max(0, $pageNum_rsAds - 1), $queryString_rsAds); ?>">Previous</a>
+                  <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsAds < $totalPages_rsAds) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsAds=%d%s", $currentPage, min($totalPages_rsAds, $pageNum_rsAds + 1), $queryString_rsAds); ?>">Next</a>
+                  <?php } // Show if not last page ?></td>
+              <td><?php if ($pageNum_rsAds < $totalPages_rsAds) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsAds=%d%s", $currentPage, $totalPages_rsAds, $queryString_rsAds); ?>">Last</a>
+                  <?php } // Show if not last page ?></td>
+                  <td>
+                  Records <?php echo ($startRow_rsAds + 1) ?> to <?php echo min($startRow_rsAds + $maxRows_rsAds, $totalRows_rsAds) ?> of <?php echo $totalRows_rsAds ?>
+                  </td>
+            </tr>
+          </table>
+        </div>
         
         <div class="pagination" style="display:none">
         <span class="disabled"><< prev</span><span class="current">1</span><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a>…<a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">100</a><a href="">101</a><a href="">next >></a>

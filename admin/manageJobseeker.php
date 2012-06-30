@@ -31,7 +31,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_rsJobseeker = 20;
+$maxRows_rsJobseeker = 50;
 $pageNum_rsJobseeker = 0;
 if (isset($_GET['pageNum_rsJobseeker'])) {
   $pageNum_rsJobseeker = $_GET['pageNum_rsJobseeker'];
@@ -78,6 +78,26 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
     exit;
   }
 }
+?>
+<?php
+$currentPage = $_SERVER["PHP_SELF"];
+?>
+<?php
+$queryString_rsJobseeker = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_rsJobseeker") == false && 
+        stristr($param, "totalRows_rsJobseeker") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_rsJobseeker = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_rsJobseeker = sprintf("&totalRows_rsJobseeker=%d%s", $totalRows_rsJobseeker, $queryString_rsJobseeker);
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -212,42 +232,55 @@ ddaccordion.init({
 <table id="rounded-corner">
     <thead>
     	<tr>
-        	<th scope="col" class="rounded-company"></th>
             <th scope="col" class="rounded">First Name</th>
             <th scope="col" class="rounded">Last Name</th>
             <th scope="col" class="rounded">Mobile</th>
             <th scope="col" class="rounded">Email</th>
             <th scope="col" class="rounded">Edit</th>
-            <th scope="col" class="rounded-q4">Delete</th>
+            <th scope="col" class="rounded">Delete</th>
         </tr>
     </thead>
        
     <tbody>
-    	<tr>
         	<?php do { ?>
         	<tr>
-        	  <td><input type="checkbox" name="" /></td>
               <?php $jsid = $row_rsJobseeker['users_id']; ?>
               <td><?php echo $row_rsJobseeker['users_fname']; ?></td>
               <td><?php echo $row_rsJobseeker['users_lname']; ?></td>
               <td><?php echo $row_rsJobseeker['jobseeker_mobile']; ?></td>
               <td><?php echo $row_rsJobseeker['users_email']; ?></td>
 
-              <td><a href="jobseeker_edit.php?uid=<?php echo $jsid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-              <td><a href="delete_jobseeker.php?uid=<?php echo $jsid ?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+              <td><img src="images/user_edit.png" alt="" title="" border="0" /></td>
+              <td><img src="images/trash.png" alt="" title="" border="0" /></td>
             
             </tr>
             <?php } while ($row_rsJobseeker = mysql_fetch_assoc($rsJobseeker)); ?>
-            
-        </tr>
-        
-    	
     </tbody>
 </table>
 
-     <a href="#" class="bt_red"><span class="bt_red_lft"></span><strong>Delete items</strong><span class="bt_red_r"></span></a> 
+      
      
-     	<div class="pagination"> Records <?php echo ($startRow_rsJobseeker + 1) ?> to <?php echo min($startRow_rsJobseeker + $maxRows_rsJobseeker, $totalRows_rsJobseeker) ?> of <?php echo $totalRows_rsJobseeker ?> </div>
+     	<div class="pagination">
+          <table border="0">
+            <tr>
+              <td><?php if ($pageNum_rsJobseeker > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsJobseeker=%d%s", $currentPage, 0, $queryString_rsJobseeker); ?>">First</a>
+                  <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsJobseeker > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsJobseeker=%d%s", $currentPage, max(0, $pageNum_rsJobseeker - 1), $queryString_rsJobseeker); ?>">Previous</a>
+                  <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsJobseeker < $totalPages_rsJobseeker) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsJobseeker=%d%s", $currentPage, min($totalPages_rsJobseeker, $pageNum_rsJobseeker + 1), $queryString_rsJobseeker); ?>">Next</a>
+                  <?php } // Show if not last page ?></td>
+              <td><?php if ($pageNum_rsJobseeker < $totalPages_rsJobseeker) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsJobseeker=%d%s", $currentPage, $totalPages_rsJobseeker, $queryString_rsJobseeker); ?>">Last</a>
+                  <?php } // Show if not last page ?></td>
+                  <td>
+                  Records <?php echo ($startRow_rsJobseeker + 1) ?> to <?php echo min($startRow_rsJobseeker + $maxRows_rsJobseeker, $totalRows_rsJobseeker) ?> of <?php echo $totalRows_rsJobseeker ?>
+                  </td>
+            </tr>
+          </table>
+        </div>
         
         <div class="pagination" style="display:none">
         <span class="disabled"><< prev</span><span class="current">1</span><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a>…<a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">100</a><a href="">101</a><a href="">next >></a>

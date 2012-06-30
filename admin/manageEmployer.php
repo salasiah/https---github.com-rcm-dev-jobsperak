@@ -31,7 +31,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_rsEmployer = 20;
+$maxRows_rsEmployer = 50;
 $pageNum_rsEmployer = 0;
 if (isset($_GET['pageNum_rsEmployer'])) {
   $pageNum_rsEmployer = $_GET['pageNum_rsEmployer'];
@@ -78,6 +78,26 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
     exit;
   }
 }
+?>
+<?php
+$currentPage = $_SERVER["PHP_SELF"];
+?>
+<?php
+$queryString_rsEmployer = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_rsEmployer") == false && 
+        stristr($param, "totalRows_rsEmployer") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_rsEmployer = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_rsEmployer = sprintf("&totalRows_rsEmployer=%d%s", $totalRows_rsEmployer, $queryString_rsEmployer);
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -212,20 +232,17 @@ ddaccordion.init({
 <table id="rounded-corner">
     <thead>
     	<tr>
-        	<th scope="col" class="rounded-company"></th>
             <th scope="col" class="rounded">Employer Name</th>
             <th scope="col" class="rounded">Email</th>
             <th scope="col" class="rounded">Featured</th>
             <th scope="col" class="rounded">Edit</th>
-            <th scope="col" class="rounded-q4">Delete</th>
+            <th scope="col" class="rounded">Delete</th>
         </tr>
     </thead>
        
     <tbody>
-    	<tr>
         	<?php do { ?>
         	<tr>
-        	  <td><input type="checkbox" name="" /></td>
               <?php $empid = $row_rsEmployer['emp_id']; ?>
               <td><?php echo $row_rsEmployer['emp_name']; ?></td>
               <td><?php echo $row_rsEmployer['emp_email']; ?></td>
@@ -240,22 +257,34 @@ ddaccordion.init({
 
               ?></td>
 
-              <td><a href="employer_edit.php?uid=<?php echo $empid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-              <td><a href="delete_employer.php?uid=<?php echo $empid ?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+              <td><img src="images/user_edit.png" alt="" title="" border="0" /></td>
+              <td><img src="images/trash.png" alt="" title="" border="0" /></td>
             
             </tr>
             <?php } while ($row_rsEmployer = mysql_fetch_assoc($rsEmployer)); ?>
-            
-        </tr>
-        
-    	
     </tbody>
 </table>
-
-     <a href="#" class="bt_red"><span class="bt_red_lft"></span><strong>Delete items</strong><span class="bt_red_r"></span></a> 
-     
-     
-     	<div class="pagination"> Records <?php echo ($startRow_rsEmployer + 1) ?> to <?php echo min($startRow_rsEmployer + $maxRows_rsEmployer, $totalRows_rsEmployer) ?> of <?php echo $totalRows_rsEmployer ?> </div>
+<div class="pagination">
+          <table border="0">
+            <tr>
+              <td><?php if ($pageNum_rsEmployer > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsEmployer=%d%s", $currentPage, 0, $queryString_rsEmployer); ?>">First</a>
+                  <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsEmployer > 0) { // Show if not first page ?>
+                  <a href="<?php printf("%s?pageNum_rsEmployer=%d%s", $currentPage, max(0, $pageNum_rsEmployer - 1), $queryString_rsEmployer); ?>">Previous</a>
+                  <?php } // Show if not first page ?></td>
+              <td><?php if ($pageNum_rsEmployer < $totalPages_rsEmployer) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsEmployer=%d%s", $currentPage, min($totalPages_rsEmployer, $pageNum_rsEmployer + 1), $queryString_rsEmployer); ?>">Next</a>
+                  <?php } // Show if not last page ?></td>
+              <td><?php if ($pageNum_rsEmployer < $totalPages_rsEmployer) { // Show if not last page ?>
+                  <a href="<?php printf("%s?pageNum_rsEmployer=%d%s", $currentPage, $totalPages_rsEmployer, $queryString_rsEmployer); ?>">Last</a>
+                  <?php } // Show if not last page ?></td>
+                  <td>
+                  Records <?php echo ($startRow_rsEmployer + 1) ?> to <?php echo min($startRow_rsEmployer + $maxRows_rsEmployer, $totalRows_rsEmployer) ?> of <?php echo $totalRows_rsEmployer ?>
+                  </td>
+            </tr>
+          </table>
+        </div>
         
         <div class="pagination" style="display:none">
         <span class="disabled"><< prev</span><span class="current">1</span><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a>…<a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">100</a><a href="">101</a><a href="">next >></a>
