@@ -2,6 +2,16 @@ Jobsperak Portal
 webmaster@jobsperak.com
 
 
+Changelog 1.5.2 / 2012-07-09
+--------------------------------
+
++ added out source data
++ added google analytics
++ added ads minimum requirement
++ fixed validation email in registration
+
+
+
 Changelog 1.5.1 / 2012-06-30
 --------------------------------
 
