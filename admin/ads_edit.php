@@ -107,7 +107,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsEditAds = "SELECT jp_ads.ads_id, jp_ads.ads_title, jp_ads.ads_details, jp_ads.emp_id_fk, jp_ads.ads_location, jp_ads.ads_salary, jp_ads.ads_y_exp, jp_ads.ads_industry_id_fk, jp_ads.ads_enable_view, jp_ads.ads_featured, jp_ads.ads_date_expired, jp_employer.emp_name, jp_employer.emp_id, jp_industry.indus_id, jp_industry.indus_name, jp_location.location_id, jp_location.location_name FROM jp_ads Inner Join jp_employer On jp_ads.emp_id_fk = jp_employer.emp_id Inner Join jp_industry On jp_ads.ads_industry_id_fk = jp_industry.indus_id Inner Join jp_location On jp_ads.ads_location = jp_location.location_id Where jp_ads.ads_id = '$get_ads_id'";
+$query_rsEditAds = "SELECT jp_ads.ads_id, jp_ads.ads_title, jp_ads.ads_details, jp_ads.emp_id_fk, jp_ads.ads_location, jp_ads.ads_salary, jp_ads.ads_y_exp, jp_ads.ads_industry_id_fk, jp_ads.ads_enable_view, jp_ads.ads_featured, jp_ads.ads_date_expired, jp_employer.emp_name, jp_employer.emp_id, jp_industry.indus_id, jp_industry.indus_name, jp_location.location_id, jp_location.location_name, jp_ads.ads_minimum FROM jp_ads Inner Join jp_employer On jp_ads.emp_id_fk = jp_employer.emp_id Inner Join jp_industry On jp_ads.ads_industry_id_fk = jp_industry.indus_id Inner Join jp_location On jp_ads.ads_location = jp_location.location_id Where jp_ads.ads_id = '$get_ads_id'";
 $rsEditAds = mysql_query($query_rsEditAds, $conJobsPerak) or die(mysql_error());
 $row_rsEditAds = mysql_fetch_assoc($rsEditAds);
 $totalRows_rsEditAds = mysql_num_rows($rsEditAds);
@@ -275,6 +275,56 @@ ddaccordion.init({
                     <dl>
                         <dt><label for="ads_exp">Expired Date:</label></dt>
                         <dd><input name="ads_exp" type="text" id="" value="<?php echo $row_rsEditAds['ads_date_expired']; ?>" size="54" readonly="readonly" /></dd>
+                    </dl>
+                    <dl>
+                        <dt><label for="ads_exp">Job Minimum:</label></dt>
+                        <dd>
+                        <?php 
+
+                        $minimum = $row_rsEditAds['ads_minimum']; 
+
+                        switch ($minimum) {
+                          case '1':
+                            # code...
+                          echo "PMR";
+                            break;
+
+                          case '2':
+                            # code...
+                          echo "SPM";
+                            break;
+
+                          case '3':
+                            # code...
+                          echo "STPM";
+                            break;
+
+                          case '4':
+                            # code...
+                          echo "Diploma";
+                            break;
+
+                          case '5':
+                            # code...
+                          echo "Degree";
+                            break;
+
+                          case '6':
+                            # code...
+                          echo "Master";
+                            break;
+
+                          case '7':
+                            # code...
+                          echo "PHD";
+                            break;
+                          
+                          default:
+                            # code...
+                            break;
+                        }
+
+                        ?></dd>
                     </dl>
                     <dl>
                         <dt><label for="ads_view">Enable View:</label></dt>
