@@ -100,6 +100,7 @@ $query_rsAdsInd = "SELECT jp_ads.ads_id, jp_ads.ads_industry_id_fk AS ind_id, jp
 $rsAdsInd = mysql_query($query_rsAdsInd, $conJobsPerak) or die(mysql_error());
 $row_rsAdsInd = mysql_fetch_assoc($rsAdsInd);
 $totalRows_rsAdsInd = mysql_num_rows($rsAdsInd);
+
 ?>
 
 <?php
@@ -220,6 +221,12 @@ $query_ttlPending = "Select   Count(*) As ttlPending From   jp_ads Where   jp_ad
 $ttlPending = mysql_query($query_ttlPending, $conJobsPerak) or die(mysql_error());
 $row_ttlPending = mysql_fetch_assoc($ttlPending);
 $totalRows_ttlPending = mysql_num_rows($ttlPending);
+
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_outData = "Select   Count(*) As outData From jp_outside_successful";
+$outData = mysql_query($query_outData, $conJobsPerak) or die(mysql_error());
+$row_outData = mysql_fetch_assoc($outData);
+$totalRows_outData = mysql_num_rows($outData);
 
 ?>
 
@@ -518,14 +525,28 @@ ddaccordion.init({
     <td class="numb">&nbsp;</td>
     <td align="center" valign="middle" class="desc">Rejected</td>
     </tr>
+     
   <tr>
     <td align="center" valign="middle" class="desc">&nbsp;</td>
     <td align="center" valign="middle" class="numb"><?php echo $row_ttlApproved['ttlApproved']; ?></td>
     <td align="center" valign="middle">&nbsp;</td>
   </tr>
+  
   <tr>
     <td align="center" valign="middle" class="desc">&nbsp;</td>
     <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</span></td>
+    <td align="center" valign="middle">&nbsp;</td>
+    </tr>
+    
+    <tr>
+    <td align="center" valign="middle" class="desc">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><?php echo $row_outData['outData']; ?></td>
+    <td align="center" valign="middle">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td align="center" valign="middle" class="desc">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</br>(Outside Data)</span></td>
     <td align="center" valign="middle">&nbsp;</td>
     </tr>
 </table>
@@ -591,4 +612,7 @@ mysql_free_result($ttlReject);
 mysql_free_result($ttlApproved);
 
 mysql_free_result($ttlPending);
+
+mysql_free_result($outData);
+
 ?>
