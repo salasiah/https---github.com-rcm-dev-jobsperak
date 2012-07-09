@@ -37,6 +37,18 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+
+  $current_email = mysql_real_escape_string($_POST['users_email']);
+  // check existing email
+  $sqlExistingEmail = "SELECT * FROM jp_users WHERE users_email LIKE '$current_email'";
+  $sqlExistingEmailResult = mysql_query($sqlExistingEmail);
+  $sqlExistingEmailResultRow = mysql_num_rows($sqlExistingEmailResult);
+
+  if ($sqlExistingEmailResultRow == 1) {
+    $error = '<p style="color:red; padding:4px; border:1px solid red; background:#FDC8CC; font-weight:bold; text-align:center">Already Registered</p>';
+  } else {
+  /*-----------*/
+
   $insertSQL = sprintf("INSERT INTO jp_users (users_email, users_pass, users_register, users_fname, users_lname, users_type) VALUES (%s, md5(%s), NOW(), %s, %s, %s)",
                        GetSQLValueString($_POST['users_email'], "text"),
                        GetSQLValueString($_POST['users_pass'], "text"),
@@ -53,6 +65,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     $insertGoTo .= $_SERVER['QUERY_STRING'];
   }
   header(sprintf("Location: %s", $insertGoTo));
+
+  } // run registered
 }
 ?>
 <!DOCTYPE html>
@@ -64,6 +78,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+  <script language="javascript" src="js/jquery-1.7.1.min.js"></script>
 </head>
 
 <body>
@@ -99,6 +114,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <h2>Register as a JobSeeker / Employer</h2>
 <div class="master_details">
 <p>Please fill up the form in order to use this portal.</p>
+
+  <?php echo @$error; ?>
+
   <form method="post" name="form1" action="<?php echo $editFormAction; ?>">
     <table width="500" align="center">
       <tr valign="baseline">
