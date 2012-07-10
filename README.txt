@@ -1,6 +1,14 @@
 Jobsperak Portal
 webmaster@jobsperak.com
 
+Changelog 1.5.3 / 2012-07-10
+--------------------------------
+
++ Appicant as Staff Module
++ Fixed Ads Front/Back
++ Added published date ads
++ Change Backend Menu
+
 
 Changelog 1.5.2 / 2012-07-09
 --------------------------------
