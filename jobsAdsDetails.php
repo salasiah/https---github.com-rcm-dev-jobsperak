@@ -80,7 +80,7 @@ if (isset($_GET['jobAdsId'])) {
   $colname_rsJobsAdsDetails = $_GET['jobAdsId'];
 }
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsJobsAdsDetails = sprintf("SELECT jp_employer.emp_name,   jp_employer.emp_address,   jp_employer.emp_email,   jp_employer.emp_web,   jp_employer.emp_tel,  jp_employer.emp_pic,  jp_ads.*,   jp_industry.indus_name,   jp_location.location_name FROM jp_ads Inner Join   jp_employer On jp_ads.emp_id_fk = jp_employer.emp_id Inner Join   jp_industry On jp_ads.ads_industry_id_fk = jp_industry.indus_id Inner Join   jp_location On jp_ads.ads_location = jp_location.location_id WHERE jp_ads.ads_id = %s", GetSQLValueString($colname_rsJobsAdsDetails, "int"));
+$query_rsJobsAdsDetails = sprintf("SELECT jp_employer.emp_name,   jp_employer.emp_address,   jp_employer.emp_email,   jp_employer.emp_web,   jp_employer.emp_tel,  jp_employer.emp_pic,  jp_ads.*,   jp_industry.indus_name,   jp_location.location_name FROM jp_ads Inner Join   jp_employer On jp_ads.emp_id_fk = jp_employer.emp_id Inner Join   jp_industry On jp_ads.ads_industry_id_fk = jp_industry.indus_id Inner Join   jp_location On jp_ads.ads_location = jp_location.location_id WHERE jp_ads.ads_id = %s AND ads_enable_view = 1", GetSQLValueString($colname_rsJobsAdsDetails, "int"));
 $rsJobsAdsDetails = mysql_query($query_rsJobsAdsDetails, $conJobsPerak) or die(mysql_error());
 $row_rsJobsAdsDetails = mysql_fetch_assoc($rsJobsAdsDetails);
 $totalRows_rsJobsAdsDetails = mysql_num_rows($rsJobsAdsDetails);

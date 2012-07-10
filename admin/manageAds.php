@@ -202,18 +202,7 @@ ddaccordion.init({
     <div class="main_content">
     
                     <div class="menu">
-                    <ul>
-                    <li><a href="dashboard.php">Admin Home</a></li>
-                    <li><a href="manageJobseeker.php">Manage Jobseekers<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageEmployer.php">Manage Employers<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageUser.php">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a class="current" href="manageAds.php">Manage Ads<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    
-                    </ul>
+                    <?php include('admin_menu.php'); ?>
                     </div> 
                     
                     
@@ -253,11 +242,23 @@ ddaccordion.init({
               $not_featured = "Not Featured"; 
               if ($row_rsAds['ads_enable_view'] == 1) { ?>
                   <a href="../jobsAdsDetails.php?jobAdsId=<?php echo $adsid ?>" target="_blank">Live</a>
+               <?php } elseif ($row_rsAds['ads_enable_view'] == 2) { ?>
+               		Expired
 <?php } else { ?>
                 <a href="ads_edit.php?uid=<?php echo $adsid ?>">Pending</a><?php } ?>
                 </td>
-              <td><a href="ads_edit.php?uid=<?php echo $adsid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-              <td><a href="delete_employer.php?uid=<?php echo $adsid ?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+              <td>
+              <?php
+              $featured = "Featured";
+              $not_featured = "Not Featured"; 
+              if ($row_rsAds['ads_enable_view'] == 1) { ?>
+                  Live
+              <?php } elseif ($row_rsAds['ads_enable_view'] == 2) { ?>
+              	Expired
+<?php } else { ?>
+                <a href="ads_edit.php?uid=<?php echo $adsid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a><?php } ?>
+              </td>
+              <td><img src="images/trash.png" alt="" title="" border="0" /></td>
             
             </tr>
             <?php } while ($row_rsAds = mysql_fetch_assoc($rsAds)); ?>

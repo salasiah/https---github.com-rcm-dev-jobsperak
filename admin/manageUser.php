@@ -203,18 +203,7 @@ ddaccordion.init({
     <div class="main_content">
     
                     <div class="menu">
-                    <ul>
-                    <li><a href="dashboard.php">Admin Home</a></li>
-                    <li><a href="manageJobseeker.php">Manage Jobseekers<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageEmployer.php">Manage Employers<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a class="current" href="manageUser.php">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageAds.php">Manage Ads<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    
-                    </ul>
+                    <?php include('admin_menu.php'); ?>
                     </div> 
                     
                     

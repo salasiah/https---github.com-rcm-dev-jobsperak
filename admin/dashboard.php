@@ -460,18 +460,7 @@ ddaccordion.init({
     <div class="main_content">
     
                     <div class="menu">
-                    <ul>
-                    <li><a class="current"href="dashboard.php">Admin Home</a></li>
-                    <li><a href="manageJobseeker.php">Manage Jobseekers<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageEmployer.php">Manage Employers<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageUser.php">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    <li><a href="manageAds.php">Manage Ads<!--[if IE 7]><!--></a><!--<![endif]-->
-                    </li>
-                    
-                    </ul>
+                    <?php include('admin_menu.php'); ?>
                     </div> 
                     
                     
@@ -563,12 +552,15 @@ ddaccordion.init({
 </table>
 
         <br/><br/><br/><br/>
-       <h2>Jobs Ads By Industry</h2>
-        <div id="chartdiv" style="width: 100%; height: 400px;"></div>
-        <h2>Jobs Ads By Location</h2>
-        <div id="chartdiv2" style="width: 100%; height: 400px;"></div>
-      
-     
+
+        <!-- Hide chart -->
+        <div style="display:none">
+          <h2>Jobs Ads By Industry</h2>
+          <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+          <h2>Jobs Ads By Location</h2>
+          <div id="chartdiv2" style="width: 100%; height: 400px;"></div>  
+        </div>
+
      </div><!-- end of right content-->
             
                     

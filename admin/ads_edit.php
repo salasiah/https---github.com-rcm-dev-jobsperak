@@ -117,8 +117,12 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
+# set GMT +8
+date_default_timezone_set('Asia/Singapore');
+$endDate = date("Y-m-d G:i:s", strtotime("+30 Days"));
+
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form")) {
-  $updateSQL = sprintf("UPDATE jp_ads SET ads_enable_view=1 WHERE ads_id=%s",
+  $updateSQL = sprintf("UPDATE jp_ads SET ads_enable_view=1, ads_date_published = NOW(), ads_date_expired = '$endDate' WHERE ads_id=%s",
                        GetSQLValueString($_POST['id'], "int"));
 
   mysql_select_db($database_conJobsPerak, $conJobsPerak);
