@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsSuccessfulAction" value="name:users_email;datatype:blob,name:users_fname;datatype:string,name:users_lname;datatype:string,name:emp_name;datatype:string,name:is_approve;datatype:int,name:shortlisted_id;datatype:int,name:ads_id_fk;datatype:int,name:ads_title;datatype:string,name:jobseeker_mobile;datatype:string" />
+</info>
