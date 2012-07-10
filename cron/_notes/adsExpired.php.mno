@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAds" value="name:ads_id;datatype:int,name:ads_enable_view;datatype:int,name:ads_date_expired;datatype:datetime" />
+</info>
