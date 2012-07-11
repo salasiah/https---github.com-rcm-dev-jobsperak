@@ -1700,12 +1700,14 @@ if(@$_GET['submitPrefer'] == "Search")
     <th>Name</th>
     <th>Email</th>
     <th>Picture</th>
+    <th>Action</th>
   </tr>
   <?php do { ?>
     <tr>
       <td align="left" valign="middle"><?php echo $row_rsJobSeekerList['users_fname']; ?> <?php echo $row_rsJobSeekerList['users_lname']; ?></td>
       <td align="center" valign="middle"><a href="jobSeekerResume.php?js_id=<?php echo $row_rsJobSeekerList['users_id']; ?>"><?php echo $row_rsJobSeekerList['users_email']; ?></a></td>
       <td align="center" valign="middle"><img src="<?php echo $row_rsJobSeekerList['jobseeker_pic']; ?>" width="48"></td>
+      <td align="center" valign="middle"><a href="employerApplicationShorlistedDirect.php?candidateID=<?php echo $row_rsJobSeekerList['jobseeker_id']; ?>&employer_id=<?php echo $_SESSION['MM_UserID']; ?>"><img src="img/Document-Write-icon.png" alt="shortlisted" width="16" height="16" border="0" title="Shorlist this Candidate"></a></td>
     </tr>
     <?php } while ($row_rsJobSeekerList = mysql_fetch_assoc($rsJobSeekerList)); ?>
 </table>
