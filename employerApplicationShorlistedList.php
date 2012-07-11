@@ -178,7 +178,7 @@ if (isset($_SESSION['MM_UserID'])) {
   $colname_rsDirectShorlisted = $_SESSION['MM_UserID'];
 }
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsDirectShorlisted = sprintf("SELECT jp_users.users_email,   jp_users.users_fname,   jp_users.users_lname,   jp_shortlisted_by_emp.jp_id_fk,   jp_shortlisted_by_emp.jp_emp_id_fk, jp_shortlisted_by_emp.sbemp_id FROM jp_shortlisted_by_emp Inner Join   jp_jobseeker On jp_shortlisted_by_emp.jp_id_fk = jp_jobseeker.jobseeker_id   Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_shortlisted_by_emp.jp_emp_id_fk = %s", GetSQLValueString($colname_rsDirectShorlisted, "int"));
+$query_rsDirectShorlisted = sprintf("SELECT jp_users.users_email,   jp_users.users_fname,   jp_users.users_lname,   jp_shortlisted_by_emp.jp_id_fk,   jp_shortlisted_by_emp.jp_emp_id_fk, jp_shortlisted_by_emp.sbemp_id, jp_jobseeker.users_id_fk FROM jp_shortlisted_by_emp Inner Join   jp_jobseeker On jp_shortlisted_by_emp.jp_id_fk = jp_jobseeker.jobseeker_id   Inner Join   jp_users On jp_jobseeker.users_id_fk = jp_users.users_id WHERE jp_shortlisted_by_emp.jp_emp_id_fk = %s", GetSQLValueString($colname_rsDirectShorlisted, "int"));
 $rsDirectShorlisted = mysql_query($query_rsDirectShorlisted, $conJobsPerak) or die(mysql_error());
 $row_rsDirectShorlisted = mysql_fetch_assoc($rsDirectShorlisted);
 $totalRows_rsDirectShorlisted = mysql_num_rows($rsDirectShorlisted);
@@ -289,8 +289,10 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
       <th>Action</th>
       </tr>
     <tr>
-      <td><?php echo $row_rsDirectShorlisted['users_fname']; ?> <?php echo $row_rsDirectShorlisted['users_lname']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_rsDirectShorlisted['users_email']; ?></td>
+      <td>
+        <?php echo $row_rsDirectShorlisted['users_fname']; ?> <?php echo $row_rsDirectShorlisted['users_lname']; ?>
+        </td>
+      <td align="center" valign="middle"><a href="jobSeekerResume.php?js_id=<?php echo $row_rsDirectShorlisted['users_id_fk']; ?>"><?php echo $row_rsDirectShorlisted['users_email']; ?></a></td>
       <td align="center" valign="middle"><a href="deleteDirectShorlisted.php?sbemp_id=<?php echo $row_rsDirectShorlisted['sbemp_id']; ?>" id="deleteDirect">Delete</a></td>
       </tr>
   </table>
@@ -309,7 +311,9 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
     </tr>
     <?php do { ?>
       <tr>
-        <td><?php echo $row_rsShortlistedCandidate['users_fname']; ?> <?php echo $row_rsShortlistedCandidate['users_lname']; ?></td>
+        <td>
+          <?php echo $row_rsShortlistedCandidate['users_fname']; ?> <?php echo $row_rsShortlistedCandidate['users_lname']; ?>
+        </td>
         <td align="center" valign="middle"><?php echo $row_rsShortlistedCandidate['ads_title']; ?></td>
         <td align="center" valign="middle"><?php echo $row_rsShortlistedCandidate['users_email']; ?></td>
         <td align="center" valign="middle"> 
