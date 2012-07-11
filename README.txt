@@ -1,6 +1,11 @@
 Jobsperak Portal
 webmaster@jobsperak.com
 
+Changelog 1.5.3.1 / 2012-07-11
+--------------------------------
++ Fixed browse resume result added shortlisted
+
+
 Changelog 1.5.3 / 2012-07-10
 --------------------------------
 
