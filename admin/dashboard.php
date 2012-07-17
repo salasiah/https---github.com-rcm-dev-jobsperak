@@ -515,13 +515,13 @@ ddaccordion.init({
     <td align="center" valign="middle" class="desc">Rejected</td>
     </tr>
      
-  <tr>
+  <tr style="display:none">
     <td align="center" valign="middle" class="desc">&nbsp;</td>
     <td align="center" valign="middle" class="numb"><?php echo $row_ttlApproved['ttlApproved']; ?></td>
     <td align="center" valign="middle">&nbsp;</td>
   </tr>
   
-  <tr>
+  <tr style="display:none">
     <td align="center" valign="middle" class="desc">&nbsp;</td>
     <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</span></td>
     <td align="center" valign="middle">&nbsp;</td>
@@ -529,13 +529,13 @@ ddaccordion.init({
     
     <tr>
     <td align="center" valign="middle" class="desc">&nbsp;</td>
-    <td align="center" valign="middle" class="numb"><?php echo $row_outData['outData']; ?></td>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></td>
     <td align="center" valign="middle">&nbsp;</td>
   </tr>
   
   <tr>
     <td align="center" valign="middle" class="desc">&nbsp;</td>
-    <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</br>(Outside Data)</span></td>
+    <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</span></td>
     <td align="center" valign="middle">&nbsp;</td>
     </tr>
 </table>
