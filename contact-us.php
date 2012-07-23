@@ -54,7 +54,7 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
             	<?php if (!isset($_SESSION['MM_Username'])) { ?>
 					<a href="login.php" title="Login">Login</a> &nbsp;|&nbsp;
                 	<a href="registerJobSeeker.php" title="Register JobSeeker">
-                    Register JobSeeker</a>
+                    JobSeeker / Employer Registration</a>
 				<?php } else { ?>
                 	<strong>Hi, <?php echo $_SESSION['MM_Username']; ?></strong> 
                     &middot; <a href="sessionGateway.php">My Dashboard</a> &middot; (<a href="<?php echo $logoutAction ?>">Log Out</a>)
@@ -70,12 +70,17 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 	
 	<section id="middle">
 
-		<div id="container" class="full">
-		  <div id="content_full">
+		<div id="container">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
 <h2>Contact Us</h2><br/>
 <div class="master_details_full">
-  <p>If you have any enquiries, do not hesitate to contact us by filling<br/>
-up the form and we will reply your email as soon as possible.
+<p>
+<strong>Pusat Kerjaya Amanjaya</strong><br/>
+B-G-9, Greentown Suria, Jalan Dato' Seri Ahmad Said, 30450 Ipoh, Malaysia<br/>
+Tel: 605 - 241 1770 Fax: 605 - 241 1771 <br/>
+Email: <a href="mailto:info@jobsperak.com">info@jobsperak.com</a> / <a href="mailto:webmaster@jobsperak.com">webmaster@jobsperak.com </a></p>
+  <p>If you have any enquiries, do not hesitate to contact us by filling
+up the form and we will reply<br/> your email as soon as possible.
   </p><br>
   <form action="email-sent.php" method="post" name="form1" style="width:600px; margin:0 auto;">
   	<table width="600" border="0" align="center" cellpadding="2" cellspacing="2">
@@ -95,7 +100,7 @@ up the form and we will reply your email as soon as possible.
       </select></td>
   </tr>
   <tr>
-    <td align="right" valign="middle">Message</td>
+    <td align="right" valign="top">Message</td>
     <td align="center" valign="middle">:</td>
     <td valign="middle"><label for="emailMessage"></label>
       <textarea name="emailMessage" id="emailMessage" cols="2" style="width:300px" rows="8" placeholder="Your Message"></textarea></td>
@@ -113,38 +118,9 @@ up the form and we will reply your email as soon as possible.
 
           </div><!-- #content-->
 	
-		  <aside id="sideRight" class="hide">
-          	  <div class="sidebarBox">
-              	<strong>How-to</strong>
-            	<div class="sidebar_howto">
-                	<ul>
-                    	<li><a href="#">Register</a></li>
-                        <li><a href="#">Post a Job</a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-			  <div class="sidebarBox hide">
-              	<strong>Recent Jobs</strong>
-            	<div class="sidebar_recentjob">
-                	<ul>
-                      <li><a></a></li>
-                    </ul>
-	            </div><!-- .sidebar_recentjob -->
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Jobs Posted under </strong>
-              	<ul>
-                  <li><a></a></li>
-                </ul>
-              </div><!-- .sidebarBox -->
-              
-              <div class="sidebarBox hide">
-           	  <strong>Get Connected</strong><br />
-              	Facebook | Twitter | RSS
-              </div><!-- .sidebarBox -->
-            </aside>
+		  <aside id="sideRight">
+          	  <?php include('full_content_sidebar.php'); ?>
+          </aside>
 			<!-- aside -->
 			<!-- #sideRight -->
 

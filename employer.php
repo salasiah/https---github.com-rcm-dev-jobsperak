@@ -149,7 +149,7 @@ $totalPages_rsEmployerJobLists = ceil($totalRows_rsEmployerJobLists/$maxRows_rsE
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
           	  Viewing : <strong><?php echo ucfirst($_GET['employer']); ?></strong>
               <?php if ($totalRows_rsEmployerDetails > 0) { // Show if recordset not empty ?>
   <div class="master_details">

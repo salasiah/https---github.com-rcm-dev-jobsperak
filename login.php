@@ -122,7 +122,7 @@ if (isset($_POST['email'])) {
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
 <h2>Portal Login</h2>
 <div class="master_details">
 	<p>Please fill up your Email and Password.</p>

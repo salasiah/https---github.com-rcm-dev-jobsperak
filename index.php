@@ -74,10 +74,16 @@ $row_rsLocation = mysql_fetch_assoc($rsLocation);
 $totalRows_rsLocation = mysql_num_rows($rsLocation);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0 LIMIT 0,60";
+$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0 LIMIT 0,30"; // limit to 60
 $rsIndustry = mysql_query($query_rsIndustry, $conJobsPerak) or die(mysql_error());
 $row_rsIndustry = mysql_fetch_assoc($rsIndustry);
 $totalRows_rsIndustry = mysql_num_rows($rsIndustry);
+
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsIndustryAll = "SELECT * FROM jp_industry WHERE industry_parent = 0 LIMIT 0,60"; // limit to 60
+$rsIndustryAll = mysql_query($query_rsIndustryAll, $conJobsPerak) or die(mysql_error());
+$row_rsIndustryAll = mysql_fetch_assoc($rsIndustryAll);
+$totalRows_rsIndustryAll = mysql_num_rows($rsIndustryAll);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
 $query_rsTenLatestJob = "SELECT ads_id, ads_title FROM jp_ads WHERE ads_enable_view = 1 ORDER BY ads_date_posted DESC";
@@ -133,7 +139,9 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="css/reveal.css">
 	<script language="javascript" src="js/jquery-1.7.1.min.js"></script>
+  <script src="js/jquery.reveal.js" type="text/javascript"></script>
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -175,18 +183,15 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 		<?php include("main_menu.php"); ?>
 	</header><!-- #header-->
 
-	<div id="wrapper">
-	
-	<section id="middle">
-
-		  <div id="content">
-          	  <div class="box">
-              	<div class="search_container">
-                	<h3 class="icon_zoom">Search Jobs</h3>
-                	<form action="jobAdsSearchResult.php" method="get" name="front_search">
+  <div id="search_help">
+    <div class="center">
+      <div class="left" style="width:640px;">
+        <div class="search_container">
+                  <h3 class="icon_zoom">Search Jobs</h3>
+                  <form action="jobAdsSearchResult.php" method="get" name="front_search">
                     <table width="100%" border="0" cellspacing="6" cellpadding="2">
   <tr>
-  	<td colspan="4"><input name="q" type="text" class="main_q" id="main_q" placeholder="Search by Job Title / Job Description " dir="ltr" /></td>
+    <td colspan="4"><input name="q" type="text" class="main_q" id="main_q" placeholder="Search by Job Title / Job Description " dir="ltr" /></td>
   </tr>
   <tr>
     <td><select name="industries">
@@ -200,7 +205,7 @@ do {
   $rows = mysql_num_rows($rsAllindustries);
   if($rows > 0) {
       mysql_data_seek($rsAllindustries, 0);
-	  $row_rsAllindustries = mysql_fetch_assoc($rsAllindustries);
+    $row_rsAllindustries = mysql_fetch_assoc($rsAllindustries);
   }
 ?>
     </select></td>
@@ -215,7 +220,7 @@ do {
   $rows = mysql_num_rows($rsLocation);
   if($rows > 0) {
       mysql_data_seek($rsLocation, 0);
-	  $row_rsLocation = mysql_fetch_assoc($rsLocation);
+    $row_rsLocation = mysql_fetch_assoc($rsLocation);
   }
 ?>
     </select></td>
@@ -236,20 +241,47 @@ do {
     </select></td>
   </tr>
   <tr>
-  	<td colspan="2">There are currently (<?php echo $row_rsTotalJobsOnline['totalOnline']; ?>) jobs available for you to choose.</td>
+    <td colspan="2">There are currently (<?php echo $row_rsTotalJobsOnline['totalOnline']; ?>) jobs available for you to choose.</td>
     <td><input name="search_job" type="submit" class="button green" id="search_job" value="Search Job"></td>
     <td><a href="#" class="hide">Advanced Search</a></td>
   </tr>
 </table>
                   </form>
                 </div>
-              </div>
-              
-            <div class="browse_jobopening box">
+      </div>
+
+      <div class="right" style="width:338px;">
+        <div class="search_container" style="height:147px;">
+          <h3 class="icon_help">How-to</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td><img src="img/Files-Download-File-icon-emp.png" title="Download how-to register as employer" /></td>
+                <td><strong style="color:#2951ED">Employers</strong><br/>Download how-to register as employer</td>
+              </tr>
+              <tr>
+                <td><img src="img/Files-Download-File-icon.png" title="Download how-to register as Jobseekers" /></td>
+                <td><strong>Jobseekers</strong><br/>Download how-to register as Jobseekers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="clear:both"></div>
+
+    </div><!-- ./center -->
+  </div><!-- /#search_help -->
+
+	<div id="wrapper">
+	
+	<section id="middle">
+
+		  <div id="content">              
+            <div class="browse_jobopening box hide">
             	<a href="jobsOpeningAll.php"> Browse all jobs opening in our portal &raquo;</a></div>
             
 				
-			  <div class="browse_industry box">
+			  <div class="search_container browse_industry box">
 			    <h2 class="title icon_archive">Browse by Industry</h2>
 			    <div class="industry_lists">
                 	<ul>
@@ -259,9 +291,12 @@ do {
                           <div class="clear"></div>
                     </ul>
                 </div>
+                <div style="text-align:right">
+                  <a href="#" data-reveal-id="myModal" id="myButton" title="View All Indusries">View All Indusries</a>
+                </div>
               </div>
               
-              <div class="browse_location box">
+              <div class="search_container browse_location box">
 	      		<h2 class="title icon_pin">Browse by Location</h2>
 			    <div class="location_lists">
                 	<ul>
@@ -336,6 +371,18 @@ do {
 	</footer><!-- #footer -->
 
 
+  <div id="myModal" class="reveal-modal">
+     <h3>Browse by Industry</h3>
+     <div class="industry_lists_all">
+        <ul>
+            <?php do { ?>
+              <li><a href="jobsByIndustry.php?ads_industry_id_fk=<?php echo $row_rsIndustryAll['indus_id']; ?>&industry=<?php echo $row_rsIndustryAll['indus_name']; ?>"><?php echo $row_rsIndustryAll['indus_name']; ?></a></li>
+              <?php } while ($row_rsIndustryAll = mysql_fetch_assoc($rsIndustryAll)); ?>
+                <div class="clear"></div>
+          </ul>
+      </div>
+     <a class="close-reveal-modal">&#215;</a>
+  </div>
 
 </body>
 </html>
@@ -350,6 +397,13 @@ $(document).ready(function(){
 		}
 
 	});
+
+  /* modal */
+  $('#myButton').click(function(e) {
+    e.preventDefault();
+    $('#myModal').reveal();
+  });
+
 });
 </script>
 <?php

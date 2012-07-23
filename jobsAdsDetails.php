@@ -198,7 +198,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
           	  <strong>Jobs Details</strong>
        	    <?php if ($totalRows_rsJobsAdsDetails > 0) { // Show if recordset not empty ?>
   <div class="master_details">
