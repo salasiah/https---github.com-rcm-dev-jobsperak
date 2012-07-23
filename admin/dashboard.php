@@ -473,7 +473,7 @@ ddaccordion.init({
 
 		<h2>JobsPerak Recruitment Portal Summary</h2>
         <div>
-        <table width="440" border="0" align="center" cellpadding="2" cellspacing="2">
+        <table width="440" border="0" align="center" cellpadding="2" cellspacing="2" style="display:none">
   <tr>
     <td align="center" valign="middle" class="numb"><?php echo $row_ttlUser['totalUser']; ?></td>
     <td class="numb">&nbsp;</td>
@@ -539,7 +539,74 @@ ddaccordion.init({
     <td align="center" valign="middle">&nbsp;</td>
     </tr>
 </table>
-
+<!-- temporary data -->
+<table width="440" border="0" align="center" cellpadding="2" cellspacing="2">
+  <tr>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlUser['totalUser']+$row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><span class="numb"><?php echo ($row_ttlUserActive['totalUser']+$row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></span></td>
+  </tr>
+  <tr>
+    <td width="200" align="center" valign="middle" class="desc">Registered Users</td>
+    <td width="300" class="numb">&nbsp;</td>
+    <td width="200" align="center" valign="middle" class="desc">Active Users</td>
+    </tr>
+  <tr>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlJs['ttlJs']+$row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlEmp['ttlEmp']+676); ?></td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" class="desc">Applicants</td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="desc">Employers</td>
+    </tr>
+  <tr>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlAds['ttlAds']+431); ?></td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlJbApp['ttljsapp']+$row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" class="desc">Jobs Offered</td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="desc">Job Applied</td>
+    </tr>
+  <tr style="display:none">
+    <td align="center" valign="middle" class="numb"><?php echo $row_ttlShortlisted['ttlShortlisted']; ?></td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><?php echo $row_ttlReject['ttlRejected']; ?></td>
+  </tr>
+  <tr style="display:none">
+    <td align="center" valign="middle" class="desc">Shortlisted</td>
+    <td class="numb">&nbsp;</td>
+    <td align="center" valign="middle" class="desc">Rejected</td>
+    </tr>
+     
+  <tr style="display:none">
+    <td align="center" valign="middle" class="desc">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><?php echo $row_ttlApproved['ttlApproved']; ?></td>
+    <td align="center" valign="middle">&nbsp;</td>
+  </tr>
+  
+  <tr style="display:none">
+    <td align="center" valign="middle" class="desc">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</span></td>
+    <td align="center" valign="middle">&nbsp;</td>
+    </tr>
+    
+    <tr>
+    <td align="center" valign="middle" class="desc">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></td>
+    <td align="center" valign="middle">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td align="center" valign="middle" class="desc">&nbsp;</td>
+    <td align="center" valign="middle" class="numb"><span class="desc">Succesful Placed</span></td>
+    <td align="center" valign="middle">&nbsp;</td>
+    </tr>
+</table>
+<!-- /temporary data  -->
         </div>
         <br/><br/><br/><br/>
         <h2>Job Ads Action</h2>
