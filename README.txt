@@ -5,7 +5,7 @@ webmaster@jobsperak.com
 Changelog 1.5.4.1 / 2012-07-23
 --------------------------------
 + Fixed default value for employer picture
-	- set default url "media/employer/img/default_employ.png"
+	- set default url default_employ.png
 
 
 Changelog 1.5.4 / 2012-07-21
