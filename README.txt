@@ -1,10 +1,16 @@
 Jobsperak Portal
 webmaster@jobsperak.com
 
+Changelog 1.5.4 / 2012-07-21
+--------------------------------
++ Addon Roadshow Module
+^ Upgrade UX of each pages
+
 
 Changelog 1.5.3.2 / 2012-07-17
 --------------------------------
 + Combined Outside data with internal data system
++ Hide Admin number/replace dummy PEKA number
 
 
 Changelog 1.5.3.1 / 2012-07-11
