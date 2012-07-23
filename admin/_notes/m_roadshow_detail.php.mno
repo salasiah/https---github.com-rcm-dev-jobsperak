@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAdsInd" value="name:ads_id;datatype:int,name:ind_id;datatype:int,name:indus_id;datatype:int,name:ind_name;datatype:string,name:ind_count;datatype:int" />
+	<infoitem key="UD_rsAdsLoc" value="name:loc_id;datatype:int,name:loc_name;datatype:string" />
+	<infoitem key="UD_rsAdsLocVal" value="name:id;datatype:int,name:ads_location;datatype:int,name:location;datatype:int" />
+	<infoitem key="UD_ttlUser" value="name:totalUser;datatype:int" />
+	<infoitem key="UD_ttlUserActive" value="name:totalUser;datatype:int" />
+	<infoitem key="UD_ttlJs" value="name:ttlJs;datatype:int" />
+	<infoitem key="UD_ttlEmp" value="name:ttlEmp;datatype:int" />
+	<infoitem key="UD_ttlAds" value="name:ttlAds;datatype:int" />
+	<infoitem key="UD_ttlJbApp" value="name:ttljsapp;datatype:int" />
+	<infoitem key="UD_ttlShortlisted" value="name:ttlShortlisted;datatype:int" />
+	<infoitem key="UD_ttlReject" value="name:ttlRejected;datatype:int" />
+	<infoitem key="UD_ttlApproved" value="name:ttlApproved;datatype:int" />
+	<infoitem key="UD_ttlPending" value="name:ttlPending;datatype:int" />
+	<infoitem key="UD_outData" value="name:outData;datatype:int" />
+	<infoitem key="UD_DetailRS1" value="name:rs_id;datatype:int,name:rs_name;datatype:string,name:rs_address;datatype:string,name:rs_lat;datatype:real,name:rs_long;datatype:real,name:rs_date;datatype:string,name:status;datatype:int" />
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+</info>

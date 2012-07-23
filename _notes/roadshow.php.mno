@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsRoadshow" value="name:rs_id;datatype:int,name:rs_name;datatype:string,name:rs_address;datatype:string,name:rs_lat;datatype:real,name:rs_long;datatype:real,name:rs_date;datatype:string,name:status;datatype:int" />
+</info>
