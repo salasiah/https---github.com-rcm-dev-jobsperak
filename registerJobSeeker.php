@@ -110,7 +110,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 	<div id="wrapper">
 	
 	<section id="middle">
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
 <h2>Register as a JobSeeker / Employer</h2>
 <div class="master_details">
 <p>Please fill up the form in order to use this portal.</p>
