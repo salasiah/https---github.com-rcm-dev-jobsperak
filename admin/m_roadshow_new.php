@@ -70,9 +70,10 @@ if (isset($_SERVER['QUERY_STRING'])) {
 ?>
 <?php
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO jp_roadshow (rs_name, rs_address, rs_lat, rs_long, rs_date, status) VALUES (%s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO jp_roadshow (rs_name, rs_address, rs_area, rs_lat, rs_long, rs_date, status) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['rs_name'], "text"),
                        GetSQLValueString($_POST['rs_address'], "text"),
+					   GetSQLValueString($_POST['rs_area'], "text"),
                        GetSQLValueString($_POST['rs_lat'], "double"),
                        GetSQLValueString($_POST['rs_long'], "double"),
                        GetSQLValueString($_POST['rs_date'], "text"),
@@ -389,12 +390,25 @@ ddaccordion.init({
       <td><input type="text" name="rs_name" value="" size="32" placeholder="University Name" /></td>
     </tr>
     <tr valign="baseline">
-      <td nowrap="nowrap" align="right" valign="top">&nbsp;</td>
-      <td>* Use &lt;br/&gt; to make new line</td>
-    </tr>
-    <tr valign="baseline">
       <td nowrap="nowrap" align="right" valign="top">Address</td>
       <td><textarea name="rs_address" id="rs_address" cols="50" rows="5" placeholder="Address"></textarea></td>
+    </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Area</td>
+      <td><select name="rs_area" id="rs_area">
+      <option value="Select Area / Category">Select Area / Category</option>
+        <option value="Kinta">Kinta</option>
+        <option value="Hilir Perak">Hilir Perak</option>
+        <option value="Kerian">Kerian</option>
+        <option value="Larut Matang dan Selama">Larut Matang dan Selama</option>
+        <option value="Hulu Perak">Hulu Perak</option>
+        <option value="Batang Padang">Batang Padang</option>
+        <option value="Kampar">Kampar</option>
+        <option value="Manjung">Manjung</option>
+        <option value="Perak Tengah">Perak Tengah</option>
+        <option value="Kuala Kangsar">Kuala Kangsar</option>
+        <option value="GiatMara">Giatmara</option>
+      </select></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>
@@ -429,6 +443,7 @@ ddaccordion.init({
       <td><select name="status">
         <option value="0" <?php if (!(strcmp(0, ""))) {echo "SELECTED";} ?>>Pending</option>
         <option value="1" <?php if (!(strcmp(1, ""))) {echo "SELECTED";} ?>>Confirm</option>
+        <option value="2" <?php if (!(strcmp(1, ""))) {echo "SELECTED";} ?>>Done</option>
       </select></td>
     </tr>
     <tr valign="baseline">

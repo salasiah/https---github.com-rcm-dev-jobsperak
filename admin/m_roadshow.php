@@ -342,24 +342,27 @@ ddaccordion.init({
 
 		<h2>Road Show List</h2>
         <p><a href="m_roadshow_new.php">New Road Show</a></p>
-        <table align="center" id="rounded-corner">
-        <thead>
-          <tr>
-            <th scope="col" class="rounded">Name</th>
-            <th scope="col" class="rounded">Address</th>
-            <th scope="col" class="rounded">Date</th>
-            <th scope="col" class="rounded">Status</th>
-            <th scope="col" class="rounded">Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-          <?php do { ?>
-            <tr>
-              <td><?php echo $row_rsModuleRoadshow['rs_name']; ?>&nbsp; </td>
-              <td><?php echo $row_rsModuleRoadshow['rs_address']; ?>&nbsp; </td>
-              <td><?php echo $row_rsModuleRoadshow['rs_date']; ?>&nbsp; </td>
-              <td>
-			  <?php 
+        <?php if ($totalRows_rsModuleRoadshow > 0) { // Show if recordset not empty ?>
+  <table align="center" id="rounded-corner">
+    <thead>
+      <tr>
+        <th scope="col" class="rounded">Name</th>
+        <th scope="col" class="rounded">Address</th>
+        <th scope="col" class="rounded">Area</th>
+        <th scope="col" class="rounded">Date</th>
+        <th scope="col" class="rounded">Status</th>
+        <th scope="col" class="rounded">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+      <?php do { ?>
+        <tr>
+          <td><?php echo $row_rsModuleRoadshow['rs_name']; ?>&nbsp; </td>
+          <td><?php echo $row_rsModuleRoadshow['rs_address']; ?>&nbsp; </td>
+          <td><?php echo $row_rsModuleRoadshow['rs_area']; ?>&nbsp; </td>
+          <td><?php echo $row_rsModuleRoadshow['rs_date']; ?>&nbsp; </td>
+          <td>
+            <?php 
 			  
 			  if($row_rsModuleRoadshow['status'] == 0) {
 				  echo "Pending";
@@ -368,12 +371,16 @@ ddaccordion.init({
 			  }
 			  
 			  ?></td>
-              <td><a href="m_roadshow_detail.php?recordID=<?php echo $row_rsModuleRoadshow['rs_id']; ?>">Detail</a></td>
-            </tr>
-            <?php } while ($row_rsModuleRoadshow = mysql_fetch_assoc($rsModuleRoadshow)); ?>
-            </tbody>
-        </table>
-        <br />
+          <td><a href="m_roadshow_detail.php?recordID=<?php echo $row_rsModuleRoadshow['rs_id']; ?>">Detail</a></td>
+        </tr>
+        <?php } while ($row_rsModuleRoadshow = mysql_fetch_assoc($rsModuleRoadshow)); ?>
+    </tbody>
+  </table>
+  <?php } // Show if recordset not empty ?>
+  <?php if ($totalRows_rsModuleRoadshow == 0) { // Show if recordset empty ?>
+  <p>No Road Show Yet</p>
+  <?php } // Show if recordset empty ?>
+<br />
         <table border="0">
           <tr>
             <td><?php if ($pageNum_rsModuleRoadshow > 0) { // Show if not first page ?>
