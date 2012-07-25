@@ -125,6 +125,7 @@ $queryString_rsJobByLocation = sprintf("&totalRows_rsJobByLocation=%d%s", $total
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+    <script language="javascript" src="js/jquery-1.7.1.min.js"></script>
 </head>
 
 <body>
@@ -157,7 +158,7 @@ $queryString_rsJobByLocation = sprintf("&totalRows_rsJobByLocation=%d%s", $total
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
           	  <strong class="title"><h2><?php echo ucfirst($_GET['location']); ?></h2></strong>
               <div class="topTableCaption"><?php echo $totalRows_rsJobByLocation ?> Job(s) Posted in <?php echo ucfirst($_GET['location']); ?></div><br/>
               <?php if ($totalRows_rsJobByLocation > 0) { // Show if recordset not empty ?>

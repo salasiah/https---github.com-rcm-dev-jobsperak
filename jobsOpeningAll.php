@@ -117,7 +117,7 @@ $queryString_rsJobsOpening = sprintf("&totalRows_rsJobsOpening=%d%s", $totalRows
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
           	  <strong>Browse Jobs Opening</strong>
               <div class="topTableCaption">There are <?php echo $totalRows_rsJobsOpening ?> Job(s) opening.</div>
               <?php if ($totalRows_rsJobsOpening > 0) { // Show if recordset not empty ?>

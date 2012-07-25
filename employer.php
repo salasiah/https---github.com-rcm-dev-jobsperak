@@ -117,6 +117,7 @@ $totalPages_rsEmployerJobLists = ceil($totalRows_rsEmployerJobLists/$maxRows_rsE
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+    <script language="javascript" src="js/jquery-1.7.1.min.js"></script>
 </head>
 
 <body>

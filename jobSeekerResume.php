@@ -295,7 +295,7 @@ $totalRows_rsJsSPM = mysql_num_rows($rsJsSPM);
 	                <td width="32">&nbsp;</td>
 	                <td class="def_width_box_3">File name</td>
 	                <td width="22">:</td>
-	                <td><a href="<?php echo $row_rsUserResume['resume_path']; ?>"><?php echo $row_rsUserResume['resume_title']; ?></a></td>
+	                <td><a href="media/resume/<?php echo $row_rsUserResume['resume_path']; ?>"><?php echo $row_rsUserResume['resume_title']; ?></a></td>
                   </tr>
 	              <tr>
 	                <td>&nbsp;</td>

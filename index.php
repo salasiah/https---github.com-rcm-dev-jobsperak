@@ -74,7 +74,7 @@ $row_rsLocation = mysql_fetch_assoc($rsLocation);
 $totalRows_rsLocation = mysql_num_rows($rsLocation);
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0 LIMIT 0,30"; // limit to 60
+$query_rsIndustry = "SELECT * FROM jp_industry WHERE industry_parent = 0 LIMIT 0,60"; // limit to 60
 $rsIndustry = mysql_query($query_rsIndustry, $conJobsPerak) or die(mysql_error());
 $row_rsIndustry = mysql_fetch_assoc($rsIndustry);
 $totalRows_rsIndustry = mysql_num_rows($rsIndustry);
@@ -141,7 +141,9 @@ $totalRows_rsTotalJobsOnline = mysql_num_rows($rsTotalJobsOnline);
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="css/reveal.css">
 	<script language="javascript" src="js/jquery-1.7.1.min.js"></script>
+    <!-- Jquery modal -->
   <script src="js/jquery.reveal.js" type="text/javascript"></script>
+  
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -291,8 +293,8 @@ do {
                           <div class="clear"></div>
                     </ul>
                 </div>
-                <div style="text-align:right">
-                  <a href="#" data-reveal-id="myModal" id="myButton" title="View All Indusries">View All Indusries</a>
+                <div style="text-align:right; display:none">
+                  <a href="#" data-reveal-id="myModal" id="myButton" title="View All Industries" class="tipFade">View All Industries</a>
                 </div>
               </div>
               

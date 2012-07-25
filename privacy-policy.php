@@ -69,7 +69,7 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 	
 	<section id="middle">
 
-		<div id="container" class="full">
+		<div id="container" class="search_container full" style="margin-top:20px">
 		  <div id="content_full">
 <h2>Privacy Policy</h2><br/>
 <div class="master_details_full">

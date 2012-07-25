@@ -3,7 +3,10 @@
 $to      = $_GET['mail'];
 $subject = 'Activation for JobsPerak Recruitment Portal';
 $message = 'Hi, '.$to;
-$message .= 'Please activate your account by clicking http://www.jobsperak.com/v1/account-activation.php?mail='.$to;
+// direct message login
+$message .= ' You can login to JobsPerak Recruitment Portal Now by clicking http://www.jobsperak.com/v1/login.php';
+// after this enable back to normal activation
+//$message .= 'Please activate your account by clicking http://www.jobsperak.com/v1/account-activation.php?mail='.$to;
 $headers = 'From: no-replay@jobsperak.com' . "\r\n" .
     'Reply-To: webmaster@jobsperak.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
@@ -52,7 +55,7 @@ mail($to, $subject, $message, $headers);
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
 <h2>Thank You!</h2>
 <div class="master_details">
   <p class="success"><strong>Please check your email for activation.</strong></p>

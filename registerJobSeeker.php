@@ -139,7 +139,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
         <td nowrap align="right">Register as: <span class="req">*</span></td>
         <td valign="baseline"><table width="400">
           <tr>
-            <td><input type="radio" name="users_type" value="1" >
+            <td><input name="users_type" type="radio" value="1" checked >
               JobSeeker</td>
               <td><input type="radio" name="users_type" value="2" >
               Employer</td>

@@ -32,7 +32,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_conJobsPerak, $conJobsPerak);
-$query_rsRoadshow = "SELECT * FROM jp_roadshow";
+$query_rsRoadshow = "SELECT * FROM jp_roadshow ORDER BY rs_date DESC";
 $rsRoadshow = mysql_query($query_rsRoadshow, $conJobsPerak) or die(mysql_error());
 $row_rsRoadshow = mysql_fetch_assoc($rsRoadshow);
 $totalRows_rsRoadshow = mysql_num_rows($rsRoadshow);
@@ -123,36 +123,59 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 </div><br/>
 <p>
 <strong>Road Show Campus</strong></p>
-<table width="610" border="0" cellspacing="0" cellpadding="0" class="csstable2">
-  <tr>
-    <th scope="col">No</th>
-    <th scope="col">Place</th>
-    <th width="100" scope="col">Date</th>
-    <th scope="col">Status</th>
-  </tr>
-  <?php $i = 1; ?>
-  <?php do { ?>
+<?php if ($totalRows_rsRoadshow > 0) { // Show if recordset not empty ?>
+  <table width="610" border="0" cellspacing="0" cellpadding="0" class="csstable2">
     <tr>
-      <td align="center" valign="middle">
-      <?php echo $i++; ?>
-      </td>
-      <td><strong><?php echo $row_rsRoadshow['rs_name']; ?></strong><br><?php echo $row_rsRoadshow['rs_address']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_rsRoadshow['rs_date']; ?></td>
-      <td align="center" valign="middle">
-	  <?php
+      <th scope="col">No</th>
+      <th scope="col">Place</th>
+      <th scope="col">Area</th>
+      <th width="100" scope="col">Date</th>
+      <th scope="col">Status</th>
+    </tr>
+    <?php $i = 1; ?>
+    <?php do { ?>
+      <tr>
+        <td align="center" valign="middle">
+          <?php echo $i++; ?>
+        </td>
+        <td><strong><?php echo $row_rsRoadshow['rs_name']; ?></strong></td>
+        <td align="center" valign="middle"><?php echo $row_rsRoadshow['rs_area']; ?></td>
+        <td align="center" valign="middle">
+		<?php 
+		
+		if($row_rsRoadshow['status'] == 0) {
+		  //echo "Pending";
+		  echo $row_rsRoadshow['rs_date'];
+	  } elseif($row_rsRoadshow['status'] == 1) {
+		  //echo "Confirm";
+		  echo "<span style='color:green;font:weight:bold'>".$row_rsRoadshow['rs_date']."</span>";
+	  } elseif($row_rsRoadshow['status'] == 2) {
+		  //echo "<del>Done</del>";
+		  echo "<del>".$row_rsRoadshow['rs_date']."</del>";
+	  } 
+	  
+	  ?>
+        </td>
+        <td align="center" valign="middle">
+          <?php
 	  
 	  if($row_rsRoadshow['status'] == 0) {
 		  echo "Pending";
-	  } else {
+	  } elseif($row_rsRoadshow['status'] == 1) {
 		  echo "Confirm";
+	  } elseif($row_rsRoadshow['status'] == 2) {
+		  echo "<del>Done</del>";
 	  }
 	  
 	  ?>
-      </td>
-    </tr>
-    <?php } while ($row_rsRoadshow = mysql_fetch_assoc($rsRoadshow)); ?>
-</table>
-
+        </td>
+      </tr>
+      <?php } while ($row_rsRoadshow = mysql_fetch_assoc($rsRoadshow)); ?>
+  </table>
+  <?php } // Show if recordset not empty ?>
+  <?php if ($totalRows_rsRoadshow == 0) { // Show if recordset empty ?>
+  <p>No Road Show at the moment.</p>
+  <?php } // Show if recordset empty ?>
 </div>
 
           </div><!-- #content-->

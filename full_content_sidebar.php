@@ -79,6 +79,27 @@ $query_rsArticleCat = "Select   jp_article.*,   jp_article.art_id As art_id1 Fro
 $rsArticleCat = mysql_query($query_rsArticleCat, $conJobsPerak) or die(mysql_error());
 $row_rsArticleCat = mysql_fetch_assoc($rsArticleCat);
 $totalRows_rsArticleCat = mysql_num_rows($rsArticleCat);
+
+$maxRows_rsRoadshowList = 1;
+$pageNum_rsRoadshowList = 0;
+if (isset($_GET['pageNum_rsRoadshowList'])) {
+  $pageNum_rsRoadshowList = $_GET['pageNum_rsRoadshowList'];
+}
+$startRow_rsRoadshowList = $pageNum_rsRoadshowList * $maxRows_rsRoadshowList;
+
+mysql_select_db($database_conJobsPerak, $conJobsPerak);
+$query_rsRoadshowList = "SELECT * FROM jp_roadshow WHERE status = 1 ORDER BY rs_date DESC";
+$query_limit_rsRoadshowList = sprintf("%s LIMIT %d, %d", $query_rsRoadshowList, $startRow_rsRoadshowList, $maxRows_rsRoadshowList);
+$rsRoadshowList = mysql_query($query_limit_rsRoadshowList, $conJobsPerak) or die(mysql_error());
+$row_rsRoadshowList = mysql_fetch_assoc($rsRoadshowList);
+
+if (isset($_GET['totalRows_rsRoadshowList'])) {
+  $totalRows_rsRoadshowList = $_GET['totalRows_rsRoadshowList'];
+} else {
+  $all_rsRoadshowList = mysql_query($query_rsRoadshowList);
+  $totalRows_rsRoadshowList = mysql_num_rows($all_rsRoadshowList);
+}
+$totalPages_rsRoadshowList = ceil($totalRows_rsRoadshowList/$maxRows_rsRoadshowList)-1;
 ?>
 <div class="sidebarBox hide">
 <strong>How-to</strong>
@@ -94,11 +115,18 @@ $totalRows_rsArticleCat = mysql_num_rows($rsArticleCat);
 <div class="sidebarBox">
 <strong class="icon_bookmark">New Job Openings</strong>
 <div class="sidebar_recentjob">
+<div style="height:190px;">
+<marquee behavior="scroll" direction="up" scrollamount="2.5" scrolldelay="2.5" onmouseover="this.stop()" onmouseout="this.start()">
+	<div style="height:190px;">
     <ul>
         <?php do { ?>
-          <li><a href="jobsAdsDetails.php?jobAdsId=<?php echo $row_rsRecentJobs['ads_id']; ?>"><?php echo $row_rsRecentJobs['ads_title']; ?></a> &middot; <span class="dateSidebar"><?php echo date('d/m/Y',strtotime($row_rsRecentJobs['ads_date_posted'])); ?></span></li>
+          <li><a href="jobsAdsDetails.php?jobAdsId=<?php echo $row_rsRecentJobs['ads_id']; ?>"><?php echo ucwords($row_rsRecentJobs['ads_title']); ?></a> &middot; <span class="dateSidebar"><?php echo date('d/m/Y',strtotime($row_rsRecentJobs['ads_date_posted'])); ?></span></li>
           <?php } while ($row_rsRecentJobs = mysql_fetch_assoc($rsRecentJobs)); ?>
+          <li><a href="jobsOpeningAll.php">View all Jobs</a></li>
     </ul>
+    </div>
+    </marquee>
+</div>
 </div><!-- .sidebar_recentjob -->
 </div>
 
@@ -106,15 +134,18 @@ $totalRows_rsArticleCat = mysql_num_rows($rsArticleCat);
 <div class="sidebarBox">
 <strong class="icon_favorite">Companies Hiring This Week</strong>
 <div class="sidebar_recentjob">
-    <ul>
+    <ul id="emp_pic">
           <?php do { ?>
-            <li><a href="employer.php?emp_id=<?php echo $row_rsHiringThisWeek['emp_id']; ?>&employer=<?php echo $row_rsHiringThisWeek['emp_name']; ?>"><?php echo $row_rsHiringThisWeek['emp_name']; ?></a></li>
+            <li>
+            <a href="employer.php?emp_id=<?php echo $row_rsHiringThisWeek['emp_id']; ?>&employer=<?php echo $row_rsHiringThisWeek['emp_name']; ?>"><img src="media/employer/img/<?php echo $row_rsHiringThisWeek['emp_pic']; ?>" width="50px" border="0" class="tipFade" title="<?php echo $row_rsHiringThisWeek['emp_name']; ?>" /></a>
+            </li>
             <?php } while ($row_rsHiringThisWeek = mysql_fetch_assoc($rsHiringThisWeek)); ?>
+            <div style="clear:both"></div>
     </ul>
 </div><!-- .sidebar_recentjob -->
 </div>
 
-<div class="sidebarBox">
+<div class="sidebarBox hide">
 <strong class="ic_folder">Articles / Resource Categories</strong>
 <div class="sidebar_recentjob">
     <ul>
@@ -124,6 +155,24 @@ $totalRows_rsArticleCat = mysql_num_rows($rsArticleCat);
     </ul>
 </div><!-- .sidebar_recentjob -->
 </div>
+
+<div class="sidebarBox">
+<strong>Next Stop Road Show</strong>
+<div class="sidebar_recentjob">
+    <ul>
+      <?php if ($totalRows_rsRoadshowList > 0) { // Show if recordset not empty ?>
+  <?php do { ?>
+    <li><?php echo $row_rsRoadshowList['rs_name']; ?><br/>
+      <em><?php echo $row_rsRoadshowList['rs_date']; ?></em></li>
+    <?php } while ($row_rsRoadshowList = mysql_fetch_assoc($rsRoadshowList)); ?>
+        <?php } // Show if recordset not empty ?>
+        <?php if ($totalRows_rsRoadshowList == 0) { // Show if recordset empty ?>
+  <li>No Road Show yet.</li>
+  <?php } // Show if recordset empty ?>
+    </ul>
+</div><!-- .sidebar_recentjob -->
+</div>
+
 <br/><br/>
 <div class="sidebarBox">
 <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FJobsPerak%2F198616306873628&amp;width=292&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=true&amp;appId=185462048213496" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:290px;" allowTransparency="true"></iframe>
@@ -146,10 +195,23 @@ Facebook | Twitter | RSS
 </table>
 
 </div><!-- .sidebarBox -->
+<!-- Tipsy -->
+  	<script type='text/javascript' src='js/jquery.tipsy.js'></script>
+  	<script type='text/javascript'>
+	$(document).ready(function(){
+		$('.tipFade').tipsy({
+				gravity: 's',
+				fade: true
+			});
+	});
+    </script>
+	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
 <?php
 mysql_free_result($rsRecentJobs);
 
 mysql_free_result($rsHiringThisWeek);
 
 mysql_free_result($rsArticleCat);
+
+mysql_free_result($rsRoadshowList);
 ?>

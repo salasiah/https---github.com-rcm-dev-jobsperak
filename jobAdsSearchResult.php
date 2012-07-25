@@ -255,6 +255,7 @@ $queryString_rsJobsOpening = sprintf("&totalRows_rsJobsOpening=%d%s", @$totalRow
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+    <script language="javascript" src="js/jquery-1.7.1.min.js"></script>
 </head>
 
 <body>
@@ -287,7 +288,7 @@ $queryString_rsJobsOpening = sprintf("&totalRows_rsJobsOpening=%d%s", @$totalRow
 	
 	<section id="middle">
 
-		  <div id="content">
+		  <div id="content" class="search_container" style="width:610px; padding-top:10px;margin-top:30px;">
           	  <strong class="title"><h2>Your Search Result</h2></strong>
               <div class="topTableCaption">There are (<?php echo $totalRows_rsQueryJob ?>) Job(s) in your search</div><br/>
               

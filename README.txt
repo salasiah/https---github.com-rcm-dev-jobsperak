@@ -2,6 +2,12 @@ Jobsperak Portal
 webmaster@jobsperak.com
 
 
+Changelog 1.5.4.2 / 2012-07-24
+--------------------------------
++ Fixed view/download resume
++ Fixed varchar 255 working Working Experience Description
+
+
 Changelog 1.5.4.1 / 2012-07-23
 --------------------------------
 + Fixed default value for employer picture
