@@ -652,5 +652,20 @@ div.browse_industry ul li:nth-child(2n) {
 	position: absolute;
 }
 
+/*Employer Thumb*/
+ul#emp_pic {
+    border:0px solid red;
+}
 
-/* modal */
+ul#emp_pic li {
+    border:0px solid blue;
+    width:50px;
+    height: 50px;
+    margin:5px;
+    float:left;
+}
+
+ul#emp_pic li a {
+    border:0px solid green;
+    line-height:50px;
+}
