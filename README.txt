@@ -2,6 +2,14 @@ Jobsperak Portal
 webmaster@jobsperak.com
 
 
+Changelog 1.6 / 2012-07-25
+--------------------------------
+^ Upgrace version 1.6
++ Added Roadshow module to Live
++ Upgrade UX
++ Added Backend Module for Roadshow
+
+
 Changelog 1.5.4.2 / 2012-07-24
 --------------------------------
 + Fixed view/download resume
