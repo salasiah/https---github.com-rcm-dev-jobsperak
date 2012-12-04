@@ -554,7 +554,7 @@ ddaccordion.init({
   <tr>
     <td align="center" valign="middle" class="numb"><?php echo ($row_ttlJs['ttlJs']+$row_outData['outData']+$row_ttlApproved['ttlApproved']); ?></td>
     <td class="numb">&nbsp;</td>
-    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlEmp['ttlEmp']+676); ?></td>
+    <td align="center" valign="middle" class="numb"><?php echo ($row_ttlEmp['ttlEmp']); ?></td>
   </tr>
   <tr>
     <td align="center" valign="middle" class="desc">Applicants</td>

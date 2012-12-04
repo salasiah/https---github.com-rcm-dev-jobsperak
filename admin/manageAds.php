@@ -258,7 +258,18 @@ ddaccordion.init({
 <?php } else { ?>
                 <a href="ads_edit.php?uid=<?php echo $adsid ?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a><?php } ?>
               </td>
-              <td><img src="images/trash.png" alt="" title="" border="0" /></td>
+              <td>
+                <?php if ($row_rsAds['ads_enable_view'] == 1) { ?>
+                  <a href="ads_delete.php?adsid=<?php echo $adsid ?>&url_callback=manageAds.php" title="Delete Job Ad" id="<?php echo $adsid ?>" class="delete_adsid">
+                  <img src="images/trash.png" alt="" title="" border="0" />
+                  </a>
+                <?php } elseif($row_rsAds['ads_enable_view'] == 2) { ?>
+                  Expired
+                <?php } else { ?>
+                  Pending
+                <?php } ?>
+                
+              </td>
             
             </tr>
             <?php } while ($row_rsAds = mysql_fetch_assoc($rsAds)); ?>
@@ -304,7 +315,24 @@ ddaccordion.init({
     
      <?php include 'footer.php'; ?>
 
-</div>		
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  // Delete JobAds
+  $('.delete_adsid').live('click', function(){
+    
+    var answer = confirm("Are you sure you want to delete this Job Ads?");
+    if(answer){
+      return true;
+    } else {
+      return false;
+    }
+
+    //console.log($(this).attr('id'));
+    return false;
+  });
+});
+</script>		
 </body>
 </html>
 <?php

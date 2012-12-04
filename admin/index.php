@@ -60,7 +60,17 @@ if (isset($_POST['login_username'])) {
 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
     //declare two session variables and assign them
     $_SESSION['MM_Admin'] = $loginUsername;
-    $_SESSION['MM_UserGroup'] = $loginStrGroup;	      
+    $_SESSION['MM_UserGroup'] = $loginStrGroup;	   
+
+    /**
+     *
+     * Record Set for adminlog
+     * Retrieve via object 
+     * 
+     */
+
+    $query_adminlog     = "UPDATE jp_admin SET admin_lastlogin = NOW() WHERE admin_name = '$loginUsername'";
+    $rs_adminlog        = mysql_query($query_adminlog) or die(mysql_error());   
 
     if (isset($_SESSION['PrevUrl']) && false) {
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	

@@ -1,5 +1,6 @@
 <ul>
 <li><a href="dashboard.php">Dashboard</a></li>
+<li><a href="live-browsing.php">Live Browsing</a></li>
 <li><a href="#">Modules</a>
   <ul>
     <li><a href="manageJobseeker.php">Manage Jobseekers<!--[if IE 7]><!--></a><!--<![endif]-->
