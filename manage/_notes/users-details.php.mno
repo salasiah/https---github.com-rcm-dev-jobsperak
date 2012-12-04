@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+	<infoitem key="UD_rsAdminName" value="name:admin_name;datatype:string" />
+	<infoitem key="UD_rsLanguageList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+	<infoitem key="UD_rsUserLists" value="name:users_id;datatype:int,name:users_email;datatype:blob,name:users_pass;datatype:string,name:users_register;datatype:datetime,name:users_last_login;datatype:timestamp,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_type;datatype:int,name:user_active;datatype:int" />
+	<infoitem key="UD_DetailRS1" value="name:users_id;datatype:int,name:users_email;datatype:blob,name:users_pass;datatype:string,name:users_register;datatype:datetime,name:users_last_login;datatype:timestamp,name:users_fname;datatype:string,name:users_lname;datatype:string,name:users_type;datatype:int,name:user_active;datatype:int" />
+	<infoitem key="UD_rsJobseekerDetails" value="name:jobseeker_id;datatype:int,name:users_id_fk;datatype:int,name:joobseeker_ic;datatype:string,name:jobseeker_tel;datatype:string,name:jobseeker_mobile;datatype:string,name:jobseeker_address;datatype:blob,name:jobseeker_address_poscode;datatype:int,name:jobseeker_address_state;datatype:int,name:jobseeker_address_district;datatype:int,name:jobseeker_address_subdistrict;datatype:int,name:jobseeker_dob_y;datatype:int,name:jobseeker_dob_m;datatype:int,name:jobseeker_dob_d;datatype:int,name:jobseeker_gender;datatype:int,name:jobseeker_nationality;datatype:int,name:jobseeker_moreinfo;datatype:blob,name:employment_status;datatype:string,name:jobseeker_pic;datatype:blob,name:jobseeker_last_edited;datatype:timestamp" />
+	<infoitem key="UD_rsEmployerDetails" value="name:indus_name;datatype:string,name:emp_id;datatype:int,name:emp_name;datatype:string,name:emp_desc;datatype:blob,name:emp_industry_id_fk;datatype:int,name:emp_address;datatype:blob,name:emp_tel;datatype:string,name:emp_email;datatype:string,name:emp_web;datatype:string,name:emp_pic;datatype:string,name:emp_featured;datatype:int,name:users_id_fk;datatype:int,name:users_id_fk1;datatype:int" />
+</info>

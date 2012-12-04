@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAdminName" value="name:admin_name;datatype:string" />
+	<infoitem key="UD_rsLanguageList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+	<infoitem key="UD_rsResumes" value="name:resume_title;datatype:string,name:resume_type;datatype:string,name:users_email;datatype:blob,name:users_fname;datatype:string,name:users_lname;datatype:string,name:resume_upload_on;datatype:timestamp,name:resume_path;datatype:blob" />
+</info>

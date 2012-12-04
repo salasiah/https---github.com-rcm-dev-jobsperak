@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAtmDetails" value="name:atm_f_id;datatype:int,name:user_id_fk;datatype:int,name:height;datatype:real,name:weight;datatype:real,name:body;datatype:real,name:bmi;datatype:real" />
+</info>

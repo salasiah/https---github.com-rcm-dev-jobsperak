@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAdminName" value="name:admin_name;datatype:string" />
+	<infoitem key="UD_rsJobadsLists" value="name:indus_name;datatype:string,name:emp_name;datatype:string,name:ads_id;datatype:int,name:ads_title;datatype:string,name:ads_details;datatype:blob,name:emp_id_fk;datatype:int,name:ads_location;datatype:int,name:ads_salary;datatype:string,name:ads_y_exp;datatype:int,name:ads_enable_view;datatype:int,name:ads_featured;datatype:int,name:ads_date_posted;datatype:timestamp,name:ads_date_published;datatype:timestamp,name:ads_date_last_edited;datatype:timestamp,name:ads_date_expired;datatype:datetime,name:ads_industry_id_fk;datatype:int,name:ads_minimum;datatype:int,name:location_name;datatype:string" />
+	<infoitem key="UD_rsLanguageList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+</info>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsDistrict" value="name:dist_id;datatype:int,name:dist_name;datatype:string,name:dist_parent_fk;datatype:int" />
+	<infoitem key="UD_rsDistrictList" value="name:dist_id;datatype:int,name:dist_name;datatype:string,name:dist_parent_fk;datatype:int" />
+</info>

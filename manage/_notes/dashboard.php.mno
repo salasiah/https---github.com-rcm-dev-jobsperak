@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rsAdminName" value="name:admin_name;datatype:string" />
+	<infoitem key="UD_rsLanguageList" value="name:languList_id;datatype:int,name:languList_name;datatype:string" />
+	<infoitem key="UD_rsEduLists" value="name:edu_id;datatype:int,name:edu_name;datatype:string" />
+	<infoitem key="UD_rsState" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsLocation" value="name:location_id;datatype:int,name:location_name;datatype:string,name:location_parent;datatype:int" />
+	<infoitem key="UD_rsIndustry" value="name:indus_id;datatype:int,name:indus_name;datatype:string,name:industry_parent;datatype:int" />
+	<infoitem key="UD_rsFieldStudy" value="name:field_id;datatype:int,name:field_name;datatype:string" />
+</info>
