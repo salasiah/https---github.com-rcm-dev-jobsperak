@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /media/ads/
+Disallow: /media/employer/
+Disallow: /media/employer/img/
+Disallow: /media/jobseeker/
+Disallow: /media/jobseeker/img/
+Disallow: /media/resume/
+Disallow: /media/resume_candidate/
+Disallow: /db/
