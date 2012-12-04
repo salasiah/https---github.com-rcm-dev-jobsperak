@@ -6,6 +6,7 @@ Changelog 1.7 / 2012-12-04
 --------------------------------
 ^ Migrate the whole system
 ^ Addon users
+^ add text
 
 
 
